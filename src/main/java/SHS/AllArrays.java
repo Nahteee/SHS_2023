@@ -11,7 +11,7 @@ import java.io.*;
  * @author User
  */
 public class AllArrays extends Count {
-    String[][] getUsers () {
+    public String[][] getUsers () {
         try {
             Count c = new Count();
 //            String str;

@@ -4,6 +4,8 @@
  */
 package main.java.SHS;
 
+import SHS.UI.Admin.UI_Admin_Main;
+
 /**
  *
  * @author User
@@ -118,7 +120,7 @@ public class Role extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    adminlogin al = new adminlogin();
+    UI_Admin_Main al = new UI_Admin_Main();
         al.setVisible(true);
         al.pack();
         al.setLocationRelativeTo(null);

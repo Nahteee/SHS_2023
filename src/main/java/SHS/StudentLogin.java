@@ -4,6 +4,8 @@
  */
 package main.java.SHS;
 
+import main.java.SHS.UI.UI_Register;
+import main.java.SHS.UI.UI_Student_Main;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
@@ -240,8 +242,8 @@ public class StudentLogin extends javax.swing.JFrame {
                     if (password.equals("admin123")) {
                         JOptionPane.showMessageDialog(null, "Successfully Logged In as Admin!");
                         this.setVisible(false);
-                        admin a = new admin();
-                        a.setVisible(true);
+//                        admin a = new admin();
+//                        a.setVisible(true);
                         
                 }
                 }
@@ -258,7 +260,7 @@ public class StudentLogin extends javax.swing.JFrame {
                 ioe.printStackTrace();
                 }
                 this.setVisible(false);
-                student s = new student();
+                UI_Student_Main s = new UI_Student_Main();
                 s.setVisible(true);
                 }
             }
@@ -273,7 +275,7 @@ public class StudentLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-    StudentRegister sr = new StudentRegister();
+    UI_Register sr = new UI_Register();
         sr.setVisible(true);
         sr.pack();
         sr.setLocationRelativeTo(null);

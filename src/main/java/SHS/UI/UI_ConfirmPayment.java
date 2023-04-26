@@ -2,21 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package main.java.SHS;
+package main.java.SHS.UI;
 
+import main.java.SHS.UI.UI_Payment;
 import java.io.*;
 import javax.swing.*;
+import main.java.SHS.Child;
 
 /**
  *
  * @author User
  */
-public class confirmpayment extends javax.swing.JFrame {
+public class UI_ConfirmPayment extends javax.swing.JFrame {
 
     /**
      * Creates new form confirmpayment
      */
-    public confirmpayment() {
+    public UI_ConfirmPayment() {
         initComponents();
     }
 
@@ -170,7 +172,7 @@ public class confirmpayment extends javax.swing.JFrame {
 
     private void sbut1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sbut1ActionPerformed
         JOptionPane.showMessageDialog(null,"Process Terminated" , "Error",JOptionPane.ERROR_MESSAGE,null);
-        payment p= new payment();
+        UI_Payment p= new UI_Payment();
         p.setVisible(true);
         p.pack();
         p.setLocationRelativeTo(null);
@@ -193,9 +195,9 @@ public class confirmpayment extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Text Field Cannot Be Empty!" , "TextField Empty",JOptionPane.ERROR_MESSAGE,null);
             }else{
 
-                Child c = new Child(contact,card,address);
+                Child c = new Child(userId, username, userEmail, password, age, gender, picturePath, contact, card, address, role);
 
-                JOptionPane.showMessageDialog(this,"Contact is :"+ c.getcontact()+"\n"+"Card Number is :"+ c.getcard()+"\n"+"Address is :"+ c.getaddress());
+                JOptionPane.showMessageDialog(this,"Contact is :"+ c.getContact()+"\n"+"Card Number is :"+ c.getCard()+"\n"+"Address is :"+ c.getAddress());
                 JOptionPane.showMessageDialog(null,"Payment Successful" , "Payment",JOptionPane.PLAIN_MESSAGE,null);
 
                 
