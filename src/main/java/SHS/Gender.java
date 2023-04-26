@@ -4,23 +4,12 @@
  */
 package main.java.SHS;
 
-import main.java.SHS.User;
-
 /**
  *
  * @author User
  */
-public class Child extends User{
-    Child()
-    {}
-    
-    Child(String Contact,String Card,String Address)
-    {
-        contact = Contact;
-        card = Card;
-        address = Address;
-        
-    }
-    
-    
+public enum Gender{
+    MALE,
+    FEMALE,
+    ATTACK_HELICOPTER
 }
