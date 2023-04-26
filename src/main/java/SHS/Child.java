@@ -4,6 +4,8 @@
  */
 package SHS;
 
+import main.java.SHS.User;
+
 /**
  *
  * @author User
