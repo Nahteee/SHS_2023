@@ -90,7 +90,7 @@
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/main/java/SHS/UI/Imgs/man-pointing-laughing-you-closeup-portrait-handsome-excited-happy-smile-point-finger-towards-to-camera-gesture-young-32475315.jpg"/>
+                  <Image iconType="3" name="/main/java/SHS/UI/Imgs/guy.jpg"/>
                 </Property>
               </Properties>
             </Component>
