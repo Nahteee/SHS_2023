@@ -8,7 +8,7 @@ import java.util.*;
 import javax.swing.*;
 import main.java.SHS.AllArrays;
 import main.java.SHS.Count;
-import main.java.SHS.Role;
+//import main.java.SHS.Role;
 import main.java.SHS.StudentLogin;
 /**
  *
@@ -240,11 +240,11 @@ public class UI_Register extends javax.swing.JFrame {
     }//GEN-LAST:event_ctxtActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    Role r = new Role();
-        r.setVisible(true);
-        r.pack();
-        r.setLocationRelativeTo(null);
-       this.dispose();
+//    Role r = new Role();
+//        r.setVisible(true);
+//        r.pack();
+//        r.setLocationRelativeTo(null);
+//       this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked

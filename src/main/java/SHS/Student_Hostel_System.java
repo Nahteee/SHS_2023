@@ -4,13 +4,23 @@
 
 package main.java.SHS;
 
+import SHS.UI.UI_Login;
+
 /**
  *
  * @author User
  */
 public class Student_Hostel_System {
 
+    
+    private void initialize(){
+        UI_Login lu = new UI_Login();
+        lu.setVisible(true);
+
+    }
+    
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Student_Hostel_System main = new Student_Hostel_System();
+        main.initialize();
     }
 }

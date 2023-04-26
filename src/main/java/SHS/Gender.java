@@ -10,6 +10,5 @@ package main.java.SHS;
  */
 public enum Gender{
     MALE,
-    FEMALE,
-    ATTACK_HELICOPTER
+    FEMALE
 }

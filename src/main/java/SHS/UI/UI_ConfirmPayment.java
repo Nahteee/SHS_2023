@@ -7,7 +7,7 @@ package main.java.SHS.UI;
 import main.java.SHS.UI.UI_Payment;
 import java.io.*;
 import javax.swing.*;
-import main.java.SHS.Child;
+import main.java.SHS.Student;
 
 /**
  *
@@ -195,10 +195,10 @@ public class UI_ConfirmPayment extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Text Field Cannot Be Empty!" , "TextField Empty",JOptionPane.ERROR_MESSAGE,null);
             }else{
 
-                Child c = new Child(userId, username, userEmail, password, age, gender, picturePath, contact, card, address, role);
+//                Student c = new Student(userId, username, userEmail, password, age, gender, picturePath, contact, card, address, role);
 
-                JOptionPane.showMessageDialog(this,"Contact is :"+ c.getContact()+"\n"+"Card Number is :"+ c.getCard()+"\n"+"Address is :"+ c.getAddress());
-                JOptionPane.showMessageDialog(null,"Payment Successful" , "Payment",JOptionPane.PLAIN_MESSAGE,null);
+//                JOptionPane.showMessageDialog(this,"Contact is :"+ c.getContact()+"\n"+"Card Number is :"+ c.getCard()+"\n"+"Address is :"+ c.getAddress());
+//                JOptionPane.showMessageDialog(null,"Payment Successful" , "Payment",JOptionPane.PLAIN_MESSAGE,null);
 
                 
     }//GEN-LAST:event_sbutActionPerformed

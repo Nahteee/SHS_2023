@@ -196,11 +196,11 @@ public class StudentLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_utxtActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    Role r = new Role();
-        r.setVisible(true);
-        r.pack();
-        r.setLocationRelativeTo(null);
-       this.dispose();
+//    Role r = new Role();
+//        r.setVisible(true);
+//        r.pack();
+//        r.setLocationRelativeTo(null);
+//       this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

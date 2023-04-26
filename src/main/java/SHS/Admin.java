@@ -6,37 +6,16 @@ package main.java.SHS;
 
 /**
  *
- * @author User
+ * @author mingl
  */
-public class User {
-    protected int userId;
-    protected String username;
-    protected String userEmail;
-    protected String password;
-    protected int age;
-    protected Gender gender;
-    protected String picturePath;
-    protected String contact;
-    protected String card;
-    protected String address;
-    protected UserRole role;
+public class Admin extends User{
 
-    public User(int userId, String username, String userEmail, String password, int age, Gender gender, String picturePath, String contact, String card, String address, UserRole role) {
-        this.userId = userId;
-        this.username = username;
-        this.userEmail = userEmail;
-        this.password = password;
-        this.age = age;
-        this.gender = gender;
-        this.picturePath = picturePath;
-        this.contact = contact;
-        this.card = card;
-        this.address = address;
-        this.role = role;
+    public Admin(int userId, String username, String userEmail, String password, int age, Gender gender, String picturePath, String contact, String card, String address, UserRole role) {
+        super(userId, username, userEmail, password, age, gender, picturePath, contact, card, address, role);
     }
     
-    User(int userId){
-        this.userId = userId;
+    public Admin(int userId){
+        super(userId);
     }
 
     public int getUserId() {
@@ -127,6 +106,5 @@ public class User {
         this.role = role;
     }
     
-
-
+    
 }
