@@ -4,14 +4,15 @@
 
 package main.java.SHS;
 
-import SHS.UI.UI_Login;
+import main.java.SHS.UI.UI_Login;
 
 /**
  *
  * @author User
  */
 public class Student_Hostel_System {
-
+    public static User current_user;
+    public static boolean isLogIn;
     
     private void initialize(){
         UI_Login lu = new UI_Login();

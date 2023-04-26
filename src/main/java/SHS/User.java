@@ -4,6 +4,15 @@
  */
 package main.java.SHS;
 
+import main.java.SHS.UI.Admin.UI_Admin_Main;
+import javax.swing.JOptionPane;
+import main.java.SHS.FileHandlers.FileHandler;
+import main.java.SHS.FileHandlers.FileName;
+import main.java.SHS.FileHandlers.FileRecord;
+import main.java.SHS.UI.UI_Student_Main;
+import javax.swing.JOptionPane;
+import main.java.SHS.UI.UI_Login;
+
 /**
  *
  * @author User
@@ -127,6 +136,67 @@ public class User {
         this.role = role;
     }
     
-
+    public static void login(String username, String password, String fileName){
+        FileHandler fHandler = new FileHandler(fileName);
+        FileRecord user_record = fHandler.FetchRecord(username, 1);
+        if(user_record == null){
+            JOptionPane.showMessageDialog(null,"Login credential incorrect.","Oops",JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        int user_id = user_record.getID();
+        String[] splitted_user_record = user_record.getRecordList();
+        
+        if(!(username == null ? splitted_user_record[1] == null : username.equals(splitted_user_record[2]) 
+                && password == null ? splitted_user_record[3] == null : password.equals(splitted_user_record[3])))
+        {
+            JOptionPane.showMessageDialog(null,"Login credential incorrect.","Oops",JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        if(fileName == null ? FileName.ADMIN == null : fileName.equals(FileName.ADMIN)){
+            Student_Hostel_System.current_user = new Admin(user_id);
+        }
+        
+        
+        if(fileName == null ? FileName.STUDENT== null : fileName.equals(FileName.STUDENT)){
+            Student_Hostel_System.current_user = new Student(user_id);
+        }
+        
+        Student_Hostel_System.current_user.setAge(Integer.parseInt(splitted_user_record[4]));
+        Student_Hostel_System.current_user.setUserEmail(splitted_user_record[2]);
+        Student_Hostel_System.current_user.setGender(Gender.valueOf(splitted_user_record[5]));
+        Student_Hostel_System.current_user.setPassword(splitted_user_record[3]);
+        Student_Hostel_System.current_user.setContact(splitted_user_record[6]);
+        Student_Hostel_System.current_user.setPicturePath(splitted_user_record[7]);
+        
+        switch(fileName) {
+            case FileName.ADMIN -> {
+                Student_Hostel_System.current_user.setRole(UserRole.ADMIN);
+                UI_Admin_Main a = new UI_Admin_Main();
+                System.out.println("User login successfully");
+                JOptionPane.showMessageDialog(null,"Welcome to StudentBNB!","Successfully Login",JOptionPane.INFORMATION_MESSAGE);
+        // need to setup user related data
+                a.setVisible(true);
+            }
+            case FileName.STUDENT -> {
+                Student_Hostel_System.current_user.setRole(UserRole.MEMBER);
+                System.out.println("User login successfully");
+                JOptionPane.showMessageDialog(null,"Welcome to StudentBNB!","Successfully Login",JOptionPane.INFORMATION_MESSAGE);
+        // need to setup user related data
+                UI_Student_Main s = new UI_Student_Main();
+                s.setVisible(true);
+            }
+            default -> {
+                System.out.println("no file name specified.");
+            }
+        }
+        
+    }
+    
+    public static void logout(){
+        Student_Hostel_System.current_user = null;
+        UI_Login lu = new UI_Login();
+        lu.setVisible(true);
+    }
 
 }

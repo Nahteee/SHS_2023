@@ -15,7 +15,7 @@ import java.util.List;
 
 public class FileHandler {
     private List<FileRecord> records;
-    private String FILE_PATH_PREFIX  = "src\\main\\java\\com\\mycompany\\oodms\\files\\";
+    private String FILE_PATH_PREFIX  = "src\\main\\java\\SHS\\Txtfiles\\";
     private String filePath;
 
     public FileHandler(String fileName) {
