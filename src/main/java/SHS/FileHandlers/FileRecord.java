@@ -28,4 +28,12 @@ public class FileRecord {
     public String[] getRecordList(){
         return record.split(";");
     }
+
+    @Override
+    public String toString() {
+        return "FileRecord{" + "id=" + id + ", record=" + record + '}';
+    }
+    
+    
 }
+

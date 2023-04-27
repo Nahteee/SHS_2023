@@ -17,7 +17,7 @@ public class Student extends User{
         super(userId, username, userEmail, password, age, gender, picturePath, contact, card, address, role);
     }
 
-    Student(int user_id) {
+    public Student(int user_id) {
         super(user_id);
     }
     
