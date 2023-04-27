@@ -43,7 +43,7 @@ public class UI_Login extends javax.swing.JFrame {
         Login = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        PWField = new javax.swing.JTextField();
+        PWField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 255, 0));
@@ -86,6 +86,11 @@ public class UI_Login extends javax.swing.JFrame {
 
         UNField.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         UNField.setForeground(new java.awt.Color(92, 128, 188));
+        UNField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UNFieldActionPerformed(evt);
+            }
+        });
 
         Register.setBackground(new java.awt.Color(92, 128, 188));
         Register.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
@@ -125,8 +130,13 @@ public class UI_Login extends javax.swing.JFrame {
             .addGap(0, 5, Short.MAX_VALUE)
         );
 
-        PWField.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
+        PWField.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
         PWField.setForeground(new java.awt.Color(92, 128, 188));
+        PWField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PWFieldActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -145,11 +155,11 @@ public class UI_Login extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(UNField, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(PWField)
+                                        .addComponent(UNField, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(PWField, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(3, 3, 3))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(196, 196, 196)
@@ -214,6 +224,14 @@ public class UI_Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_RegisterActionPerformed
 
+    private void UNFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UNFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UNFieldActionPerformed
+
+    private void PWFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PWFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PWFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -251,7 +269,7 @@ public class UI_Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Login;
-    private javax.swing.JTextField PWField;
+    private javax.swing.JPasswordField PWField;
     private javax.swing.JButton Register;
     private javax.swing.JTextField UNField;
     private javax.swing.JLabel jLabel1;
