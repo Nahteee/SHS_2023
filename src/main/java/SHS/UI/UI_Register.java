@@ -51,10 +51,10 @@ public class UI_Register extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 153));
+        jPanel2.setBackground(new java.awt.Color(175, 238, 238));
 
         jLabel2.setFont(new java.awt.Font("URWEgyptienneTMed", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(100, 149, 137));
         jLabel2.setText("APU HOSTEL SYSTEM ");
 
         jLabel5.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
