@@ -5,10 +5,8 @@
         <group>
             <file>file:/C:/Users/User/Documents/NetBeansProjects/SHS_2023/src/main/java/SHS/UI/UI_Register.java</file>
             <file>file:/C:/Users/User/Documents/NetBeansProjects/SHS_2023/src/main/java/SHS/UI/UI_Payment.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/SHS_2023/src/main/java/SHS/StudentLogin.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/SHS_2023/src/main/java/SHS/UI/UI_ConfirmPayment.java</file>
             <file>file:/C:/Users/User/Documents/NetBeansProjects/SHS_2023/src/main/java/SHS/UI/UI_Student_Main.java</file>
-            <file>file:/C:/Users/User/Documents/NetBeansProjects/SHS_2023/src/main/java/SHS/FileHandlers/FileHandler.java</file>
+            <file>file:/C:/Users/User/Documents/NetBeansProjects/SHS_2023/src/main/java/SHS/UI/Admin/UI_Admin_Main.java</file>
             <file>file:/C:/Users/User/Documents/NetBeansProjects/SHS_2023/src/main/java/SHS/UI/UI_Login.java</file>
         </group>
     </open-files>
