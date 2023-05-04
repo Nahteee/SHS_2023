@@ -208,15 +208,14 @@ public class UI_Login extends javax.swing.JFrame {
         String password = PWField.getText().trim();
         
         if("Admin".equals(username)){
-                if (password.equals("admin123")) {
-                        fileName = FileName.ADMIN;
-                        Admin.login(username, password, fileName);
-                        this.setVisible(false);
-            }
+            fileName = FileName.ADMIN;
+            Admin.login(username, password, fileName);
+            this.setVisible(false);
+        }
         else{
             fileName = FileName.STUDENT;
             Student.login(username, password, fileName);
-        }
+            this.setVisible(false);
         }
     }//GEN-LAST:event_LoginActionPerformed
 

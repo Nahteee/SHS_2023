@@ -145,8 +145,9 @@ public class User {
         }
         int user_id = user_record.getID();
         String[] splitted_user_record = user_record.getRecordList();
+        System.out.println(splitted_user_record[2]);
         
-        if(!(username == null ? splitted_user_record[1] == null : username.equals(splitted_user_record[2]) 
+        if(!(username == null ? splitted_user_record[1] == null : username.equals(splitted_user_record[1]) 
                 && password == null ? splitted_user_record[3] == null : password.equals(splitted_user_record[3])))
         {
             JOptionPane.showMessageDialog(null,"Login credential incorrect.","Oops",JOptionPane.INFORMATION_MESSAGE);
