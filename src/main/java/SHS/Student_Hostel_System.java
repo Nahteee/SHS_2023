@@ -17,6 +17,7 @@ public class Student_Hostel_System {
     private void initialize(){
         UI_Login lu = new UI_Login();
         lu.setVisible(true);
+       
 
     }
     
