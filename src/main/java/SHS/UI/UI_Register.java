@@ -281,7 +281,7 @@ public class UI_Register extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
     public static void register(String username, String name, String password, String gender, String phone){
         FileHandler fHandler = new FileHandler(FileName.STUDENT);
-        FileRecord user_record = fHandler.FetchRecord(username, 2);
+        FileRecord user_record = fHandler.FetchRecord(username, 1);
         if(user_record != null){
             JOptionPane.showMessageDialog(null,"Username exist" , "Error",JOptionPane.ERROR_MESSAGE,null);
             return;
