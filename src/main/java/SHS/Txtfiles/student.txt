@@ -1,2 +1,6 @@
 1;Ethan;member123@gmail.com;12345;20;MALE;src/main/java/com/mycompany/oodms/ui/pictures/hudao.jpg;0127729912;32235234;something street
 2;ethann;ethann;Male;0126789990
+3;john;Male;21;ethann;03242332423;03242332423
+4;bob;Male;22;ethann;0125478998;0125478998
+5;Hanson;MALE;21;hanson;0125678998;0125678998
+6;Tan;MALE;20;tann;0234234;0234234

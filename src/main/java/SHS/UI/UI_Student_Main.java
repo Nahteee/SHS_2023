@@ -5,22 +5,29 @@
 package main.java.SHS.UI;
 
 import java.io.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import main.java.SHS.FileHandlers.FileHandler;
 import main.java.SHS.FileHandlers.FileName;
 import main.java.SHS.FileHandlers.FileRecord;
+
 
 /**
  *
  * @author User
  */
 public class UI_Student_Main extends javax.swing.JFrame {
-
+    public static String price;
+    public static String type;
+    
     /**
      * Creates new form student
      */
     public UI_Student_Main() {
         initComponents();
+        UI_Booking.type = type;
+        UI_Booking.price = price;
+        UI_Payment.price = price;
     }
 
     /**
@@ -74,18 +81,25 @@ public class UI_Student_Main extends javax.swing.JFrame {
 
         roomtab.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Room No", "Room Type", "Room Capacity", "Room Price", "Availability"
             }
         ));
+        roomtab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                roomtabMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(roomtab);
 
         jButton5.setText("MAKE BOOKING");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("BACK");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -165,15 +179,20 @@ public class UI_Student_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+    UI_Payment up = new UI_Payment(price);
+        up.setVisible(true);
+        up.pack();
+        up.setLocationRelativeTo(null);
+       this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void roombutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roombutActionPerformed
 
-        String file = "room.txt";
+        String file = "src\\main\\java\\SHS\\Txtfiles\\room.txt";
        
        try
        {
+           
            FileReader fr = new FileReader(file);
            BufferedReader br = new BufferedReader(fr);
           
@@ -195,6 +214,34 @@ public class UI_Student_Main extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if(roomtab.getSelectedRow()<0){
+            JOptionPane.showMessageDialog(null,"No room selected" , "Error",JOptionPane.ERROR_MESSAGE,null);
+            return;
+        }
+        
+        int result = JOptionPane.showConfirmDialog(this, "Are You Confirm ?", "Confirmation",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,null);
+        if (result==JOptionPane.YES_OPTION){ 
+        int row = roomtab.getSelectedRow();
+        //String id = roomtab.getModel().getValueAt(row,0).toString();
+        String type = roomtab.getModel().getValueAt(row,1).toString();
+        String price = roomtab.getModel().getValueAt(row,3).toString();
+        
+        UI_Booking ub = new UI_Booking(type,price);
+        ub.setVisible(true);
+        this.dispose();
+        }else{
+        UI_Student_Main us = new UI_Student_Main();
+        us.setVisible(true);
+        this.dispose();
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void roomtabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roomtabMouseClicked
+
+    }//GEN-LAST:event_roomtabMouseClicked
 
     /**
      * @param args the command line arguments
