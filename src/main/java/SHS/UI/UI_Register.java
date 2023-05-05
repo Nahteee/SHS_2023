@@ -5,11 +5,12 @@
 package main.java.SHS.UI;
 import java.io.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import main.java.SHS.FileHandlers.*;
+
 import javax.swing.*;
-import main.java.SHS.AllArrays;
-import main.java.SHS.Count;
-//import main.java.SHS.Role;
-import main.java.SHS.StudentLogin;
+
 /**
  *
  * @author User
@@ -248,82 +249,55 @@ public class UI_Register extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-    StudentLogin sl = new StudentLogin();
-        sl.setVisible(true);
-        sl.pack();
-        sl.setLocationRelativeTo(null);
+    UI_Login ul = new UI_Login();
+        ul.setVisible(true);
+        ul.pack();
+        ul.setLocationRelativeTo(null);
        this.dispose();
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    try {
-        AllArrays ua = new AllArrays(); //Object method
-        Count c = new Count();
-        
-        if(ntxt.getText().equals("")||usertxt.getText().equals("")||passtxt.getText().equals("")||gtxt.getSelectedItem().equals("")||ctxt.getText().equals("")) 
-        {
-            JOptionPane.showMessageDialog(this, "Please Enter All Fields");
-            }
-            else{
-            int id = c.Users() + 1;
-            String username = usertxt.getText().trim();
-            String password = passtxt.getText().trim();
-            String name = ntxt.getText().trim();
-            String gender = (String) gtxt.getSelectedItem();
-            String phone = ctxt.getText().trim();
-            
-        try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("users.txt",true))))
-        {
-            String[] usernames = new String[c.Users()];
-        
-            int index = 0;
-            for (String[] thing: ua.getUsers()) {
-                 usernames[index] = thing[1];
-                 index ++;
-             }
-        
-            try {
-                int phonenumber = Integer.parseInt(phone);
-                boolean contains = Arrays.stream(usernames).anyMatch(username::equals);
-                if (contains) {
-                    JOptionPane.showMessageDialog(null, "Username already exists. Try again.");
-                }
-                else {
-                    if (password.equals(password)) {
-                        pw.print(id + "/");
-                        pw.print(username + "/");
-                        pw.print(password + "/");
-                        pw.print(name + "/");
-                        pw.print(gender + "/");
-                        pw.print(phone+ "\n");
-                        pw.close();
-                        JOptionPane.showMessageDialog(null, "Account Successfully Registered!");
-                        this.setVisible(false);
-                        StudentLogin sl = new StudentLogin();
-                        sl.setVisible(true);
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(null, "Passwords don't match. Try again.");
-                    }
-                }
-            }
-            catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Phone number has to be integer. Try again.");
-            }
-            
-            
-        }
-         catch(IOException ioe) 
-         {
-            ioe.printStackTrace();
-        }
-        }
-        }
-        catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Registration complete!");
-        }
+    // Validation
+    
+    String username = usertxt.getText().trim();
+    String password = passtxt.getText().trim();
+    String name = ntxt.getText().trim();
+    String gender = (String) gtxt.getSelectedItem();
+    String phone = ctxt.getText().trim();
+    
+    if(username.isBlank() 
+        ||  passtxt.getText().isBlank() 
+        || usertxt.getText().isBlank() 
+        || ctxt.getText().isBlank()
+        || ntxt.getText().isBlank()
+       ){
+        JOptionPane.showMessageDialog(null,"Please enter valid input. Make sure every field is filled." , "Error",JOptionPane.ERROR_MESSAGE,null);
+        return;
+       }
+    
+    register(username,name,password,gender,phone);
+    
+    
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    public static void register(String username, String name, String password, String gender, String phone){
+        FileHandler fHandler = new FileHandler(FileName.STUDENT);
+        FileRecord user_record = fHandler.FetchRecord(username, 2);
+        if(user_record != null){
+            JOptionPane.showMessageDialog(null,"Username exist" , "Error",JOptionPane.ERROR_MESSAGE,null);
+            return;
+        }
+        
+        // write to text file
+        int newStudentID = fHandler.GenerateID();
+        String newStudentString = newStudentID + ";" + username + ";" + password + ";" + gender + ";" + phone;
+        FileRecord newStudentRecord = new FileRecord(newStudentID, newStudentString);
+        fHandler.InsertRecord(newStudentRecord);
+        
+        JOptionPane.showMessageDialog(null,"Registration successfully.","Registration",JOptionPane.INFORMATION_MESSAGE);
+        UI_Login ul = new UI_Login();
+        ul.setVisible(true);
+        
+    }
     /**
      * @param args the command line arguments
      */

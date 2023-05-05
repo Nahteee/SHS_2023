@@ -244,6 +244,6 @@ public class UI_Student_Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton roombut;
-    private javax.swing.JTable roomtab;
+    public javax.swing.JTable roomtab;
     // End of variables declaration//GEN-END:variables
 }
