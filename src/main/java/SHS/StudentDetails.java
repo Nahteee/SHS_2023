@@ -57,11 +57,13 @@ public class StudentDetails {
         int student_age = Integer.parseInt(student_data[4]);
         Gender student_gender = Gender.valueOf(student_data[5]);
         String student_phone = student_data[6];
-        String student_picture = student_data[7];
-        
-        return new Student(student_id);
+        String student_card = student_data[7];
+
+        // Still missing NULL Value for card 
+        return new Student(student_id, student_name, student_email, student_password, student_age, student_gender, student_phone, student_card, UserRole.STUDENT);
+//        return new Student(student_id);
     }
-    //    return new Student(student_id, student_name, student_email, student_password, student_age, student_gender, student_phone, student_picture, UserRole.STUDENT);
+        
     
     private FileRecord convertToFileRecord(Student student){
          String student_record_string = student.getUserId() + ";" + student.getUsername()+ ";" + student.getUserEmail() + ";" + student.getPassword()+ ";" + student.getAge() + ";" +student.getGender() + ";" + student.getContact() + ";" + student.getPicturePath();

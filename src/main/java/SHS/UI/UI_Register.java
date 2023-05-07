@@ -105,6 +105,11 @@ public class UI_Register extends javax.swing.JFrame {
 
         gtxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MALE", "FEMALE" }));
         gtxt.setBorder(null);
+        gtxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gtxtActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("SimHei", 0, 18)); // NOI18N
         jButton2.setText("BACK");
@@ -182,8 +187,8 @@ public class UI_Register extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -279,7 +284,7 @@ public class UI_Register extends javax.swing.JFrame {
     String age = atxt.getText().trim();
     String gender = (String) gtxt.getSelectedItem();
     String phone = cntxt.getText().trim();
-    String email = cntxt.getText().trim();
+    String email = etxt.getText().trim();
     
     if(username.isBlank() 
         ||  atxt.getText().isBlank() 
@@ -292,7 +297,7 @@ public class UI_Register extends javax.swing.JFrame {
         return;
        }
     
-    register(username,age,password,gender,phone,email);
+    register(username,password,age,email,gender,phone);
     
     
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -300,6 +305,10 @@ public class UI_Register extends javax.swing.JFrame {
     private void cntxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cntxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cntxtActionPerformed
+
+    private void gtxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gtxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_gtxtActionPerformed
     public static void register(String username, String password, String age, String email, String gender, String phone){
         FileHandler fHandler = new FileHandler(FileName.STUDENT);
         FileRecord user_record = fHandler.FetchRecord(username, 1);

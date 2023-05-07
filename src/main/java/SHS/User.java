@@ -30,17 +30,15 @@ public class User {
     protected String address;
     protected UserRole role;
 
-    public User(int userId, String username, String userEmail, String password, int age, Gender gender, String picturePath, String contact, String card, String address, UserRole role) {
+    public User(int userId, String username, String userEmail, String password, int age, Gender gender, String contact, String card, UserRole role) {
         this.userId = userId;
         this.username = username;
         this.userEmail = userEmail;
         this.password = password;
         this.age = age;
         this.gender = gender;
-        this.picturePath = picturePath;
         this.contact = contact;
         this.card = card;
-        this.address = address;
         this.role = role;
     }
     
