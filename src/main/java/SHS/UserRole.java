@@ -10,5 +10,6 @@ package main.java.SHS;
  */
 public enum UserRole {
     ADMIN,
-    MEMBER
+    STUDENT
+
 }

@@ -10,6 +10,13 @@ import javax.swing.table.DefaultTableModel;
 import main.java.SHS.FileHandlers.FileHandler;
 import main.java.SHS.FileHandlers.FileName;
 import main.java.SHS.FileHandlers.FileRecord;
+import static main.java.SHS.UI.UI_Payment.cid;
+import static main.java.SHS.UI.UI_Payment.email;
+import static main.java.SHS.UI.UI_Payment.los;
+import static main.java.SHS.UI.UI_Payment.no;
+import static main.java.SHS.UI.UI_Payment.phone;
+import static main.java.SHS.UI.UI_Payment.price;
+import static main.java.SHS.UI.UI_Payment.type;
 
 
 /**
@@ -19,6 +26,7 @@ import main.java.SHS.FileHandlers.FileRecord;
 public class UI_Student_Main extends javax.swing.JFrame {
     public static String price;
     public static String type;
+    public static String no;
     
     /**
      * Creates new form student
@@ -28,6 +36,8 @@ public class UI_Student_Main extends javax.swing.JFrame {
         UI_Booking.type = type;
         UI_Booking.price = price;
         UI_Payment.price = price;
+        UI_Payment.type = type;
+        UI_Booking.no = no;
     }
 
     /**
@@ -179,7 +189,7 @@ public class UI_Student_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    UI_Payment up = new UI_Payment(price);
+    UI_Payment up = new UI_Payment(no,type,price, email, phone, los, cid);
         up.setVisible(true);
         up.pack();
         up.setLocationRelativeTo(null);
@@ -228,8 +238,9 @@ public class UI_Student_Main extends javax.swing.JFrame {
         //String id = roomtab.getModel().getValueAt(row,0).toString();
         String type = roomtab.getModel().getValueAt(row,1).toString();
         String price = roomtab.getModel().getValueAt(row,3).toString();
+        String no = roomtab.getModel().getValueAt(row,0).toString();
         
-        UI_Booking ub = new UI_Booking(type,price);
+        UI_Booking ub = new UI_Booking(type,price,no);
         ub.setVisible(true);
         this.dispose();
         }else{

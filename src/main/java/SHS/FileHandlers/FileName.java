@@ -12,6 +12,7 @@ public class FileName {
     public static final String ADMIN = "admin";
     public static final String STUDENT = "student";
     public static final String ROOM = "room";
+    public static final String BOOKING = "booking";
 
     
 //    public static final String PRODUCT = "product";

@@ -180,7 +180,7 @@ public class User {
                 a.setVisible(true);
             }
             case FileName.STUDENT -> {
-                Student_Hostel_System.current_user.setRole(UserRole.MEMBER);
+                Student_Hostel_System.current_user.setRole(UserRole.STUDENT);
                 System.out.println("User login successfully");
                 JOptionPane.showMessageDialog(null,"Welcome to StudentBNB!","Successfully Login",JOptionPane.INFORMATION_MESSAGE);
         // need to setup user related data
