@@ -160,7 +160,7 @@ public class User {
         if(fileName == null ? FileName.STUDENT== null : fileName.equals(FileName.STUDENT)){
             Student_Hostel_System.current_user = new Student(user_id);
         }
-        
+        Student_Hostel_System.current_user.setUsername(splitted_user_record[1]);
         Student_Hostel_System.current_user.setAge(Integer.parseInt(splitted_user_record[4]));
         Student_Hostel_System.current_user.setUserEmail(splitted_user_record[2]);
         Student_Hostel_System.current_user.setGender(Gender.valueOf(splitted_user_record[5]));

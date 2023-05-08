@@ -226,12 +226,13 @@ public class UI_Booking extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(rmlbl)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7)
-                        .addComponent(nolbl)))
+                        .addComponent(nolbl))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(rmlbl)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -282,9 +283,7 @@ public class UI_Booking extends javax.swing.JFrame {
         return true;
     }
     private void sbutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sbutActionPerformed
-   /* int result = JOptionPane.showConfirmDialog(this, "Proceed to payment now ?", "Confirmation",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,null);
-        if (result==JOptionPane.YES_OPTION){ */
+  
             // Validation  
     if( etxt.getText().isEmpty() || pntxt.getText().isEmpty() || ctxt.getText().isEmpty() || lstxt.getSelectedItem()==null){
                 JOptionPane.showMessageDialog(null,"Text Field Cannot Be Empty!" , "TextField Empty",JOptionPane.ERROR_MESSAGE,null);
@@ -300,10 +299,7 @@ public class UI_Booking extends javax.swing.JFrame {
             up.setVisible(true);
         }
     }
-    /*} else{
-           UI_Student_Main sm = new UI_Student_Main();
-            sm.setVisible(true); 
-        }*/
+    
     
     
     

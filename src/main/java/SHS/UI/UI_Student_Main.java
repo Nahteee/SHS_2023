@@ -73,7 +73,7 @@ public class UI_Student_Main extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("MAKE PAYMENT");
+        jButton2.setText("VIEW LOGS");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);

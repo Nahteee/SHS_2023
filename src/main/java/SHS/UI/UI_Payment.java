@@ -10,6 +10,8 @@ import main.java.SHS.FileHandlers.FileName;
 import main.java.SHS.FileHandlers.FileRecord;
 import main.java.SHS.Student_Hostel_System;
 import main.java.SHS.UI.UI_Student_Main;
+import main.java.SHS.Student;
+import main.java.SHS.StudentDetails;
 import main.java.SHS.User;
 
 /**
@@ -48,7 +50,6 @@ public class UI_Payment extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
         jPanel1 = new javax.swing.JPanel();
         bbut = new javax.swing.JButton();
         CFBUT = new javax.swing.JButton();
@@ -272,10 +273,11 @@ public class UI_Payment extends javax.swing.JFrame {
     private void saveBooking(){
         FileHandler fHandler = new FileHandler(FileName.BOOKING);
         int newBookingID = fHandler.GenerateID();
-        //User current_user = Student_Hostel_System.current_user;
-        //Member m = (Member)
-        //System.out.println("cu"+current_user);
-        String bookingDetails = newBookingID+";"+no+";"+type+";"+price+";"+email+";"+phone+";"+los+";"+cid+";";
+        User current_user = Student_Hostel_System.current_user;
+        Student s = (Student) Student_Hostel_System.current_user;
+        current_user = StudentDetails.getStudentDetails().getStudent(s.getUserId()); 
+        //String kkk = String.valueOf(current_user.getUsername());
+        String bookingDetails = newBookingID+";"+current_user+";"+no+";"+type+";"+price+";"+email+";"+phone+";"+los+";"+cid+";";
         FileRecord newBookingDetails = new FileRecord(newBookingID, bookingDetails);
         fHandler.InsertRecord(newBookingDetails);
     }
@@ -288,6 +290,11 @@ public class UI_Payment extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this,"Card Number is :"+ card +"\n"+"Price is :"+ price +"\n"+ "Choosen Room is :"+ type );
         JOptionPane.showMessageDialog(null,"Payment Successful" , "Payment",JOptionPane.PLAIN_MESSAGE,null);
         saveBooking();
+        UI_Student_Main s = new UI_Student_Main();
+        s.setVisible(true);
+        s.pack();
+        s.setLocationRelativeTo(null);
+        this.dispose();
     }
           
    
@@ -383,7 +390,6 @@ public class UI_Payment extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
-    private com.toedter.calendar.JMonthChooser jMonthChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel plbl;
