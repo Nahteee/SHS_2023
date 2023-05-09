@@ -17,7 +17,7 @@ import main.java.SHS.FileHandlers.FileRecord;
 public class StudentDetails {
     private static StudentDetails student_details;
     
-    public static StudentDetails getMemberService()
+    public static StudentDetails getStudentDetails()
     {
         //Not instantiated yet
         if (student_details == null)
@@ -33,7 +33,7 @@ public class StudentDetails {
     
     String file = "src\\main\\java\\SHS\\Txtfiles\\student.txt";
     private ArrayList<Student> students;
-    FileHandler student_file = new FileHandler(file);
+    FileHandler student_file = new FileHandler(FileName.STUDENT );
     
     public StudentDetails(){
          this.students = new ArrayList<Student>();
@@ -61,7 +61,7 @@ public class StudentDetails {
 
         // Still missing NULL Value for card 
         return new Student(student_id, student_name, student_email, student_password, student_age, student_gender, student_phone, student_card, UserRole.STUDENT);
-//        return new Student(student_id);
+
     }
         
     
