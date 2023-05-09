@@ -1,0 +1,37 @@
+
+conf t
+vlan 10
+name Admin
+vlan 20
+name Accounts
+vlan 30
+name HR
+vlan 40
+name Voice
+vlan 99
+name Management
+vlan 100
+name Native 
+exit
+do cop r st
+
+
+SWC(config)#int fa0/4
+SWC(config-if)#switchport mode access 
+SWC(config-if)#switchport voice vlan 40
+SWC(config-if)#mls qos trust cos
+
+
+SWA(config)#int g0/1
+SWA(config-if)#switchport mode trunk 
+SWA(config-if)#switchport trunk native vlan 100
+SWA(config-if)#switchport nonegotiate
+SWA(config-if)#do cop r st 
+
+
+
+
+
+
+
+

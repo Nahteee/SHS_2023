@@ -33,7 +33,7 @@ public class StudentDetails {
     
     String file = "src\\main\\java\\SHS\\Txtfiles\\student.txt";
     private ArrayList<Student> students;
-    FileHandler student_file = new FileHandler(file);
+    FileHandler student_file = new FileHandler(FileName.STUDENT );
     
     public StudentDetails(){
          this.students = new ArrayList<Student>();
