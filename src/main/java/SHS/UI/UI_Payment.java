@@ -4,6 +4,7 @@
  */
 package main.java.SHS.UI;
 
+import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import main.java.SHS.FileHandlers.FileHandler;
 import main.java.SHS.FileHandlers.FileName;
@@ -26,6 +27,7 @@ public class UI_Payment extends javax.swing.JFrame {
     public static String los;
     public static String cid;
     public static String no;
+    
     /**
      * Creates new form payment
      */
@@ -39,6 +41,7 @@ public class UI_Payment extends javax.swing.JFrame {
         UI_Payment.los = los;
         UI_Payment.cid = cdate;
         plbl.setText(price);
+        date();
     }
 
     /**
@@ -63,6 +66,8 @@ public class UI_Payment extends javax.swing.JFrame {
         datetxt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         codetxt = new javax.swing.JTextField();
+        dlbl = new javax.swing.JLabel();
+        datelbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -149,6 +154,11 @@ public class UI_Payment extends javax.swing.JFrame {
             }
         });
 
+        dlbl.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        dlbl.setText("DATE:");
+
+        datelbl.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -158,21 +168,35 @@ public class UI_Payment extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(datetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(datetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(codetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cardtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(36, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(dlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(codetxt, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(cardtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                        .addComponent(datelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(dlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(datelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cardtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -246,7 +270,13 @@ public class UI_Payment extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void date(){
+        GregorianCalendar gc = new GregorianCalendar();
+        int year = gc.get(GregorianCalendar.YEAR);
+        int month = (gc.get(GregorianCalendar.MONTH)+1);
+        int day = (gc.get(GregorianCalendar.DATE));
+        datelbl.setText(day+"/"+month+"/"+year);
+    }
     private void bbutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bbutActionPerformed
         UI_Student_Main s = new UI_Student_Main();
         s.setVisible(true);
@@ -277,8 +307,9 @@ public class UI_Payment extends javax.swing.JFrame {
         User current_user = Student_Hostel_System.current_user;
         Student s = (Student) Student_Hostel_System.current_user;
         current_user = StudentDetails.getStudentDetails().getStudent(s.getUserId()); 
+        String date = datelbl.getText();
         //String kkk = String.valueOf(current_user.getUsername());
-        String bookingDetails = newBookingID+";"+current_user+";"+no+";"+type+";"+price+";"+email+";"+phone+";"+los+";"+cid+";";
+        String bookingDetails = newBookingID+";"+current_user+";"+no+";"+type+";"+price+";"+email+";"+phone+";"+los+";"+cid+";"+date;
         FileRecord newBookingDetails = new FileRecord(newBookingID, bookingDetails);
         fHandler.InsertRecord(newBookingDetails);
     }
@@ -385,7 +416,9 @@ public class UI_Payment extends javax.swing.JFrame {
     private javax.swing.JButton bbut;
     private javax.swing.JTextField cardtxt;
     private javax.swing.JTextField codetxt;
+    private javax.swing.JLabel datelbl;
     private javax.swing.JTextField datetxt;
+    private javax.swing.JLabel dlbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
