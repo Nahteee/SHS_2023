@@ -69,14 +69,6 @@ public class Student extends User{
         super.gender = gender;
     }
 
-    public String getPicturePath() {
-        return super.picturePath;
-    }
-
-    public void setPicturePath(String picturePath) {
-        super.picturePath = picturePath;
-    }
-
     public String getContact() {
         return super.contact;
     }
@@ -91,14 +83,6 @@ public class Student extends User{
 
     public void setCard(String card) {
         super.card = card;
-    }
-
-    public String getAddress() {
-        return super.address;
-    }
-
-    public void setAddress(String address) {
-        super.address = address;
     }
 
     public UserRole getRole() {

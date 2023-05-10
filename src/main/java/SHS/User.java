@@ -166,7 +166,7 @@ public class User {
         Student_Hostel_System.current_user.setGender(Gender.valueOf(splitted_user_record[5]));
         Student_Hostel_System.current_user.setPassword(splitted_user_record[3]);
         Student_Hostel_System.current_user.setContact(splitted_user_record[6]);
-        Student_Hostel_System.current_user.setPicturePath(splitted_user_record[7]);
+        Student_Hostel_System.current_user.setCard(splitted_user_record[7]);
         
         switch(fileName) {
             case FileName.ADMIN -> {

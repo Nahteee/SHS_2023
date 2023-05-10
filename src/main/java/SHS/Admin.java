@@ -10,8 +10,8 @@ package main.java.SHS;
  */
 public class Admin extends User{
 
-    public Admin(int userId, String username, String userEmail, String password, int age, Gender gender, String picturePath, String contact, String card, String address, UserRole role) {
-        super(userId, username, userEmail, password, age, gender, picturePath, contact, card, address, role);
+    public Admin(int userId, String username, String userEmail, String password, int age, Gender gender, String contact, String card, UserRole role) {
+        super(userId, username, userEmail, password, age, gender, contact, card, role);
     }
     
     public Admin(int userId){

@@ -273,6 +273,7 @@ public class UI_Payment extends javax.swing.JFrame {
     private void saveBooking(){
         FileHandler fHandler = new FileHandler(FileName.BOOKING);
         int newBookingID = fHandler.GenerateID();
+        System.out.println(Student_Hostel_System.current_user);
         User current_user = Student_Hostel_System.current_user;
         Student s = (Student) Student_Hostel_System.current_user;
         current_user = StudentDetails.getStudentDetails().getStudent(s.getUserId()); 
