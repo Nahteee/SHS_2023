@@ -12,7 +12,7 @@ import main.java.SHS.FileHandlers.FileRecord;
 import main.java.SHS.Student_Hostel_System;
 import main.java.SHS.UI.UI_Student_Main;
 import main.java.SHS.Student;
-import main.java.SHS.StudentDetails;
+import main.java.SHS.Services.StudentService;
 import main.java.SHS.User;
 
 /**
@@ -305,7 +305,7 @@ public class UI_Payment extends javax.swing.JFrame {
         int newBookingID = fHandler.GenerateID();
         System.out.println(Student_Hostel_System.current_user.getUserId() + "Student id?");
         User current_user = Student_Hostel_System.current_user;
-        Student s = (Student) Student_Hostel_System.current_user;
+//        Student s = (Student) Student_Hostel_System.current_user;
 //        current_user = StudentDetails.getStudentDetails().getStudent(s.getUserId()); 
         String date = datelbl.getText();
         //String kkk = String.valueOf(current_user.getUsername());

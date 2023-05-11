@@ -13,8 +13,8 @@ import main.java.SHS.User;
 public class Student extends User{
 
     
-    public Student(int userId, String username, String userEmail, String password, int age, Gender gender, String contact, String card, UserRole role) {
-        super(userId, username, userEmail, password, age, gender, contact, card, role);
+    public Student(int userId, String username, String fullname, String userEmail, String password, int age, Gender gender, String contact, String card, UserRole role) {
+        super(userId, username, fullname, userEmail, password, age, gender, contact, card, role);
     }
 
     public Student(int user_id) {
@@ -35,6 +35,14 @@ public class Student extends User{
 
     public void setUsername(String username) {
         super.username = username;
+    }
+    
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getUserEmail() {

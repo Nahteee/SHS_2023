@@ -1,1 +1,1 @@
-1;Admin;admin@gmail.com;admin123;29;FEMALE;019922332;card
+1;Admin;Name;admin@gmail.com;admin123;29;FEMALE;019922332;card
