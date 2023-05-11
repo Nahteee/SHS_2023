@@ -113,8 +113,8 @@ public class FileHandler {
      public FileRecord FetchRecord(String data, int col){
         FileRecord response = null;
         for(int i = 0; i < records.size(); i ++) {
-            System.out.println(records.get(i));
-            System.out.println(records.get(i).getRecordList()[0]);
+//            System.out.println(records.get(i));
+//            System.out.println(records.get(i).getRecordList()[1]);
             String fetched_data = records.get(i).getRecordList()[col];
             if(data == null ? fetched_data == null : data.equals(fetched_data)){ // The question mark ? is the ternary operator in Java. It is a shorthand way of writing an if-else statement. The expression before the ? is evaluated as a boolean condition. If it is true, then the expression between the ? and : is evaluated. If it is false, then the expression after the : is evaluated.
                 response = records.get(i);

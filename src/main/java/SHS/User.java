@@ -4,6 +4,7 @@
  */
 package main.java.SHS;
 
+import java.util.Arrays;
 import main.java.SHS.UI.Admin.UI_Admin_Main;
 import javax.swing.JOptionPane;
 import main.java.SHS.FileHandlers.FileHandler;
@@ -143,7 +144,8 @@ public class User {
         }
         int user_id = user_record.getID();
         String[] splitted_user_record = user_record.getRecordList();
-        System.out.println(splitted_user_record[2]);
+//        System.out.println(Arrays.toString(splitted_user_record));
+//        System.out.println(splitted_user_record[7]);
         
         if(!(username == null ? splitted_user_record[1] == null : username.equals(splitted_user_record[1]) 
                 && password == null ? splitted_user_record[3] == null : password.equals(splitted_user_record[3])))
@@ -160,6 +162,7 @@ public class User {
         if(fileName == null ? FileName.STUDENT== null : fileName.equals(FileName.STUDENT)){
             Student_Hostel_System.current_user = new Student(user_id);
         }
+        
         Student_Hostel_System.current_user.setUsername(splitted_user_record[1]);
         Student_Hostel_System.current_user.setAge(Integer.parseInt(splitted_user_record[4]));
         Student_Hostel_System.current_user.setUserEmail(splitted_user_record[2]);
@@ -167,6 +170,7 @@ public class User {
         Student_Hostel_System.current_user.setPassword(splitted_user_record[3]);
         Student_Hostel_System.current_user.setContact(splitted_user_record[6]);
         Student_Hostel_System.current_user.setCard(splitted_user_record[7]);
+//        System.out.println(Student_Hostel_System.current_user.getUserId());
         
         switch(fileName) {
             case FileName.ADMIN -> {
