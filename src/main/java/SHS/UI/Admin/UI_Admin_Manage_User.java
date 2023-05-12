@@ -64,7 +64,6 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
@@ -73,7 +72,6 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(217, 225, 228));
 
-        UsersTable.setBackground(new java.awt.Color(213, 228, 242));
         UsersTable.setForeground(new java.awt.Color(92, 128, 188));
         UsersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -85,8 +83,31 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
             new String [] {
                 "ID", "Username", "Full Name", "Email", "Age", "Gender", "Contact"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(UsersTable);
+        if (UsersTable.getColumnModel().getColumnCount() > 0) {
+            UsersTable.getColumnModel().getColumn(0).setMinWidth(25);
+            UsersTable.getColumnModel().getColumn(0).setPreferredWidth(25);
+            UsersTable.getColumnModel().getColumn(0).setMaxWidth(25);
+            UsersTable.getColumnModel().getColumn(1).setPreferredWidth(75);
+            UsersTable.getColumnModel().getColumn(4).setMinWidth(30);
+            UsersTable.getColumnModel().getColumn(4).setPreferredWidth(30);
+            UsersTable.getColumnModel().getColumn(4).setMaxWidth(30);
+            UsersTable.getColumnModel().getColumn(5).setMinWidth(50);
+            UsersTable.getColumnModel().getColumn(5).setPreferredWidth(50);
+            UsersTable.getColumnModel().getColumn(5).setMaxWidth(50);
+            UsersTable.getColumnModel().getColumn(6).setMinWidth(80);
+            UsersTable.getColumnModel().getColumn(6).setPreferredWidth(80);
+            UsersTable.getColumnModel().getColumn(6).setMaxWidth(80);
+        }
 
         jPanel2.setBackground(new java.awt.Color(92, 128, 188));
 
@@ -209,9 +230,6 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Rooms.png"))); // NOI18N
         jLabel5.setText("jLabel4");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Roomtype.png"))); // NOI18N
-        jLabel6.setText("jLabel4");
-
         jButton4.setText("Details");
 
         jButton5.setText("Delete");
@@ -241,7 +259,6 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(21, 21, 21))
@@ -273,8 +290,7 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
                         .addGap(41, 41, 41)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabel3)
@@ -282,17 +298,14 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(43, 43, 43)
                                 .addComponent(jLabel4)
-                                .addGap(64, 64, 64)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6)
-                                .addGap(77, 77, 77))
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel5))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(30, Short.MAX_VALUE))))))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -381,7 +394,6 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;

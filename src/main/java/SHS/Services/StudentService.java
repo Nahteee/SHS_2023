@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  *
- * @author mingl
+ * @author ethan
  */
 public class StudentService {
     private static StudentService student_service;
