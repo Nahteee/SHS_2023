@@ -5,20 +5,27 @@
 package main.java.SHS.UI;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.table.DefaultTableModel;
+import main.java.SHS.FileHandlers.FileHandler;
+import main.java.SHS.FileHandlers.FileName;
+import main.java.SHS.Student;
+import main.java.SHS.Student_Hostel_System;
+import main.java.SHS.User;
 
 /**
  *
  * @author User
  */
 public class UI_Record extends javax.swing.JFrame {
-
     /**
      * Creates new form UI_Record
      */
     public UI_Record() {
         initComponents();
+        view();
     }
 
     /**
@@ -32,6 +39,7 @@ public class UI_Record extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         histab = new javax.swing.JTable();
@@ -41,6 +49,8 @@ public class UI_Record extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        elbl = new javax.swing.JLabel();
+        cnlbl = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -54,6 +64,8 @@ public class UI_Record extends javax.swing.JFrame {
         );
 
         jTextField1.setText("jTextField1");
+
+        jLabel5.setText("jLabel5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,6 +105,12 @@ public class UI_Record extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
         jLabel2.setText("HISTORY");
 
+        elbl.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        elbl.setText("Email :");
+
+        cnlbl.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        cnlbl.setText("Contact Number :");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -100,7 +118,6 @@ public class UI_Record extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(45, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,12 +126,22 @@ public class UI_Record extends javax.swing.JFrame {
                                     .addComponent(jButton2)
                                     .addGap(86, 86, 86)
                                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel3)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(elbl, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jLabel4))
                             .addGap(182, 182, 182))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(47, 47, 47)))))
+                            .addGap(47, 47, 47)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(194, 194, 194)
+                                .addComponent(cnlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(146, 146, 146))))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(63, 63, 63)
@@ -125,9 +152,13 @@ public class UI_Record extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(75, Short.MAX_VALUE)
-                .addComponent(jLabel3)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(elbl))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(cnlbl))
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -158,35 +189,44 @@ public class UI_Record extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     public void view(){
+        String file = "src\\main\\java\\SHS\\Txtfiles\\booking.txt";
         try{
-        BufferedReader br = new BufferedReader(new FileReader("booking.txt"));
-        String line = br.readLine();
+        FileReader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
+        
+        String line;
          
-        DefaultTableModel model = (DefaultTableModel)histab.getModel();
-        model.setRowCount(0);
+        System.out.println(Student_Hostel_System.current_user.getUsername() + " Student username?");
+        User current_user = Student_Hostel_System.current_user;
         
-        while(line!=null){
-            String[]split = line.split(",");
-            if(split[1].equals(System.getProperty("username"))){
-                String data[] = {
-                split[2],
-                split[3],
-                split[7],
-                split[8],
-                split[4]
-            }; 
-            model.addRow(data);
-            }
-            line = br.readLine();
-        } 
         
-    }catch(Exception e){
-        System.out.print("Error");
-    }
+        DefaultTableModel table = (DefaultTableModel)histab.getModel();
+        table.setRowCount(0);
+        while((line=br.readLine())!=null){
+            String[]data=line.split(";");
+            if(data[1].equals(current_user.getUsername())){
+                table.addRow(new Object[]{data[2],data[3],data[7],data[8],data[4]});
+            } 
+        }
+        br.close();
+        }
+        catch(FileNotFoundException ex){
+            System.out.print("File Not found");
+        }
+        catch(IOException ex){
+            System.out.print("Error");
+        }
+        
+
         
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        DefaultTableModel table = (DefaultTableModel) histab.getModel();
+        int row = histab.getSelectedRow();
+        String roomid = table.getValueAt(row,0).toString();
+        UI_Receipt ur = new UI_Receipt(roomid);
+        ur.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -225,6 +265,8 @@ public class UI_Record extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel cnlbl;
+    private javax.swing.JLabel elbl;
     private javax.swing.JTable histab;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -232,6 +274,7 @@ public class UI_Record extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

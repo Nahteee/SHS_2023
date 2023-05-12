@@ -303,13 +303,13 @@ public class UI_Payment extends javax.swing.JFrame {
     private void saveBooking(){
         FileHandler fHandler = new FileHandler(FileName.BOOKING);
         int newBookingID = fHandler.GenerateID();
-        System.out.println(Student_Hostel_System.current_user.getUserId() + "Student id?");
+        System.out.println(Student_Hostel_System.current_user.getUsername() + "Student id?");
         User current_user = Student_Hostel_System.current_user;
         Student s = (Student) Student_Hostel_System.current_user;
 //        current_user = StudentDetails.getStudentDetails().getStudent(s.getUserId()); 
         String date = datelbl.getText();
         //String kkk = String.valueOf(current_user.getUsername());
-        String bookingDetails = newBookingID+";"+current_user.getUserId()+";"+no+";"+type+";"+price+";"+email+";"+phone+";"+los+";"+cid+";"+date;
+        String bookingDetails = newBookingID+";"+current_user.getUsername()+";"+no+";"+type+";"+price+";"+email+";"+phone+";"+los+";"+cid+";"+date;
         FileRecord newBookingDetails = new FileRecord(newBookingID, bookingDetails);
         fHandler.InsertRecord(newBookingDetails);
     }

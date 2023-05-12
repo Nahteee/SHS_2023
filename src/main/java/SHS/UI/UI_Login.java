@@ -220,7 +220,11 @@ public class UI_Login extends javax.swing.JFrame {
     }//GEN-LAST:event_LoginActionPerformed
 
     private void RegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterActionPerformed
-        // TODO add your handling code here:
+    UI_Register ur = new UI_Register();
+        ur.setVisible(true);
+        ur.pack();
+        ur.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_RegisterActionPerformed
 
     private void UNFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UNFieldActionPerformed

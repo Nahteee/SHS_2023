@@ -82,6 +82,7 @@ public class FileHandler {
         return records;
     }
     
+    
     public FileRecord FetchRecord(int id){
         FileRecord response = null;
         for(int i = 0; i < records.size(); i ++) {
@@ -126,7 +127,9 @@ public class FileHandler {
         }
         return response;
     }
-
+     
+    
+     
     public void UpdateRecord(FileRecord record) {
         for (int i = 0; i < records.size(); i++) {
             if (records.get(i).getID() == record.getID()) {

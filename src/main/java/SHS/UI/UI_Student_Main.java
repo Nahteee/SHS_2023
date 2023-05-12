@@ -38,6 +38,7 @@ public class UI_Student_Main extends javax.swing.JFrame {
         UI_Payment.price = price;
         UI_Payment.type = type;
         UI_Booking.no = no;
+        
     }
 
     /**
@@ -185,7 +186,11 @@ public class UI_Student_Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    UI_Record ur = new UI_Record();
+        ur.setVisible(true);
+        ur.pack();
+        ur.setLocationRelativeTo(null);
+       this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
