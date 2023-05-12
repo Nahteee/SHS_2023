@@ -327,7 +327,7 @@ public class UI_Register extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // Validation
         
-        String name = ntxt.getText().trim();
+        String fullname = ntxt.getText().trim();
         String username = utxt.getText().trim();
         String password = passtxt.getText().trim();
         String confirmpassword = cptxt.getText().trim();
@@ -351,7 +351,7 @@ public class UI_Register extends javax.swing.JFrame {
             return;
         }
 
-        register(username,email,password,confirmpassword,age,gender,phone,card);
+        register(fullname,username,email,password,confirmpassword,age,gender,phone,card);
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -390,7 +390,7 @@ public class UI_Register extends javax.swing.JFrame {
     private void atxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_atxtActionPerformed
-    public static void register(String username, String email, String password, String confirmpassword, String age, String gender, String phone,String card){
+    public static void register(String fullname,String username, String email, String password, String confirmpassword, String age, String gender, String phone,String card){
         FileHandler fHandler = new FileHandler(FileName.STUDENT);
         FileRecord user_record = fHandler.FetchRecord(username, 1);
         if(user_record != null){
@@ -404,7 +404,7 @@ public class UI_Register extends javax.swing.JFrame {
         
         // write to text file
         int newStudentID = fHandler.GenerateID();
-        String newStudentString = newStudentID + ";" + username + ";" + email + ";" + password + ";" + age + ";" + gender + ";" + phone + ";" + card ;
+        String newStudentString = newStudentID + ";" + username + ";" + fullname + ";" + email + ";" + password + ";" + age + ";" + gender + ";" + phone + ";" + card ;
         FileRecord newStudentRecord = new FileRecord(newStudentID, newStudentString);
         fHandler.InsertRecord(newStudentRecord);
         

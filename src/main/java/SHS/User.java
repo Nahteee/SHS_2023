@@ -21,6 +21,7 @@ import main.java.SHS.UI.UI_Login;
 public class User {
     protected int userId;
     protected String username;
+    protected String fullname;
     protected String userEmail;
     protected String password;
     protected int age;
@@ -31,9 +32,10 @@ public class User {
     protected String address;
     protected UserRole role;
 
-    public User(int userId, String username, String userEmail, String password, int age, Gender gender, String contact, String card, UserRole role) {
+    public User(int userId, String username, String fullname, String userEmail, String password, int age, Gender gender, String contact, String card, UserRole role) {
         this.userId = userId;
         this.username = username;
+        this.fullname = fullname;
         this.userEmail = userEmail;
         this.password = password;
         this.age = age;
@@ -61,6 +63,14 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+    
+    public String fullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getUserEmail() {
@@ -148,7 +158,7 @@ public class User {
 //        System.out.println(splitted_user_record[7]);
         
         if(!(username == null ? splitted_user_record[1] == null : username.equals(splitted_user_record[1]) 
-                && password == null ? splitted_user_record[3] == null : password.equals(splitted_user_record[3])))
+                && password == null ? splitted_user_record[4] == null : password.equals(splitted_user_record[4])))
         {
             JOptionPane.showMessageDialog(null,"Login credential incorrect.","Oops",JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -164,12 +174,12 @@ public class User {
         }
         
         Student_Hostel_System.current_user.setUsername(splitted_user_record[1]);
-        Student_Hostel_System.current_user.setAge(Integer.parseInt(splitted_user_record[4]));
-        Student_Hostel_System.current_user.setUserEmail(splitted_user_record[2]);
-        Student_Hostel_System.current_user.setGender(Gender.valueOf(splitted_user_record[5]));
-        Student_Hostel_System.current_user.setPassword(splitted_user_record[3]);
-        Student_Hostel_System.current_user.setContact(splitted_user_record[6]);
-        Student_Hostel_System.current_user.setCard(splitted_user_record[7]);
+        Student_Hostel_System.current_user.setAge(Integer.parseInt(splitted_user_record[5]));
+        Student_Hostel_System.current_user.setUserEmail(splitted_user_record[3]);
+        Student_Hostel_System.current_user.setGender(Gender.valueOf(splitted_user_record[6]));
+        Student_Hostel_System.current_user.setPassword(splitted_user_record[4]);
+        Student_Hostel_System.current_user.setContact(splitted_user_record[7]);
+        Student_Hostel_System.current_user.setCard(splitted_user_record[8]);
 //        System.out.println(Student_Hostel_System.current_user.getUserId());
         
         switch(fileName) {

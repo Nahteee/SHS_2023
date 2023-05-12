@@ -10,8 +10,8 @@ package main.java.SHS;
  */
 public class Admin extends User{
 
-    public Admin(int userId, String username, String userEmail, String password, int age, Gender gender, String contact, String card, UserRole role) {
-        super(userId, username, userEmail, password, age, gender, contact, card, role);
+    public Admin(int userId, String username, String fullname, String userEmail, String password, int age, Gender gender, String contact, String card, UserRole role) {
+        super(userId, username, fullname, userEmail, password, age, gender, contact, card, role);
     }
     
     public Admin(int userId){
@@ -32,6 +32,14 @@ public class Admin extends User{
 
     public void setUsername(String username) {
         this.username = username;
+    }
+    
+    public String fullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getUserEmail() {
@@ -66,14 +74,6 @@ public class Admin extends User{
         this.gender = gender;
     }
 
-    public String getPicturePath() {
-        return picturePath;
-    }
-
-    public void setPicturePath(String picturePath) {
-        this.picturePath = picturePath;
-    }
-
     public String getContact() {
         return contact;
     }
@@ -88,14 +88,6 @@ public class Admin extends User{
 
     public void setCard(String card) {
         this.card = card;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public UserRole getRole() {
