@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-1;Ethan;member123@gmail.com;12345;20;MALE;0123790097;card
-2;ewtwet;qeqwtt;wetwet;21;MALE;34235;card
-3;ethan2522;ethan@gmail.com;etkz2522;21;MALE;0123790097;card
-4;ethann;ethan@gmail.com;qwerty;21;MALE;012365332;null
-5;john;john@gmail.com;john123;22;MALE;0122322222;null
-=======
 1;Ethan;Ethan Thong;member123@gmail.com;12345;20;MALE;0123790097;card
 2;ewtwet;EWTFULLNAME;qeqwtt@gmail.com;wetwet;21;MALE;34235;card
 3;ethan2522;Eeeethan thong;ethan@gmail.com;etkz2522;21;MALE;0123790097;card
 4;ethann;Another thong;ethan@gmail.com;qwerty;21;MALE;012365332;null
 5;hanson123;Hanson Yip;hanson@gmail.com;12345;21;MALE;123456789;null
->>>>>>> 6b5f843e10f711d94116a8c765e1bde3b29ab1fc
+6;john;johnFullName;john@gmail.com;john123;22;MALE;0122322222;null
+7;hhhhanson;Hansome;han@gmail.com;12345;21;MALE;1234567890;null
