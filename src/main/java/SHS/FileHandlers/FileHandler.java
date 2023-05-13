@@ -24,6 +24,31 @@ public class FileHandler {
         LoadRecords();
     }
     
+    private void LoadRecords() {
+        File f = new File(filePath);
+        if(!f.exists()) { 
+            try{
+                f.createNewFile();
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(";");
+                int id = Integer.parseInt(parts[0]);
+                records.add(new FileRecord(id, line));
+            }
+            br.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + filePath);
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + filePath);
+        }
+    }
+    
 //    public static void main(String[] args) {
 //
 ////    /** ============================================
@@ -176,54 +201,31 @@ public class FileHandler {
         }
         SaveRecord();
     }
+//    
+//    public void DeleteRecordForCartItem(FileRecord record) {
+//        for(int i = 0; i < records.size(); i++){
+//            String[] cart_item_record = records.get(i).getRecordList();
+//            int cart_id = Integer.parseInt(cart_item_record[0]);
+//            int product_id = Integer.parseInt(cart_item_record[1]);
+////            int qty = Integer.parseInt(cart_item_record[2]);
+////            int member_id = Integer.parseInt(cart_item_record[3]);
+//            
+//            String[] received_item_record = record.getRecordList();
+//            int cid = Integer.parseInt(received_item_record[0]);
+//            int pid = Integer.parseInt(received_item_record[1]);
+////            int o_qty = Integer.parseInt(received_item_record[2]);
+////            int mid = Integer.parseInt(received_item_record[3]);
+//            
+//            if(cart_id == cid && product_id == pid){
+//                records.remove(i);
+//                break;
+//            }
+//        }
+//        SaveRecord();
+//    }
     
-    public void DeleteRecordForCartItem(FileRecord record) {
-        for(int i = 0; i < records.size(); i++){
-            String[] cart_item_record = records.get(i).getRecordList();
-            int cart_id = Integer.parseInt(cart_item_record[0]);
-            int product_id = Integer.parseInt(cart_item_record[1]);
-//            int qty = Integer.parseInt(cart_item_record[2]);
-//            int member_id = Integer.parseInt(cart_item_record[3]);
-            
-            String[] received_item_record = record.getRecordList();
-            int cid = Integer.parseInt(received_item_record[0]);
-            int pid = Integer.parseInt(received_item_record[1]);
-//            int o_qty = Integer.parseInt(received_item_record[2]);
-//            int mid = Integer.parseInt(received_item_record[3]);
-            
-            if(cart_id == cid && product_id == pid){
-                records.remove(i);
-                break;
-            }
-        }
-        SaveRecord();
-    }
     
-    private void LoadRecords() {
-        File f = new File(filePath);
-        if(!f.exists()) { 
-            try{
-                f.createNewFile();
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(";");
-                int id = Integer.parseInt(parts[0]);
-                records.add(new FileRecord(id, line));
-            }
-            br.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + filePath);
-        } catch (IOException e) {
-            System.out.println("Error reading file: " + filePath);
-        }
-    }
-
+    
     private void SaveRecord() {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
             for (FileRecord record : this.records) {

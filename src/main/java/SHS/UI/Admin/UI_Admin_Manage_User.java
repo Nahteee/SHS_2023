@@ -4,6 +4,8 @@
  */
 package main.java.SHS.UI.Admin;
 
+import java.awt.Component;
+import static java.lang.Integer.parseInt;
 import main.java.SHS.Student;
 import main.java.SHS.Services.StudentService;
 import java.util.ArrayList;
@@ -233,6 +235,11 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
         jButton4.setText("Details");
 
         jButton5.setText("Delete");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Records");
 
@@ -343,6 +350,20 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       int removeConfirmation = JOptionPane.showOptionDialog(jPanel1, "Confirm to remove user" + "?", "Confirmation",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+       
+       DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();         
+       int userID = parseInt(model.getValueAt(UsersTable.getSelectedRow(), 0).toString());
+                if (removeConfirmation == JOptionPane.OK_OPTION) {
+                    Student removeStudent = StudentService.getStudentService().getStudent(userID);
+                    StudentService.getStudentService().deleteStudent(removeStudent);
+                    JOptionPane.showMessageDialog(jPanel1,"Delivery Student remove successfully.","Alert",JOptionPane.INFORMATION_MESSAGE);
+                    model.removeRow(UsersTable.getSelectedRow());
+                }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments

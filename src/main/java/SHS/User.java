@@ -65,7 +65,7 @@ public class User {
         this.username = username;
     }
     
-    public String fullname() {
+    public String getFullname() {
         return fullname;
     }
 

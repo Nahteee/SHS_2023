@@ -37,13 +37,13 @@ public class StudentService {
     
     public StudentService(){
          this.students = new ArrayList<Student>();
-
+            
            List<FileRecord> student_records = student_file.FetchRecord();
            student_records.forEach((record) -> {
                Student student_object = convertToObject(record);
                this.students.add(student_object);
            });
-           
+           System.out.println(students);
            this.students.forEach((record) -> System.out.println(record.getUsername())
            );
     }
@@ -69,7 +69,7 @@ public class StudentService {
     }
     
     private FileRecord convertToFileRecord(Student student){
-         String student_record_string = student.getUserId() + ";" + student.getUsername()+ ";" + student.getFullname()+ ";" + student.getUserEmail() + ";" + student.getPassword()+ ";" + student.getAge() + ";" +student.getGender() + ";" + student.getContact() + ";" + student.getPicturePath();
+         String student_record_string = student.getUserId() + ";" + student.getUsername()+ ";" + student.getFullname()+ ";" + student.getUserEmail() + ";" + student.getPassword()+ ";" + student.getAge() + ";" +student.getGender() + ";" + student.getContact() + ";" + student.getCard();
          return new FileRecord(student.getUserId(), student_record_string);
     }
     
@@ -119,7 +119,9 @@ public class StudentService {
     public void deleteStudent(Student student) {
          for(int i=0; i < students.size(); i++){
             if(students.get(i).getUserId()== student.getUserId()){
+                // Remove from student object
                 students.remove(students.get(i));
+                // Remove from Student Text file
                 FileRecord student_record = convertToFileRecord(student);
                 student_file.DeleteRecord(student_record);
                 break;
