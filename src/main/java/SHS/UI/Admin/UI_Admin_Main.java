@@ -4,6 +4,8 @@
  */
 package main.java.SHS.UI.Admin;
 
+import java.awt.Cursor;
+
 /**
  *
  * @author User
@@ -15,6 +17,8 @@ public class UI_Admin_Main extends javax.swing.JFrame {
      */
     public UI_Admin_Main() {
         initComponents();
+        
+        ManageIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     /**
@@ -29,13 +33,13 @@ public class UI_Admin_Main extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        ManageHeader = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        ManageIcon = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -57,13 +61,13 @@ public class UI_Admin_Main extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/SHS Logo Header.png"))); // NOI18N
 
-        jButton2.setBackground(new java.awt.Color(92, 128, 188));
-        jButton2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(217, 225, 228));
-        jButton2.setText("Management");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        ManageHeader.setBackground(new java.awt.Color(92, 128, 188));
+        ManageHeader.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        ManageHeader.setForeground(new java.awt.Color(217, 225, 228));
+        ManageHeader.setText("Management");
+        ManageHeader.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ManageHeaderActionPerformed(evt);
             }
         });
 
@@ -113,7 +117,7 @@ public class UI_Admin_Main extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ManageHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -137,7 +141,7 @@ public class UI_Admin_Main extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ManageHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -146,7 +150,12 @@ public class UI_Admin_Main extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Reports icon.png"))); // NOI18N
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Management icon.png"))); // NOI18N
+        ManageIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Management icon.png"))); // NOI18N
+        ManageIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ManageIconMouseClicked(evt);
+            }
+        });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Application icon.png"))); // NOI18N
 
@@ -231,7 +240,7 @@ public class UI_Admin_Main extends javax.swing.JFrame {
                 .addGap(63, 63, 63)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addComponent(ManageIcon)
                         .addGap(48, 48, 48)
                         .addComponent(jLabel5)
                         .addGap(56, 56, 56)
@@ -256,7 +265,7 @@ public class UI_Admin_Main extends javax.swing.JFrame {
                 .addGap(64, 64, 64)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4)
+                    .addComponent(ManageIcon)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
@@ -296,9 +305,11 @@ public class UI_Admin_Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void ManageHeaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageHeaderActionPerformed
+        this.setVisible(false);
+        UI_Admin_Manage_User UIAMU = new UI_Admin_Manage_User();
+        UIAMU.setVisible(true);
+    }//GEN-LAST:event_ManageHeaderActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         System.out.println("hi");
@@ -307,6 +318,12 @@ public class UI_Admin_Main extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void ManageIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ManageIconMouseClicked
+       this.setVisible(false);
+        UI_Admin_Manage_User UIAMU = new UI_Admin_Manage_User();
+        UIAMU.setVisible(true);
+    }//GEN-LAST:event_ManageIconMouseClicked
 
     /**
      * @param args the command line arguments
@@ -344,8 +361,9 @@ public class UI_Admin_Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ManageHeader;
+    private javax.swing.JLabel ManageIcon;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
@@ -357,7 +375,6 @@ public class UI_Admin_Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

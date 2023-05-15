@@ -1,4 +1,4 @@
 1;Ethan;Ethan Thong;member123@gmail.com;12345;20;MALE;0123790097;card
-3;ethan2522;Eeeethan thong;ethan@gmail.com;etkz2522;21;MALE;0123790097;card
-5;hanson123;Hanson Yip;hanson@gmail.com;12345;21;MALE;123456789;null
-6;john;johnFullName;john@gmail.com;john123;22;MALE;0122322222;null
+2;ethan2522;Eeeethan thong;ethan@gmail.com;etkz2522;21;MALE;0123790097;card
+3;hanson123;Hanson Yip;hanson@gmail.com;12345;21;MALE;123456789;null
+4;john;johnFullName;john@gmail.com;john123;22;MALE;0122322222;null

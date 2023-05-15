@@ -5,6 +5,7 @@
 package main.java.SHS.UI.Admin;
 
 import java.awt.Component;
+import java.awt.Cursor;
 import static java.lang.Integer.parseInt;
 import main.java.SHS.Student;
 import main.java.SHS.Services.StudentService;
@@ -24,6 +25,9 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
      */
     public UI_Admin_Manage_User() {
         initComponents();
+        
+        UserButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        RoomsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
         ArrayList<Student> students = StudentService.getStudentService().getStudents();
         
@@ -61,13 +65,13 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        SearchTxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        UserButton = new javax.swing.JLabel();
+        RoomsButton = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        DeleteUser = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -222,22 +226,32 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
             .addGap(0, 3, Short.MAX_VALUE)
         );
 
-        jTextField1.setText("Search...");
+        SearchTxt.setText("Search...");
+        SearchTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SearchTxtKeyReleased(evt);
+            }
+        });
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Search Icon.png"))); // NOI18N
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Users (Selected).png"))); // NOI18N
-        jLabel4.setText("jLabel4");
+        UserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Users (Selected).png"))); // NOI18N
+        UserButton.setText("jLabel4");
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Rooms.png"))); // NOI18N
-        jLabel5.setText("jLabel4");
+        RoomsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Rooms.png"))); // NOI18N
+        RoomsButton.setText("jLabel4");
+        RoomsButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RoomsButtonMouseClicked(evt);
+            }
+        });
 
         jButton4.setText("Details");
 
-        jButton5.setText("Delete");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        DeleteUser.setText("Delete");
+        DeleteUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                DeleteUserActionPerformed(evt);
             }
         });
 
@@ -259,18 +273,18 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(28, 28, 28)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(DeleteUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(UserButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(RoomsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(21, 21, 21))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1)
+                        .addComponent(SearchTxt)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(62, 62, 62)
@@ -288,7 +302,7 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SearchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
                         .addGap(74, 74, 74)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -297,16 +311,16 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
                         .addGap(41, 41, 41)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(DeleteUser, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabel3)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(43, 43, 43)
-                                .addComponent(jLabel4)
+                                .addComponent(UserButton)
                                 .addGap(26, 26, 26)
-                                .addComponent(jLabel5))
+                                .addComponent(RoomsButton))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -351,8 +365,9 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       int removeConfirmation = JOptionPane.showOptionDialog(jPanel1, "Confirm to remove user" + "?", "Confirmation",
+    private void DeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteUserActionPerformed
+       if(UsersTable.getSelectedRowCount()==1) {
+        int removeConfirmation = JOptionPane.showOptionDialog(jPanel1, "Confirm to remove user" + "?", "Confirmation",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
        
        DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();         
@@ -363,7 +378,30 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(jPanel1,"Delivery Student remove successfully.","Alert",JOptionPane.INFORMATION_MESSAGE);
                     model.removeRow(UsersTable.getSelectedRow());
                 }
-    }//GEN-LAST:event_jButton5ActionPerformed
+       }
+       else {
+            if(UsersTable.getRowCount()==0) {
+                JOptionPane.showMessageDialog(this, "Table is empty...");
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Please Select Single Row for Delete...");
+            }
+        }
+    }//GEN-LAST:event_DeleteUserActionPerformed
+
+    private void RoomsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RoomsButtonMouseClicked
+        this.setVisible(false);
+        UI_Admin_Manage_Rooms UIAMR = new UI_Admin_Manage_Rooms();
+        UIAMR.setVisible(true);
+    }//GEN-LAST:event_RoomsButtonMouseClicked
+
+    private void SearchTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchTxtKeyReleased
+        DefaultTableModel table  = (DefaultTableModel)UsersTable.getModel();
+        String search = SearchTxt.getText();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(table);
+        UsersTable.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(search));
+    }//GEN-LAST:event_SearchTxtKeyReleased
 
     /**
      * @param args the command line arguments
@@ -402,25 +440,25 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DeleteUser;
+    private javax.swing.JLabel RoomsButton;
+    private javax.swing.JTextField SearchTxt;
+    private javax.swing.JLabel UserButton;
     private javax.swing.JTable UsersTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,7 +8,7 @@ package main.java.SHS;
  *
  * @author User
  */
-public enum Roomtype {
+public enum RoomType {
     SingleRoom,
     TwinRoom,
     SingleRoomPremium,
