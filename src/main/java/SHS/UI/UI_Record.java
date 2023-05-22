@@ -26,6 +26,7 @@ public class UI_Record extends javax.swing.JFrame {
     public UI_Record() {
         initComponents();
         view();
+        userdetails();
     }
 
     /**
@@ -46,8 +47,8 @@ public class UI_Record extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        ulbl = new javax.swing.JLabel();
+        cn = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         elbl = new javax.swing.JLabel();
         cnlbl = new javax.swing.JLabel();
@@ -92,24 +93,27 @@ public class UI_Record extends javax.swing.JFrame {
         });
 
         jButton2.setText("BACK");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 18)); // NOI18N
         jLabel1.setText("Description");
 
-        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jLabel3.setText("Email :");
+        ulbl.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        ulbl.setText("Username:");
 
-        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jLabel4.setText("Contact Number :");
+        cn.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        cn.setText("Contact Number :");
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
         jLabel2.setText("HISTORY");
 
         elbl.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        elbl.setText("Email :");
 
         cnlbl.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        cnlbl.setText("Contact Number :");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -127,10 +131,10 @@ public class UI_Record extends javax.swing.JFrame {
                                     .addGap(86, 86, 86)
                                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
+                                    .addComponent(ulbl)
                                     .addGap(18, 18, 18)
                                     .addComponent(elbl, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel4))
+                                .addComponent(cn))
                             .addGap(182, 182, 182))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -153,11 +157,11 @@ public class UI_Record extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(75, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(ulbl)
                     .addComponent(elbl))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(cn)
                     .addComponent(cnlbl))
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,6 +232,39 @@ public class UI_Record extends javax.swing.JFrame {
         ur.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+    private void userdetails(){
+        String file = "src\\main\\java\\SHS\\Txtfiles\\student.txt";
+        try{
+        FileReader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
+        
+        String line;
+         
+        System.out.println(Student_Hostel_System.current_user.getUsername() + " Student username?");
+        User current_user = Student_Hostel_System.current_user;
+        while((line=br.readLine())!=null){
+            String[]data=line.split(";");
+            if(data[1].equals(current_user.getUsername())){
+                elbl.setText(data[1]);
+                cnlbl.setText(data[7]);
+            } 
+        }
+        br.close();
+        }
+        catch(FileNotFoundException ex){
+            System.out.print("File Not found");
+        }
+        catch(IOException ex){
+            System.out.print("Error");
+        }
+    }
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    UI_Student_Main us = new UI_Student_Main();
+        us.setVisible(true);
+        us.pack();
+        us.setLocationRelativeTo(null);
+       this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,6 +302,7 @@ public class UI_Record extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel cn;
     private javax.swing.JLabel cnlbl;
     private javax.swing.JLabel elbl;
     private javax.swing.JTable histab;
@@ -272,12 +310,11 @@ public class UI_Record extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel ulbl;
     // End of variables declaration//GEN-END:variables
 }
