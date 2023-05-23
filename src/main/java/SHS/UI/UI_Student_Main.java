@@ -59,12 +59,12 @@ public class UI_Student_Main extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         roomtab = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(217, 225, 230));
 
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("STUDENT");
 
         jButton1.setText("VIEW RECORDS");
@@ -89,6 +89,11 @@ public class UI_Student_Main extends javax.swing.JFrame {
         });
 
         jButton4.setText("LOGOUT");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         roomtab.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,13 +117,6 @@ public class UI_Student_Main extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setText("BACK");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -137,13 +135,10 @@ public class UI_Student_Main extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(30, 30, 30)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
+                        .addGap(71, 71, 71)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38))
+                        .addGap(72, 72, 72))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
                         .addGap(22, 22, 22))))
@@ -166,8 +161,7 @@ public class UI_Student_Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
+                    .addComponent(jButton5))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -226,10 +220,6 @@ public class UI_Student_Main extends javax.swing.JFrame {
     
     }//GEN-LAST:event_roombutActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
-
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         if(roomtab.getSelectedRow()<0){
             JOptionPane.showMessageDialog(null,"No room selected" , "Error",JOptionPane.ERROR_MESSAGE,null);
@@ -258,6 +248,14 @@ public class UI_Student_Main extends javax.swing.JFrame {
     private void roomtabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roomtabMouseClicked
 
     }//GEN-LAST:event_roomtabMouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    UI_Login ul = new UI_Login();
+        ul.setVisible(true);
+        ul.pack();
+        ul.setLocationRelativeTo(null);
+       this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,7 +300,6 @@ public class UI_Student_Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

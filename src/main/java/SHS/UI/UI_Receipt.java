@@ -280,8 +280,8 @@ public static String roomid;
         }
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    UI_Student_Main us = new UI_Student_Main();
-        us.setVisible(true);
+    UI_Record ur = new UI_Record();
+        ur.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
