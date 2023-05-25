@@ -4,7 +4,6 @@
  */
 package main.java.SHS.UI.Admin;
 
-import java.awt.Component;
 import java.awt.Cursor;
 import static java.lang.Integer.parseInt;
 import main.java.SHS.Student;

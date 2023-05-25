@@ -19,14 +19,16 @@ public class Room {
     private double price;
 
     // Constructor
-    public Room(int roomNumber, RoomType roomType, int capacity, double price) {
-        this.roomNumber = roomNumber;
-        this.roomType = roomType;
-        this.capacity = capacity;
-        this.occupants = new ArrayList<>();
-        this.availability = true;
-        this.price = price;
-    }
+public Room(int roomNumber,RoomType roomType, String capacity, String occupants, String availability, double price) {
+    this.roomNumber = roomNumber;
+    this.roomType = roomType;
+    this.capacity = Integer.parseInt(capacity);
+    this.occupants = new ArrayList<>();
+    this.availability = true;
+    this.price = price;
+    
+}
+
 
     // Getter and setter methods
     public int getRoomNumber() {
@@ -91,7 +93,7 @@ public class Room {
     }
 
     public String toString() {
-        return "Room Number: " + roomNumber + "\n"
+        return  "Room Number: " + roomNumber + "\n"
                 + "Room Type: " + roomType + "\n"
                 + "Capacity: " + capacity + "\n"
                 + "Occupants: " + occupants.toString() + "\n"
