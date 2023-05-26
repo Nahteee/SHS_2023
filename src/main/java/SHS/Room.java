@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Room {
     private int roomNumber;
     private RoomType roomType;
-    private int capacity;
+    private String capacity;
     private ArrayList<String> occupants;
     private boolean availability;
     private double price;
@@ -22,7 +22,7 @@ public class Room {
 public Room(int roomNumber,RoomType roomType, String capacity, String occupants, String availability, double price) {
     this.roomNumber = roomNumber;
     this.roomType = roomType;
-    this.capacity = Integer.parseInt(capacity);
+    this.capacity = capacity;
     this.occupants = new ArrayList<>();
     this.availability = true;
     this.price = price;
@@ -47,11 +47,11 @@ public Room(int roomNumber,RoomType roomType, String capacity, String occupants,
         this.roomType = roomType;
     }
 
-    public int getCapacity() {
+    public String getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
+    public void setCapacity(String capacity) {
         this.capacity = capacity;
     }
 

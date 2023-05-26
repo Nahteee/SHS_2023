@@ -15,8 +15,8 @@ public class BookedRoom extends Room {
     private Date checkInDate;
     private Date checkOutDate;
     
-    public BookedRoom(int roomNumber, RoomType roomType, int capacity, double price) {
-        super(roomNumber, roomType,capacity, price, room_price);
+    public BookedRoom(int roomNumber,RoomType roomType, String capacity, String occupants, String availability, double price) {
+        super(roomNumber, roomType,capacity, occupants, availability, price);
     }
     
     // getters and setters for the BookedRoom attributes
