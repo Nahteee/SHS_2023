@@ -57,14 +57,13 @@ public class RoomService {
     String room_number = room_data[0];
     String room_type = room_data[1];
     String room_capacity = room_data[2];
-    String room_occupants = room_data[3];
     String room_availability = room_data[4];
     double room_price = Integer.parseInt(room_data[5]);
     
     
     
 
-    return new Room(Integer.parseInt(room_number),getRoomTypeClass(room_type), room_capacity,room_occupants, room_availability, room_price);
+    return new Room(Integer.parseInt(room_number),getRoomTypeClass(room_type), room_capacity, room_availability, room_price);
 }
 
     public RoomType getRoomTypeClass(String roomType){
@@ -88,7 +87,7 @@ public class RoomService {
     }
     
    private FileRecord convertToFileRecord(Room room){
-         String room_record_string = room.getRoomNumber() + ";" + room.getRoomType()+ ";" + room.getCapacity()+ ";" + room.getOccupants() + ";" + room.isAvailability() + ";" + room.getPrice();
+         String room_record_string = room.getRoomNumber() + ";" + room.getRoomType()+ ";" + room.getCapacity()+ ";" + ";" + room.isAvailability() + ";" + room.getPrice();
          return new FileRecord(room.getRoomNumber(), room_record_string);
     }
     

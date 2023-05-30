@@ -424,7 +424,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Details"/>
+            <Property name="text" type="java.lang.String" value="View Past Bookings"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="DeleteUser">
@@ -437,8 +437,11 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton7">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Records"/>
+            <Property name="text" type="java.lang.String" value="View Login Records"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

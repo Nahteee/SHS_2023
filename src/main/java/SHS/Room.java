@@ -14,21 +14,18 @@ public class Room {
     private int roomNumber;
     private RoomType roomType;
     private String capacity;
-    private ArrayList<String> occupants;
     private boolean availability;
     private double price;
 
     // Constructor
-public Room(int roomNumber,RoomType roomType, String capacity, String occupants, String availability, double price) {
+public Room(int roomNumber,RoomType roomType, String capacity, String availability, double price) {
     this.roomNumber = roomNumber;
     this.roomType = roomType;
     this.capacity = capacity;
-    this.occupants = new ArrayList<>();
     this.availability = true;
     this.price = price;
     
 }
-
 
     // Getter and setter methods
     public int getRoomNumber() {
@@ -55,14 +52,6 @@ public Room(int roomNumber,RoomType roomType, String capacity, String occupants,
         this.capacity = capacity;
     }
 
-    public ArrayList<String> getOccupants() {
-        return occupants;
-    }
-
-    public void setOccupants(ArrayList<String> occupants) {
-        this.occupants = occupants;
-    }
-
     public boolean isAvailability() {
         return availability;
     }
@@ -80,23 +69,12 @@ public Room(int roomNumber,RoomType roomType, String capacity, String occupants,
     }
 
     // Methods
-    public void addOccupant(String occupant) {
-        occupants.add(occupant);
-    }
 
-    public void removeOccupant(String occupant) {
-        occupants.remove(occupant);
-    }
-
-    public boolean isOccupied() {
-        return !occupants.isEmpty();
-    }
 
     public String toString() {
         return  "Room Number: " + roomNumber + "\n"
                 + "Room Type: " + roomType + "\n"
                 + "Capacity: " + capacity + "\n"
-                + "Occupants: " + occupants.toString() + "\n"
                 + "Availability: " + availability + "\n"
                 + "Price: " + price;
     }
@@ -113,18 +91,7 @@ public Room(int roomNumber,RoomType roomType, String capacity, String occupants,
         return toString();
     }
 
-    public boolean assignRoom(Student student) {
-    // Check if the room is already occupied
-    if (isOccupied()) {
-        return false;
-    }
-    
-    // If all criteria are met, assign the room to the student
-//    addOccupant(student);
-    setAvailability(false);
-//    student.setAssignedRoom(this);
-    return true;
-}
+
 
 }
 
