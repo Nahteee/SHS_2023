@@ -245,7 +245,7 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Details");
+        jButton4.setText("View Past Bookings");
 
         DeleteUser.setText("Delete");
         DeleteUser.addActionListener(new java.awt.event.ActionListener() {
@@ -254,7 +254,12 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setText("Records");
+        jButton7.setText("View Login Records");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -401,6 +406,10 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
         UsersTable.setRowSorter(tr);
         tr.setRowFilter(RowFilter.regexFilter(search));
     }//GEN-LAST:event_SearchTxtKeyReleased
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
