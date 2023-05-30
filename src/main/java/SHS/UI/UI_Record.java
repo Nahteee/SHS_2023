@@ -110,6 +110,7 @@ public class UI_Record extends javax.swing.JFrame {
         cn.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         cn.setText("Contact Number :");
 
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
         jLabel2.setText("HISTORY");
 
