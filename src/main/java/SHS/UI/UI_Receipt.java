@@ -5,6 +5,9 @@
 package main.java.SHS.UI;
 
 import java.io.*;
+import java.util.List;
+import main.java.SHS.FileHandlers.FileHandler;
+import main.java.SHS.FileHandlers.FileRecord;
 import main.java.SHS.Student_Hostel_System;
 import main.java.SHS.User;
 
@@ -245,7 +248,7 @@ public static String roomid;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public void receipt(String roomid){
+    /*public void receipt(String roomid){
         String file = "src\\main\\java\\SHS\\Txtfiles\\booking.txt";
         try{
         FileReader fr = new FileReader(file);
@@ -278,7 +281,35 @@ public static String roomid;
         catch(IOException ex){
             System.out.print("Error");
         }
+    }*/
+    public void receipt(String roomid) {
+    
+    FileHandler fileHandler = new FileHandler("booking");
+
+    try {
+        List<FileRecord> records = fileHandler.FetchRecord();
+        User current_user = Student_Hostel_System.current_user;
+        
+        String receipt;
+        
+        for (FileRecord record : records) {
+            String[] data = record.getRecordList();
+            if (data[1].equals(current_user.getUsername()) && data[2].equals(roomid)) {
+                elbl.setText(data[5]);
+                cnlbl.setText(data[6]);
+                idlbl.setText(data[2]);
+                rtlbl.setText(data[3]);
+                doslbl.setText(data[7]);
+                plbl.setText(data[4]);
+                dlbl.setText(data[9]);
+                break;
+            }
+        }
+    } catch (Exception e) {
+        System.out.println("Error reading booking records: " + e.getMessage());
     }
+}
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     UI_Record ur = new UI_Record();
         ur.setVisible(true);
