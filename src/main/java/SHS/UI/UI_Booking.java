@@ -105,6 +105,11 @@ public class UI_Booking extends javax.swing.JFrame {
         jLabel6.setText("Length of Stay *");
 
         lstxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "3 months", "6 months", "1 year" }));
+        lstxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lstxtActionPerformed(evt);
+            }
+        });
 
         ctxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -312,6 +317,10 @@ public class UI_Booking extends javax.swing.JFrame {
     private void etxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_etxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_etxtActionPerformed
+
+    private void lstxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lstxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lstxtActionPerformed
 
     /**
      * @param args the command line arguments

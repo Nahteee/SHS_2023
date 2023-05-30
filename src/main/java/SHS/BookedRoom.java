@@ -13,13 +13,13 @@ import java.util.Date;
  */
 public class BookedRoom extends Room {
     private Reservation reservation;
-    private ArrayList<String> occupants;
+    private String occupants;
     private Date checkInDate;
     private Date checkOutDate;
     
-    public BookedRoom(int roomNumber,RoomType roomType, String capacity, String occupants, String availability, double price) {
-        super(roomNumber, roomType,capacity, availability, price);
-        this.occupants = new ArrayList<>();
+    public BookedRoom(int roomNumber,RoomType roomType, String occupants, String availability, double price) {
+        super(roomNumber, roomType, availability, price);
+        this.occupants = occupants;
     }
     
     // getters and setters for the BookedRoom attributes
@@ -31,11 +31,11 @@ public class BookedRoom extends Room {
         this.reservation = reservation;
     }
     
-        public ArrayList<String> getOccupants() {
+     public String getOccupants() {
         return occupants;
     }
 
-    public void setOccupants(ArrayList<String> occupants) {
+    public void setOccupants(String occupants) {
         this.occupants = occupants;
     }
     
@@ -56,13 +56,6 @@ public class BookedRoom extends Room {
     }
     
     //Methods
-        public void addOccupant(String occupant) {
-        occupants.add(occupant);
-    }
-
-    public void removeOccupant(String occupant) {
-        occupants.remove(occupant);
-    }
 
     public boolean isOccupied() {
         return !occupants.isEmpty();
@@ -71,7 +64,7 @@ public class BookedRoom extends Room {
     // toString method to display the booked room details
     @Override
     public String toString() {
-        return super.toString() + "Occupants: " + occupants.toString() + "\n" + ", "
+        return super.toString() + "Occupant: " + occupants + "\n" + ", "
                 + "Check-in date: " + checkInDate + "\n" + ", Check-out date: " + checkOutDate + "\n";
     }
     
@@ -82,7 +75,7 @@ public class BookedRoom extends Room {
     }
     
     // If all criteria are met, assign the room to the student
-//    addOccupant(student);
+//    addOccupant(student);W
     setAvailability(false);
 //    student.setAssignedRoom(this);
     return true;

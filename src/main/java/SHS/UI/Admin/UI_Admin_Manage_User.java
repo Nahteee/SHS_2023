@@ -245,7 +245,7 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("View Past Bookings");
+        jButton4.setText("View Details");
 
         DeleteUser.setText("Delete");
         DeleteUser.addActionListener(new java.awt.event.ActionListener() {
@@ -254,7 +254,7 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setText("View Login Records");
+        jButton7.setText("Evict");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);

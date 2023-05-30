@@ -10,7 +10,6 @@ package main.java.SHS;
  */
 public enum RoomType {
     SingleRoom,
-    TwinRoom,
     SingleRoomPremium,
-    TwinRoomPremium
+    MasterRoom
 }

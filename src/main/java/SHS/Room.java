@@ -13,15 +13,13 @@ import java.util.ArrayList;
 public class Room {
     private int roomNumber;
     private RoomType roomType;
-    private String capacity;
     private boolean availability;
     private double price;
 
     // Constructor
-public Room(int roomNumber,RoomType roomType, String capacity, String availability, double price) {
+public Room(int roomNumber,RoomType roomType, String availability, double price) {
     this.roomNumber = roomNumber;
     this.roomType = roomType;
-    this.capacity = capacity;
     this.availability = true;
     this.price = price;
     
@@ -42,14 +40,6 @@ public Room(int roomNumber,RoomType roomType, String capacity, String availabili
 
     public void setRoomType(RoomType roomType) {
         this.roomType = roomType;
-    }
-
-    public String getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(String capacity) {
-        this.capacity = capacity;
     }
 
     public boolean isAvailability() {
@@ -74,7 +64,6 @@ public Room(int roomNumber,RoomType roomType, String capacity, String availabili
     public String toString() {
         return  "Room Number: " + roomNumber + "\n"
                 + "Room Type: " + roomType + "\n"
-                + "Capacity: " + capacity + "\n"
                 + "Availability: " + availability + "\n"
                 + "Price: " + price;
     }

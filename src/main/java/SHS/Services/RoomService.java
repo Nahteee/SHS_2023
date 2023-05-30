@@ -56,14 +56,13 @@ public class RoomService {
     }
     String room_number = room_data[0];
     String room_type = room_data[1];
-    String room_capacity = room_data[2];
-    String room_availability = room_data[4];
-    double room_price = Integer.parseInt(room_data[5]);
+    String room_availability = room_data[2];
+    double room_price = Integer.parseInt(room_data[3]);
     
     
     
 
-    return new Room(Integer.parseInt(room_number),getRoomTypeClass(room_type), room_capacity, room_availability, room_price);
+    return new Room(Integer.parseInt(room_number),getRoomTypeClass(room_type), room_availability, room_price);
 }
 
     public RoomType getRoomTypeClass(String roomType){
@@ -72,14 +71,11 @@ public class RoomService {
             case "SingleRoom":
                 rt = RoomType.SingleRoom;
                 return rt;
-            case "TwinRoom":
-                rt = RoomType.TwinRoom;
-                return rt;
             case "SingleRoomPremium":
                 rt = RoomType.SingleRoomPremium;
                 return rt;
             case "TwinRoomPremium":
-                rt = RoomType.TwinRoomPremium;
+                rt = RoomType.MasterRoom;
                 return rt;
             
         }
@@ -87,7 +83,7 @@ public class RoomService {
     }
     
    private FileRecord convertToFileRecord(Room room){
-         String room_record_string = room.getRoomNumber() + ";" + room.getRoomType()+ ";" + room.getCapacity()+ ";" + ";" + room.isAvailability() + ";" + room.getPrice();
+         String room_record_string = room.getRoomNumber() + ";" + room.getRoomType()+ ";" + ";" + room.isAvailability() + ";" + room.getPrice();
          return new FileRecord(room.getRoomNumber(), room_record_string);
     }
     
