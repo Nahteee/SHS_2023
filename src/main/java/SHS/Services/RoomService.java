@@ -68,7 +68,7 @@ public class RoomService {
 }
 
     public RoomType getRoomTypeClass(String roomType){
-        RoomType rt;
+        RoomType rt;    
         switch(roomType){
             case "SingleRoom":
                 rt = RoomType.SingleRoom;

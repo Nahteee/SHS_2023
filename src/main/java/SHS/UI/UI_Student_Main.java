@@ -4,19 +4,21 @@
  */
 package main.java.SHS.UI;
 
+import java.awt.Cursor;
 import java.io.*;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import main.java.SHS.FileHandlers.FileHandler;
 import main.java.SHS.FileHandlers.FileName;
 import main.java.SHS.FileHandlers.FileRecord;
+import main.java.SHS.Room;
+import main.java.SHS.Services.RoomService;
 import static main.java.SHS.UI.UI_Payment.cid;
 import static main.java.SHS.UI.UI_Payment.email;
 import static main.java.SHS.UI.UI_Payment.los;
-import static main.java.SHS.UI.UI_Payment.no;
 import static main.java.SHS.UI.UI_Payment.phone;
-import static main.java.SHS.UI.UI_Payment.price;
-import static main.java.SHS.UI.UI_Payment.type;
+
 
 
 /**
@@ -39,6 +41,19 @@ public class UI_Student_Main extends javax.swing.JFrame {
         UI_Payment.type = type;
         UI_Booking.no = no;
         
+    roombut.setCursor(new Cursor(Cursor.HAND_CURSOR));
+    ArrayList<Room> rooms = RoomService.getRoomService().getRooms();
+        
+        DefaultTableModel model = (DefaultTableModel) roomtab.getModel();
+        for(int i = 0; i < rooms.size(); i++){
+            model.addRow(new Object[0]);
+            model.setValueAt(rooms.get(i).getRoomNumber(), i, 0);
+            model.setValueAt(rooms.get(i).getRoomType(), i, 1);
+            model.setValueAt(rooms.get(i).getCapacity(), i, 2);
+            model.setValueAt(rooms.get(i).getOccupants(), i, 3);
+            model.setValueAt(rooms.get(i).isAvailability(), i, 4);
+            model.setValueAt(rooms.get(i).getPrice(), i, 5);
+        }
     }
 
     /**
@@ -100,7 +115,7 @@ public class UI_Student_Main extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Room No", "Room Type", "Room Capacity", "Room Price", "Availability"
+                "Room No", "Room Type", "Room Capacity", "Occupants", "Availability", "Price"
             }
         ));
         roomtab.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -109,6 +124,9 @@ public class UI_Student_Main extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(roomtab);
+        if (roomtab.getColumnModel().getColumnCount() > 0) {
+            roomtab.getColumnModel().getColumn(5).setResizable(false);
+        }
 
         jButton5.setText("MAKE BOOKING");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -132,15 +150,16 @@ public class UI_Student_Main extends javax.swing.JFrame {
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(roombut, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)
+                        .addGap(88, 88, 88)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
+                        .addGap(81, 81, 81))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(22, 22, 22))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -197,7 +216,7 @@ public class UI_Student_Main extends javax.swing.JFrame {
 
     private void roombutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roombutActionPerformed
 
-        String file = "src\\main\\java\\SHS\\Txtfiles\\room.txt";
+     /*   String file = "src\\main\\java\\SHS\\Txtfiles\\room.txt";
        
        try
        {
@@ -217,7 +236,9 @@ public class UI_Student_Main extends javax.swing.JFrame {
        {
           System.out.print("Error");
        }
-    
+    */
+     
+     
     }//GEN-LAST:event_roombutActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

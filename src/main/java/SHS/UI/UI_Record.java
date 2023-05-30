@@ -8,9 +8,11 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import main.java.SHS.FileHandlers.FileHandler;
 import main.java.SHS.FileHandlers.FileName;
+import main.java.SHS.FileHandlers.FileRecord;
 import main.java.SHS.Student;
 import main.java.SHS.Student_Hostel_System;
 import main.java.SHS.User;
@@ -193,7 +195,7 @@ public class UI_Record extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     public void view(){
-        String file = "src\\main\\java\\SHS\\Txtfiles\\booking.txt";
+        /*String file = "src\\main\\java\\SHS\\Txtfiles\\booking.txt";
         try{
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
@@ -219,7 +221,28 @@ public class UI_Record extends javax.swing.JFrame {
         }
         catch(IOException ex){
             System.out.print("Error");
+        }*/
+        
+        
+        FileHandler fileHandler = new FileHandler("booking");
+
+        try {
+            List<FileRecord> records = fileHandler.FetchRecord();
+            User current_user = Student_Hostel_System.current_user;
+
+            DefaultTableModel table = (DefaultTableModel) histab.getModel();
+            table.setRowCount(0);
+
+            for (FileRecord record : records) {
+                String[] data = record.getRecordList();
+                if (data[1].equals(current_user.getUsername())) {
+                    table.addRow(new Object[]{data[2], data[3], data[7], data[8], data[4]});
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error reading booking records: " + e.getMessage());
         }
+
         
 
         
@@ -233,7 +256,7 @@ public class UI_Record extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
     private void userdetails(){
-        String file = "src\\main\\java\\SHS\\Txtfiles\\student.txt";
+        /*String file = "src\\main\\java\\SHS\\Txtfiles\\student.txt";
         try{
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
@@ -256,7 +279,23 @@ public class UI_Record extends javax.swing.JFrame {
         }
         catch(IOException ex){
             System.out.print("Error");
+        }*/
+        FileHandler fileHandler = new FileHandler("student");
+        try {
+        List<FileRecord> records = fileHandler.FetchRecord();
+        User current_user = Student_Hostel_System.current_user;
+
+        for (FileRecord record : records) {
+            String[] data = record.getRecordList();
+            if (data[1].equals(current_user.getUsername())) {
+                elbl.setText(data[1]);
+                cnlbl.setText(data[7]);
+                break;
+            }
         }
+    } catch (Exception e) {
+        System.out.println("Error reading student records: " + e.getMessage());
+    }
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     UI_Student_Main us = new UI_Student_Main();
