@@ -401,6 +401,14 @@ public class UI_Register extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Password entered not matched.","Oops",JOptionPane.WARNING_MESSAGE);
             return;
         }
+        if(!phone.matches("\\d{10}")){
+            JOptionPane.showMessageDialog(null,"Invalid Phone Number!.\n 10 digit only","Oops",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")){
+            JOptionPane.showMessageDialog(null,"Invalid Email Format!.","Oops",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         
         // write to text file
         int newStudentID = fHandler.GenerateID();
