@@ -4,7 +4,7 @@
  */
 package main.java.SHS.UI;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 import main.java.SHS.FileHandlers.FileHandler;
 import main.java.SHS.FileHandlers.FileName;
 import main.java.SHS.FileHandlers.FileRecord;
