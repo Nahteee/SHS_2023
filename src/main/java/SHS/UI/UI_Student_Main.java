@@ -49,8 +49,13 @@ public class UI_Student_Main extends javax.swing.JFrame {
             model.addRow(new Object[0]);
             model.setValueAt(rooms.get(i).getRoomNumber(), i, 0);
             model.setValueAt(rooms.get(i).getRoomType(), i, 1);
+<<<<<<< HEAD
             model.setValueAt(rooms.get(i).isAvailability(), i, 2);
             model.setValueAt(rooms.get(i).getPrice(), i, 3);
+=======
+            model.setValueAt(rooms.get(i).getAvailability(), i, 4);
+            model.setValueAt(rooms.get(i).getPrice(), i, 5);
+>>>>>>> fe20fd508a68b4794599b5358d3f66117cc3aacf
         }
     }
 
@@ -113,7 +118,11 @@ public class UI_Student_Main extends javax.swing.JFrame {
 
             },
             new String [] {
+<<<<<<< HEAD
                 "Room No", "Room Type", "Availability", "Price"
+=======
+                "Room No", "Room Type", "Price"
+>>>>>>> fe20fd508a68b4794599b5358d3f66117cc3aacf
             }
         ));
         roomtab.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -123,7 +132,11 @@ public class UI_Student_Main extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(roomtab);
         if (roomtab.getColumnModel().getColumnCount() > 0) {
+<<<<<<< HEAD
             roomtab.getColumnModel().getColumn(3).setResizable(false);
+=======
+            roomtab.getColumnModel().getColumn(2).setResizable(false);
+>>>>>>> fe20fd508a68b4794599b5358d3f66117cc3aacf
         }
 
         jButton5.setText("MAKE BOOKING");

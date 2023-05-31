@@ -74,7 +74,7 @@ public class RoomService {
             case "SingleRoomPremium":
                 rt = RoomType.SingleRoomPremium;
                 return rt;
-            case "TwinRoomPremium":
+            case "MasterRoom":
                 rt = RoomType.MasterRoom;
                 return rt;
             
@@ -83,7 +83,7 @@ public class RoomService {
     }
     
    private FileRecord convertToFileRecord(Room room){
-         String room_record_string = room.getRoomNumber() + ";" + room.getRoomType()+ ";" + ";" + room.isAvailability() + ";" + room.getPrice();
+         String room_record_string = room.getRoomNumber() + ";" + room.getRoomType()+ ";" + ";" + room.getAvailability() + ";" + room.getPrice();
          return new FileRecord(room.getRoomNumber(), room_record_string);
     }
     

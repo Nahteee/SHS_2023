@@ -76,7 +76,7 @@ public class BookedRoom extends Room {
     
     // If all criteria are met, assign the room to the student
 //    addOccupant(student);W
-    setAvailability(false);
+    setAvailability("Occupied");
 //    student.setAssignedRoom(this);
     return true;
 }

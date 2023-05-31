@@ -13,14 +13,14 @@ import java.util.ArrayList;
 public class Room {
     private int roomNumber;
     private RoomType roomType;
-    private boolean availability;
+    private String availability;
     private double price;
 
     // Constructor
 public Room(int roomNumber,RoomType roomType, String availability, double price) {
     this.roomNumber = roomNumber;
     this.roomType = roomType;
-    this.availability = true;
+    this.availability = availability;
     this.price = price;
     
 }
@@ -42,11 +42,11 @@ public Room(int roomNumber,RoomType roomType, String availability, double price)
         this.roomType = roomType;
     }
 
-    public boolean isAvailability() {
+    public String getAvailability() {
         return availability;
     }
 
-    public void setAvailability(boolean availability) {
+    public void setAvailability(String availability) {
         this.availability = availability;
     }
 
@@ -72,7 +72,7 @@ public Room(int roomNumber,RoomType roomType, String availability, double price)
         return price * days;
     }
 
-    public boolean isAvailable() {
+    public String isAvailable() {
         return availability;
     }
 
