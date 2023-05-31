@@ -391,6 +391,9 @@ public class UI_Register extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_atxtActionPerformed
     public static void register(String fullname,String username, String email, String password, String confirmpassword, String age, String gender, String phone,String card){
+        
+
+        
         FileHandler fHandler = new FileHandler(FileName.STUDENT);
         FileRecord user_record = fHandler.FetchRecord(username, 1);
         if(user_record != null){
@@ -399,6 +402,15 @@ public class UI_Register extends javax.swing.JFrame {
         }
         if(password == null ? confirmpassword == null : !password.equals(confirmpassword)){
             JOptionPane.showMessageDialog(null,"Password entered not matched.","Oops",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        if(!phone.matches("\\d{10}")){
+            JOptionPane.showMessageDialog(null,"Invalid Phone Number!.\n 10 digit only","Oops",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")){
+            JOptionPane.showMessageDialog(null,"Invalid Email Format!.","Oops",JOptionPane.WARNING_MESSAGE);
             return;
         }
         

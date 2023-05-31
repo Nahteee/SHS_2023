@@ -245,7 +245,7 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("View Details");
+        jButton4.setText("View Student Details");
 
         DeleteUser.setText("Delete");
         DeleteUser.addActionListener(new java.awt.event.ActionListener() {
@@ -391,6 +391,7 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Please Select Single Row for Delete...");
             }
         }
+       
     }//GEN-LAST:event_DeleteUserActionPerformed
 
     private void RoomsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RoomsButtonMouseClicked

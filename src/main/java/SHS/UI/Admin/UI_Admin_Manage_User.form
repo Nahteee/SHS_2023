@@ -424,7 +424,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="View Details"/>
+            <Property name="text" type="java.lang.String" value="View Student Details"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="DeleteUser">

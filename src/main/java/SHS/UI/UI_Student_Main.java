@@ -49,9 +49,7 @@ public class UI_Student_Main extends javax.swing.JFrame {
             model.addRow(new Object[0]);
             model.setValueAt(rooms.get(i).getRoomNumber(), i, 0);
             model.setValueAt(rooms.get(i).getRoomType(), i, 1);
-            model.setValueAt(rooms.get(i).getCapacity(), i, 2);
-            model.setValueAt(rooms.get(i).getOccupants(), i, 3);
-            model.setValueAt(rooms.get(i).isAvailability(), i, 4);
+            model.setValueAt(rooms.get(i).getAvailability(), i, 4);
             model.setValueAt(rooms.get(i).getPrice(), i, 5);
         }
     }
@@ -115,7 +113,7 @@ public class UI_Student_Main extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Room No", "Room Type", "Room Capacity", "Occupants", "Availability", "Price"
+                "Room No", "Room Type", "Price"
             }
         ));
         roomtab.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -125,7 +123,7 @@ public class UI_Student_Main extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(roomtab);
         if (roomtab.getColumnModel().getColumnCount() > 0) {
-            roomtab.getColumnModel().getColumn(5).setResizable(false);
+            roomtab.getColumnModel().getColumn(2).setResizable(false);
         }
 
         jButton5.setText("MAKE BOOKING");
