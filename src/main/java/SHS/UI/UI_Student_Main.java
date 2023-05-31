@@ -49,8 +49,8 @@ public class UI_Student_Main extends javax.swing.JFrame {
             model.addRow(new Object[0]);
             model.setValueAt(rooms.get(i).getRoomNumber(), i, 0);
             model.setValueAt(rooms.get(i).getRoomType(), i, 1);
-            model.setValueAt(rooms.get(i).getAvailability(), i, 4);
-            model.setValueAt(rooms.get(i).getPrice(), i, 5);
+            model.setValueAt(rooms.get(i).getAvailability(), i, 2);
+            model.setValueAt(rooms.get(i).getPrice(), i, 3);
         }
     }
 
