@@ -188,14 +188,21 @@ public class User {
                 UI_Admin_Main a = new UI_Admin_Main();
                 System.out.println("User login successfully");
                 JOptionPane.showMessageDialog(null,"Welcome to StudentBNB!","Successfully Login",JOptionPane.INFORMATION_MESSAGE);
-        // need to setup user related data
+                if (Student_Hostel_System.current_user instanceof Admin) {
+                Admin admin = (Admin) Student_Hostel_System.current_user;
+                admin.logAdminLogin();
+            }
                 a.setVisible(true);
             }
             case FileName.STUDENT -> {
                 Student_Hostel_System.current_user.setRole(UserRole.STUDENT);
                 System.out.println("User login successfully");
                 JOptionPane.showMessageDialog(null,"Welcome to StudentBNB!","Successfully Login",JOptionPane.INFORMATION_MESSAGE);
-        // need to setup user related data
+                            // Call logStudentLogin for student user
+                if (Student_Hostel_System.current_user instanceof Student) {
+                Student student = (Student) Student_Hostel_System.current_user;
+                student.logStudentLogin();
+            }
                 UI_Student_Main s = new UI_Student_Main();
                 s.setVisible(true);
             }

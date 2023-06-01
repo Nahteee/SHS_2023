@@ -1,5 +1,4 @@
 1;Single Room;Fully Furnished;Available;500
 2;Single Room Premium;Partially Furnished;Available;750
-3;SingleRoomPremium;Unfurnished;Available;850
-4;SingleRoom;Unfurnished;Available;1995
-5;SingleRoom;Fully Furnished;Available;1223
+3;MasterRoom;Partially Furnished;Available;155
+4;Single Room Premium;Fully Furnished;Available;1231

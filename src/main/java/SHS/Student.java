@@ -4,6 +4,7 @@
  */
 package main.java.SHS;
 
+import main.java.SHS.Services.LogService;
 import main.java.SHS.User;
 
 /**
@@ -20,4 +21,10 @@ public class Student extends User{
     public Student(int user_id) {
         super(user_id);
     }
+    
+        public void logStudentLogin() {
+    LogService logService = LogService.getInstance();
+    logService.log("Student" + ";" + getUserId()+ ";" + getUsername());
+}
+
 }

@@ -3,6 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main.java.SHS;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import main.java.SHS.Services.LogService;
 
 /**
  *
@@ -98,5 +103,8 @@ public class Admin extends User{
         this.role = role;
     }
     
-    
+    public void logAdminLogin() {
+    LogService logService = LogService.getInstance();
+    logService.log("Admin" + ";" + getUserId()+ ";" + getUsername());
+}
 }

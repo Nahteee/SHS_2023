@@ -13,17 +13,5 @@ public class FileName {
     public static final String STUDENT = "student";
     public static final String ROOM = "room";
     public static final String BOOKING = "booking";
-
-    
-//    public static final String PRODUCT = "product";
-//    public static final String CATEGORY = "category";
-//    
-//    public static final String WAREHOUSE = "warehouse";
-//    public static final String DELIVERY = "delivery";
-//    
-//    public static final String MEMBER_ADDRESS = "member_address";
-//    public static final String CART = "cart";
-//    public static final String CART_ITEM = "cart_item";
-//    public static final String ORDER = "order";
-//    public static final String ORDER_ITEM = "order_item";
+    public static final String LOGS = "logs";
 }
