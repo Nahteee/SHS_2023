@@ -4,6 +4,7 @@
  */
 package main.java.SHS.UI.Admin;
 
+import main.java.SHS.UI.*;
 import java.awt.Cursor;
 import static java.lang.Integer.parseInt;
 import main.java.SHS.Room;
@@ -13,6 +14,9 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import javax.swing.*;
+import main.java.SHS.Services.RoomService;
+import main.java.SHS.Room;
 
 /**
  *
@@ -36,8 +40,9 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
             model.addRow(new Object[0]);
             model.setValueAt(Rooms.get(i).getRoomNumber(), i, 0);
             model.setValueAt(Rooms.get(i).getRoomType(), i, 1);
-            model.setValueAt(Rooms.get(i).getAvailability(), i, 2);
-            model.setValueAt(Rooms.get(i).getPrice(), i, 3);
+            model.setValueAt(Rooms.get(i).getFurnish(), i, 2);
+            model.setValueAt(Rooms.get(i).getAvailability(), i, 3);
+            model.setValueAt(Rooms.get(i).getPrice(), i, 4);
         }
     }
 
@@ -62,14 +67,14 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        SearchTxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         UserButton = new javax.swing.JLabel();
         RoomsButton = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        UpdateRoom = new javax.swing.JButton();
+        DeleteRoom = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,17 +85,17 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
         RoomsTable.setForeground(new java.awt.Color(92, 128, 188));
         RoomsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "RoomNo", "RoomType", "Availability", "Price"
+                "RoomNo", "RoomType", "Furnishing", "Availability", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -98,6 +103,14 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(RoomsTable);
+        if (RoomsTable.getColumnModel().getColumnCount() > 0) {
+            RoomsTable.getColumnModel().getColumn(0).setMinWidth(75);
+            RoomsTable.getColumnModel().getColumn(0).setMaxWidth(75);
+            RoomsTable.getColumnModel().getColumn(1).setMinWidth(125);
+            RoomsTable.getColumnModel().getColumn(1).setMaxWidth(125);
+            RoomsTable.getColumnModel().getColumn(2).setMinWidth(125);
+            RoomsTable.getColumnModel().getColumn(2).setMaxWidth(125);
+        }
 
         jPanel2.setBackground(new java.awt.Color(92, 128, 188));
 
@@ -210,21 +223,46 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
             .addGap(0, 3, Short.MAX_VALUE)
         );
 
-        jTextField1.setText("Search...");
+        SearchTxt.setText("Search...");
+        SearchTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SearchTxtKeyReleased(evt);
+            }
+        });
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Search Icon.png"))); // NOI18N
 
         UserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/User.png"))); // NOI18N
         UserButton.setText("jLabel4");
+        UserButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UserButtonMouseClicked(evt);
+            }
+        });
 
         RoomsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Rooms (Selected).png"))); // NOI18N
         RoomsButton.setText("jLabel4");
 
         jButton4.setText("Add New Room");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Update Room");
+        UpdateRoom.setText("Update Room");
+        UpdateRoom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateRoomActionPerformed(evt);
+            }
+        });
 
-        jButton7.setText("Delete Room");
+        DeleteRoom.setText("Delete Room");
+        DeleteRoom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteRoomActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("View Room Details");
 
@@ -241,9 +279,9 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(22, 22, 22)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(UpdateRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(29, 29, 29)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(DeleteRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,7 +297,7 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1)
+                        .addComponent(SearchTxt)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(62, 62, 62)
@@ -277,7 +315,7 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SearchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
                         .addGap(70, 70, 70)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -287,8 +325,8 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(UpdateRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DeleteRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabel3)
@@ -344,6 +382,70 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void UserButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserButtonMouseClicked
+        this.setVisible(false);
+        UI_Admin_Manage_User UIAMU = new UI_Admin_Manage_User();
+        UIAMU.setVisible(true);
+    }//GEN-LAST:event_UserButtonMouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        this.setVisible(false);
+        UI_Admin_Manage_RoomsAdd UI = new UI_Admin_Manage_RoomsAdd();
+        UI.setVisible(true);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void DeleteRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteRoomActionPerformed
+        if(RoomsTable.getSelectedRowCount()==1) {
+        int removeConfirmation = JOptionPane.showOptionDialog(jPanel1, "Confirm to remove room?" + "?", "Confirmation",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+       
+       DefaultTableModel model = (DefaultTableModel) RoomsTable.getModel();         
+       int RoomNo = parseInt(model.getValueAt(RoomsTable.getSelectedRow(), 0).toString());
+                if (removeConfirmation == JOptionPane.OK_OPTION) {
+                    Room removeRoom = RoomService.getRoomService().getRoom(RoomNo);
+                    RoomService.getRoomService().deleteRoom(removeRoom);
+                    JOptionPane.showMessageDialog(jPanel1,"Hostel Room removed successfully.","Alert",JOptionPane.INFORMATION_MESSAGE);
+                    model.removeRow(RoomsTable.getSelectedRow());
+                }
+       }
+       else {
+            if(RoomsTable.getRowCount()==0) {
+                JOptionPane.showMessageDialog(this, "Table is empty...");
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Please Select Single Row for Delete...");
+            }
+        }
+    }//GEN-LAST:event_DeleteRoomActionPerformed
+
+    private void SearchTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchTxtKeyReleased
+        
+        DefaultTableModel table  = (DefaultTableModel)RoomsTable.getModel();
+        String search = SearchTxt.getText();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(table);
+        RoomsTable.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(search));
+    }//GEN-LAST:event_SearchTxtKeyReleased
+
+    private void UpdateRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateRoomActionPerformed
+        
+        if(RoomsTable.getSelectedRowCount()==1) {
+            DefaultTableModel model = (DefaultTableModel) RoomsTable.getModel();         
+            int RoomNo = parseInt(model.getValueAt(RoomsTable.getSelectedRow(), 0).toString());
+            this.setVisible(false);
+            UI_Admin_Manage_RoomsEdit UI = new UI_Admin_Manage_RoomsEdit(RoomNo);
+            UI.setVisible(true);
+        }
+        else {
+            if(RoomsTable.getRowCount()==0) {
+                JOptionPane.showMessageDialog(this, "Table is empty...");
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Please Select Single Row for Delete...");
+            }
+        }
+    }//GEN-LAST:event_UpdateRoomActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -380,16 +482,17 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DeleteRoom;
     private javax.swing.JLabel RoomsButton;
     private javax.swing.JTable RoomsTable;
+    private javax.swing.JTextField SearchTxt;
+    private javax.swing.JButton UpdateRoom;
     private javax.swing.JLabel UserButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -400,6 +503,5 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

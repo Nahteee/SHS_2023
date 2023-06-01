@@ -4,7 +4,7 @@
 
 package main.java.SHS;
 
-import main.java.SHS.UI.UI_Login;
+import main.java.SHS.UI.*;
 
 /**
  *

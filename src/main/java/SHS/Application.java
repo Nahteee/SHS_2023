@@ -12,13 +12,13 @@ import java.util.Date;
 public class Application {
     private String studentName;
     private String studentId;
-    private RoomType preferredRoomType;
+    private String preferredRoomType;
     private int numberOfOccupants;
     private Date startDate;
     private Date endDate;
     private boolean approved;
 
-    public Application(String studentName, String studentId, RoomType preferredRoomType, int numberOfOccupants, Date startDate, Date endDate) {
+    public Application(String studentName, String studentId, String preferredRoomType, int numberOfOccupants, Date startDate, Date endDate) {
         this.studentName = studentName;
         this.studentId = studentId;
         this.preferredRoomType = preferredRoomType;
@@ -44,11 +44,11 @@ public class Application {
         this.studentId = studentId;
     }
 
-    public RoomType getPreferredRoomType() {
+    public String getPreferredRoomType() {
         return preferredRoomType;
     }
 
-    public void setPreferredRoomType(RoomType preferredRoomType) {
+    public void setPreferredRoomType(String preferredRoomType) {
         this.preferredRoomType = preferredRoomType;
     }
 

@@ -17,8 +17,8 @@ public class BookedRoom extends Room {
     private Date checkInDate;
     private Date checkOutDate;
     
-    public BookedRoom(int roomNumber,RoomType roomType, String occupants, String availability, double price) {
-        super(roomNumber, roomType, availability, price);
+    public BookedRoom(int roomNumber,String roomType, String furnish, String occupants, String availability, int price) {
+        super(roomNumber, roomType, furnish, availability, price);
         this.occupants = occupants;
     }
     

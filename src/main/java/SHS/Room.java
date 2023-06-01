@@ -12,14 +12,16 @@ import java.util.ArrayList;
 
 public class Room {
     private int roomNumber;
-    private RoomType roomType;
+    private String roomType;
+    private String furnish;
     private String availability;
-    private double price;
+    private int price;
 
     // Constructor
-public Room(int roomNumber,RoomType roomType, String availability, double price) {
+public Room(int roomNumber,String roomType, String furnish, String availability, int price) {
     this.roomNumber = roomNumber;
     this.roomType = roomType;
+    this.furnish = furnish;
     this.availability = availability;
     this.price = price;
     
@@ -34,12 +36,20 @@ public Room(int roomNumber,RoomType roomType, String availability, double price)
         this.roomNumber = roomNumber;
     }
 
-    public RoomType getRoomType() {
+    public String getRoomType() {
         return roomType;
     }
 
-    public void setRoomType(RoomType roomType) {
+    public void setRoomType(String roomType) {
         this.roomType = roomType;
+    }
+    
+    public String getFurnish() {
+        return furnish;
+    }
+
+    public void setFurnish(String furnish) {
+        this.furnish = furnish;
     }
 
     public String getAvailability() {
@@ -50,11 +60,11 @@ public Room(int roomNumber,RoomType roomType, String availability, double price)
         this.availability = availability;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -64,11 +74,12 @@ public Room(int roomNumber,RoomType roomType, String availability, double price)
     public String toString() {
         return  "Room Number: " + roomNumber + "\n"
                 + "Room Type: " + roomType + "\n"
+                + "Furnishing: " + furnish + "\n"
                 + "Availability: " + availability + "\n"
                 + "Price: " + price;
     }
 
-    public double calculatePrice(int days) {
+    public int calculatePrice(int days) {
         return price * days;
     }
 

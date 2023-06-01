@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import main.java.SHS.FileHandlers.*;
 import main.java.SHS.Room;
-import main.java.SHS.RoomType;
 import main.java.SHS.Student;
 
 
@@ -56,40 +55,41 @@ public class RoomService {
     }
     String room_number = room_data[0];
     String room_type = room_data[1];
-    String room_availability = room_data[2];
-    double room_price = Integer.parseInt(room_data[3]);
+    String furnish = room_data[2];
+    String room_availability = room_data[3];
+    int room_price = Integer.parseInt(room_data[4]);
     
     
     
 
-    return new Room(Integer.parseInt(room_number),getRoomTypeClass(room_type), room_availability, room_price);
+    return new Room(Integer.parseInt(room_number),room_type, furnish, room_availability, room_price);
 }
 
-    public RoomType getRoomTypeClass(String roomType){
-        RoomType rt;    
-        switch(roomType){
-            case "SingleRoom":
-                rt = RoomType.SingleRoom;
-                return rt;
-            case "SingleRoomPremium":
-                rt = RoomType.SingleRoomPremium;
-                return rt;
-            case "MasterRoom":
-                rt = RoomType.MasterRoom;
-                return rt;
-            
-        }
-        return null;
-    }
     
    private FileRecord convertToFileRecord(Room room){
-         String room_record_string = room.getRoomNumber() + ";" + room.getRoomType()+ ";" + ";" + room.getAvailability() + ";" + room.getPrice();
+         String room_record_string = room.getRoomNumber() + ";" + room.getRoomType()+ ";" + room.getFurnish() + ";" + room.getAvailability() + ";" + room.getPrice();
          return new FileRecord(room.getRoomNumber(), room_record_string);
     }
     
+   public int getNewRoomNo(){
+        return room_file.GenerateID();
+    }
+   
     public ArrayList<Room> getRooms(){
         return this.rooms;
     }
+    
+        public ArrayList<Room> getRooms(String roomtype){
+         ArrayList<Room> response = new ArrayList<Room>();
+
+        for(int i = 0; i < rooms.size(); i ++) {
+            if(rooms.get(i).getRoomType() == roomtype){
+                response.add(rooms.get(i));
+            }
+        }
+        return response;
+    }
+    
     
     public Room getRoom(int id){
         Room response = null;
