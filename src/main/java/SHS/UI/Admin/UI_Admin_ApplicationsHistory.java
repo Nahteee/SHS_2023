@@ -5,7 +5,6 @@
 package main.java.SHS.UI.Admin;
 
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -16,12 +15,12 @@ import main.java.SHS.Services.ApplicationService;
  *
  * @author User
  */
-public class UI_Admin_Applications extends javax.swing.JFrame {
+public class UI_Admin_ApplicationsHistory extends javax.swing.JFrame {
 
     /**
-     * Creates new form UI_Admin_Applications
+     * Creates new form UI_Admin_ApplicationsHistory
      */
-   public UI_Admin_Applications() {
+    public UI_Admin_ApplicationsHistory() {
     initComponents();
     
     DefaultTableModel model = (DefaultTableModel) AppsTable.getModel();
@@ -31,7 +30,7 @@ public class UI_Admin_Applications extends javax.swing.JFrame {
     ArrayList<Application> applications = applicationService.getAllApplications();
     
     for (Application application : applications) {
-        if ("Pending".equals(application.getStatus()) || "Awaiting Payment".equals(application.getStatus())) { // Filter unapproved applications
+        if ("Rejected".equals(application.getStatus()) || ("Approved".equals(application.getStatus())) || ("Deleted".equals(application.getStatus()))) { // Filter unapproved applications
             Object[] rowData = {
                 application.getApplicationID(),
                 application.getStudentName(),
@@ -72,9 +71,6 @@ public class UI_Admin_Applications extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         SearchTxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        ApproveBtn = new javax.swing.JButton();
-        RejectBtn = new javax.swing.JButton();
-        AppsHistory = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,11 +98,6 @@ public class UI_Admin_Applications extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(AppsTable);
-        if (AppsTable.getColumnModel().getColumnCount() > 0) {
-            AppsTable.getColumnModel().getColumn(0).setMinWidth(25);
-            AppsTable.getColumnModel().getColumn(0).setPreferredWidth(25);
-            AppsTable.getColumnModel().getColumn(0).setMaxWidth(25);
-        }
 
         jPanel2.setBackground(new java.awt.Color(92, 128, 188));
 
@@ -175,7 +166,7 @@ public class UI_Admin_Applications extends javax.swing.JFrame {
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -201,7 +192,7 @@ public class UI_Admin_Applications extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(92, 128, 188));
-        jLabel3.setText("Pending Applications");
+        jLabel3.setText("Past Applications");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jPanel3.setBackground(new java.awt.Color(92, 128, 188));
@@ -230,91 +221,58 @@ public class UI_Admin_Applications extends javax.swing.JFrame {
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Search Icon.png"))); // NOI18N
 
-        ApproveBtn.setText("Approve Application");
-        ApproveBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ApproveBtnActionPerformed(evt);
-            }
-        });
-
-        RejectBtn.setText("Reject Application");
-        RejectBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RejectBtnActionPerformed(evt);
-            }
-        });
-
-        AppsHistory.setText("View Past Applications");
-        AppsHistory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AppsHistoryActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(537, 537, 537)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
+                        .addGap(70, 70, 70)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(211, 211, 211)
                         .addComponent(jLabel3)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(SearchTxt))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 42, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ApproveBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(RejectBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AppsHistory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addComponent(jLabel7)
+                .addGap(18, 18, 18)
+                .addComponent(SearchTxt)
                 .addGap(91, 91, 91))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 886, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(339, 339, 339)
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel7)
-                            .addComponent(SearchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(43, 43, 43)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(178, 178, 178)
-                                .addComponent(jLabel8))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(AppsHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
-                                .addComponent(ApproveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(RejectBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                            .addComponent(SearchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addGap(27, 27, 27)
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -325,9 +283,7 @@ public class UI_Admin_Applications extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -361,64 +317,6 @@ public class UI_Admin_Applications extends javax.swing.JFrame {
         tr.setRowFilter(RowFilter.regexFilter(search));
     }//GEN-LAST:event_SearchTxtKeyReleased
 
-    private void ApproveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApproveBtnActionPerformed
-        int selectedRow = AppsTable.getSelectedRow();
-
-if (selectedRow != -1) { // Check if a row is selected
-    int confirmDialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to approve this application?", "Confirmation", JOptionPane.YES_NO_OPTION);
-
-    if (confirmDialogResult == JOptionPane.YES_OPTION) { // User confirmed
-        int applicationID = (int) AppsTable.getValueAt(selectedRow, 0);
-
-        // Update the application status to "Awaiting Payment"
-        ApplicationService applicationService = new ApplicationService();
-        applicationService.updateApplication(applicationID, "Awaiting Payment");
-
-        // Update the table row with the new status
-        AppsTable.setValueAt("Awaiting Payment", selectedRow, 6);
-
-        // Show a success message or perform any additional operations
-        JOptionPane.showMessageDialog(null, "Application approved. Status changed to Awaiting Payment.");
-    }
-} else {
-    // If no row is selected, show an error message or perform any additional operations
-    JOptionPane.showMessageDialog(null, "Please select an application to approve.");
-}
-
-    }//GEN-LAST:event_ApproveBtnActionPerformed
-
-    private void RejectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RejectBtnActionPerformed
-        int selectedRow = AppsTable.getSelectedRow();
-
-if (selectedRow != -1) { // Check if a row is selected
-    int confirmDialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to reject this application?", "Confirmation", JOptionPane.YES_NO_OPTION);
-
-    if (confirmDialogResult == JOptionPane.YES_OPTION) { // User confirmed
-        int applicationID = (int) AppsTable.getValueAt(selectedRow, 0);
-
-        // Update the application status to "Rejected"
-        ApplicationService applicationService = new ApplicationService();
-        applicationService.updateApplication(applicationID, "Rejected");
-
-        // Update the table row with the new status
-        AppsTable.setValueAt("Rejected", selectedRow, 6);
-
-        // Show a success message or perform any additional operations
-        JOptionPane.showMessageDialog(null, "Application rejected. Status changed to Rejected.");
-    }
-} else {
-    // If no row is selected, show an error message or perform any additional operations
-    JOptionPane.showMessageDialog(null, "Please select an application to reject.");
-}
-
-    }//GEN-LAST:event_RejectBtnActionPerformed
-
-    private void AppsHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AppsHistoryActionPerformed
-        this.setVisible(false);
-        UI_Admin_ApplicationsHistory UIAA = new UI_Admin_ApplicationsHistory();
-        UIAA.setVisible(true);
-    }//GEN-LAST:event_AppsHistoryActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -436,29 +334,26 @@ if (selectedRow != -1) { // Check if a row is selected
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UI_Admin_Applications.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UI_Admin_ApplicationsHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UI_Admin_Applications.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UI_Admin_ApplicationsHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UI_Admin_Applications.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UI_Admin_ApplicationsHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UI_Admin_Applications.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UI_Admin_ApplicationsHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UI_Admin_Applications().setVisible(true);
+                new UI_Admin_ApplicationsHistory().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ApproveBtn;
-    private javax.swing.JButton AppsHistory;
     private javax.swing.JTable AppsTable;
-    private javax.swing.JButton RejectBtn;
     private javax.swing.JTextField SearchTxt;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

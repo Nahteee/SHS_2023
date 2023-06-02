@@ -13,7 +13,9 @@ import main.java.SHS.FileHandlers.FileHandler;
 import main.java.SHS.FileHandlers.FileName;
 import main.java.SHS.FileHandlers.FileRecord;
 import main.java.SHS.Room;
+import main.java.SHS.Services.ApplicationService;
 import main.java.SHS.Services.RoomService;
+import main.java.SHS.Student_Hostel_System;
 import static main.java.SHS.UI.UI_Payment.cid;
 import static main.java.SHS.UI.UI_Payment.email;
 import static main.java.SHS.UI.UI_Payment.los;
@@ -41,7 +43,9 @@ public class UI_Student_Main extends javax.swing.JFrame {
         UI_Payment.type = type;
         UI_Booking.no = no;
         
-    roombut.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        UsernameLbl.setText(Student_Hostel_System.current_user.getUsername());
+        
+    ViewBookingBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
     ArrayList<Room> rooms = RoomService.getRoomService().getRooms();
 
     DefaultTableModel model = (DefaultTableModel) roomtab.getModel();
@@ -66,27 +70,27 @@ public class UI_Student_Main extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        UsernameLbl = new javax.swing.JLabel();
+        ViewRecords = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        roombut = new javax.swing.JButton();
+        ViewBookingBtn = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         roomtab = new javax.swing.JTable();
-        jButton5 = new javax.swing.JButton();
+        BookRoom = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(217, 225, 230));
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("STUDENT");
+        UsernameLbl.setBackground(new java.awt.Color(0, 0, 0));
+        UsernameLbl.setText("STUDENT");
 
-        jButton1.setText("VIEW RECORDS");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ViewRecords.setText("VIEW RECORDS");
+        ViewRecords.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ViewRecordsActionPerformed(evt);
             }
         });
 
@@ -97,10 +101,10 @@ public class UI_Student_Main extends javax.swing.JFrame {
             }
         });
 
-        roombut.setText("VIEW ROOMS");
-        roombut.addActionListener(new java.awt.event.ActionListener() {
+        ViewBookingBtn.setText("VIEW STUDENT ROOM STATUS");
+        ViewBookingBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                roombutActionPerformed(evt);
+                ViewBookingBtnActionPerformed(evt);
             }
         });
 
@@ -134,10 +138,10 @@ public class UI_Student_Main extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(roomtab);
 
-        jButton5.setText("MAKE BOOKING");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        BookRoom.setText("MAKE BOOKING");
+        BookRoom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                BookRoomActionPerformed(evt);
             }
         });
 
@@ -156,18 +160,18 @@ public class UI_Student_Main extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(67, 67, 67)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(UsernameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(roombut, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ViewRecords, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ViewBookingBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BookRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(88, 88, 88)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(81, 81, 81))
@@ -182,11 +186,11 @@ public class UI_Student_Main extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(UsernameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(roombut, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ViewBookingBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ViewRecords, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -197,7 +201,7 @@ public class UI_Student_Main extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton4)
-                            .addComponent(jButton5))))
+                            .addComponent(BookRoom))))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -215,13 +219,13 @@ public class UI_Student_Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ViewRecordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewRecordsActionPerformed
     UI_Record ur = new UI_Record();
         ur.setVisible(true);
         ur.pack();
         ur.setLocationRelativeTo(null);
        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ViewRecordsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     UI_Payment up = new UI_Payment(no,type,price, email, phone, los, cid);
@@ -231,57 +235,45 @@ public class UI_Student_Main extends javax.swing.JFrame {
        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void roombutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roombutActionPerformed
+    private void ViewBookingBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewBookingBtnActionPerformed
 
-     /*   String file = "src\\main\\java\\SHS\\Txtfiles\\room.txt";
-       
-       try
-       {
-           
-           FileReader fr = new FileReader(file);
-           BufferedReader br = new BufferedReader(fr);
-          
-           DefaultTableModel model = (DefaultTableModel)roomtab.getModel();
-           Object[]lines = br.lines().toArray();
-           model.setRowCount(0);
-           for (Object line : lines) {
-               String[] row = line.toString().split(",");
-               model.addRow(row);
-           }
-       }
-       catch(Exception e)
-       {
-          System.out.print("Error");
-       }
-    */
+        
+        ApplicationService applicationService = new ApplicationService();
+        if (!applicationService.checkExistingApplication(Student_Hostel_System.current_user.getUsername())) {
+        JOptionPane.showMessageDialog(null,"No existing booking. Make a booking first!" , "Error",JOptionPane.ERROR_MESSAGE,null);
+        return; // Stop further processing
+    }
+    this.setVisible(false);
+        UI_Applications UIA = new UI_Applications();
+        UIA.setVisible(true);
      
      
-    }//GEN-LAST:event_roombutActionPerformed
+    }//GEN-LAST:event_ViewBookingBtnActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if(roomtab.getSelectedRow()<0){
-            JOptionPane.showMessageDialog(null,"No room selected" , "Error",JOptionPane.ERROR_MESSAGE,null);
+    private void BookRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookRoomActionPerformed
+        ApplicationService applicationService = new ApplicationService();
+    
+        if (applicationService.checkExistingApplication(Student_Hostel_System.current_user.getUsername())) {
+            JOptionPane.showMessageDialog(null, "Already have a booking. View current booking status first!", "Error", JOptionPane.ERROR_MESSAGE, null);
+            return; // Stop further processing
+        }
+
+        int selectedRowCount = roomtab.getSelectedRowCount();
+        if (selectedRowCount != 1) {
+            JOptionPane.showMessageDialog(null, "Please select exactly one room.", "Error", JOptionPane.ERROR_MESSAGE, null);
             return;
         }
-        
-        int result = JOptionPane.showConfirmDialog(this, "Are You Confirm ?", "Confirmation",
-                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,null);
-        if (result==JOptionPane.YES_OPTION){ 
+
         int row = roomtab.getSelectedRow();
-        //String id = roomtab.getModel().getValueAt(row,0).toString();
-        String type = roomtab.getModel().getValueAt(row,1).toString();
-        String price = roomtab.getModel().getValueAt(row,3).toString();
-        String no = roomtab.getModel().getValueAt(row,0).toString();
-        
-        UI_Booking ub = new UI_Booking(type,price,no);
+        String no = roomtab.getModel().getValueAt(row, 0).toString();
+        String type = roomtab.getModel().getValueAt(row, 1).toString();
+        String furnish = roomtab.getModel().getValueAt(row, 2).toString();
+        String price = roomtab.getModel().getValueAt(row, 3).toString();
+
+        UI_Booking ub = new UI_Booking(no, type, furnish, price);
         ub.setVisible(true);
         this.dispose();
-        }else{
-        UI_Student_Main us = new UI_Student_Main();
-        us.setVisible(true);
-        this.dispose();
-        }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_BookRoomActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
     UI_Login ul = new UI_Login();
@@ -338,15 +330,15 @@ public class UI_Student_Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton BookRoom;
+    private javax.swing.JLabel UsernameLbl;
+    private javax.swing.JButton ViewBookingBtn;
+    private javax.swing.JButton ViewRecords;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton roombut;
-    private javax.swing.JTable roomtab;
+    public javax.swing.JTable roomtab;
     // End of variables declaration//GEN-END:variables
 }

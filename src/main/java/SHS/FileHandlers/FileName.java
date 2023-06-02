@@ -14,4 +14,7 @@ public class FileName {
     public static final String ROOM = "room";
     public static final String BOOKING = "booking";
     public static final String LOGS = "logs";
+    public static final String APPLICATIONS = "applications";
+    public static final String BOOKEDROOMS = "bookedrooms";
+    public static final String PAYMENTS = "payments";
 }

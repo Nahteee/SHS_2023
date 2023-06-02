@@ -12,72 +12,57 @@ import java.util.Date;
  * @author User
  */
 public class BookedRoom extends Room {
-    private Reservation reservation;
-    private String occupants;
-    private Date checkInDate;
-    private Date checkOutDate;
-    
-    public BookedRoom(int roomNumber,String roomType, String furnish, String occupants, String availability, int price) {
+    private int studentId;
+    private String checkInDate;
+    private String checkOutDate;
+    private String RoomStatus;
+
+    public BookedRoom(int studentId, String checkInDate, String checkOutDate, String RoomStatus, int roomNumber, String roomType, String furnish, String availability, int price) {
         super(roomNumber, roomType, furnish, availability, price);
-        this.occupants = occupants;
-    }
-    
-    // getters and setters for the BookedRoom attributes
-    public Reservation getReservation() {
-        return reservation;
-    }
-    
-    public void setReservation(Reservation reservation) {
-        this.reservation = reservation;
-    }
-    
-     public String getOccupants() {
-        return occupants;
+        this.studentId = studentId;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.RoomStatus = RoomStatus;
     }
 
-    public void setOccupants(String occupants) {
-        this.occupants = occupants;
+    public int getStudentId() {
+        return studentId;
     }
-    
-    public Date getCheckInDate() {
+
+    public String getCheckInDate() {
         return checkInDate;
     }
-    
-    public void setCheckInDate(Date checkInDate) {
-        this.checkInDate = checkInDate;
-    }
-    
-    public Date getCheckOutDate() {
+
+    public String getCheckOutDate() {
         return checkOutDate;
     }
-    
-    public void setCheckOutDate(Date checkOutDate) {
+
+    public String getRoomStatus() {
+        return RoomStatus;
+    }
+
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
+    }
+
+    public void setCheckInDate(String checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public void setCheckOutDate(String checkOutDate) {
         this.checkOutDate = checkOutDate;
     }
-    
-    //Methods
 
-    public boolean isOccupied() {
-        return !occupants.isEmpty();
+    public void setRoomStatus(String RoomStatus) {
+        this.RoomStatus = RoomStatus;
     }
-    
-    // toString method to display the booked room details
+
     @Override
     public String toString() {
-        return super.toString() + "Occupant: " + occupants + "\n" + ", "
-                + "Check-in date: " + checkInDate + "\n" + ", Check-out date: " + checkOutDate + "\n";
+        return "BookedRoom{" + "studentId=" + studentId + ", checkInDate=" + checkInDate + ", checkOutDate=" + checkOutDate + ", RoomStatus=" + RoomStatus + '}';
     }
     
-        public boolean assignRoom(Student student) {
-    // Check if the room is already occupied
-    if (isOccupied()) {
-        return false;
-    }
     
-    // If all criteria are met, assign the room to the student
-//    addOccupant(student);W
-    setAvailability("Occupied");
-//    student.setAssignedRoom(this);
-    return true;
-}
+    
+    
 }

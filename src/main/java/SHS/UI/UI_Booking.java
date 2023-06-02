@@ -4,30 +4,46 @@
  */
 package main.java.SHS.UI;
 
+import static java.lang.Boolean.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import main.java.SHS.Application;
 import main.java.SHS.FileHandlers.FileHandler;
 import main.java.SHS.FileHandlers.FileName;
 import main.java.SHS.FileHandlers.FileRecord;
+import main.java.SHS.Services.ApplicationService;
+import main.java.SHS.Student_Hostel_System;
+import java.util.Calendar;
+
+
 
 /**
  *
  * @author User
  */
 public class UI_Booking extends javax.swing.JFrame {
-    public static String type;
-    public static String price;
     public static String no;
+    public static String type;
+    public static String furnish;
+    public static String price;
+    
     /**
      * Creates new form UI_Booking
      */
-    public UI_Booking(String type,String price,String no) {
+    public UI_Booking(String no,String type,String Furnish, String price) {
         initComponents();
-        UI_Booking.type = type;
-        UI_Booking.price = price;
         UI_Booking.no = no;
-        rmlbl.setText(type);
-        plbl.setText(price);
-        nolbl.setText(no);
+        UI_Booking.type = type;
+        UI_Booking.furnish = Furnish;
+        UI_Booking.price = price;
+        RoomLbl.setText("Room No :" + no);
+        TypeLbl.setText("Room Type :" + type);
+        FurnishLbl.setText("Furnishing :" + furnish);
+        PriceLbl.setText("Price/M :" + price);
+        etxt.setText(Student_Hostel_System.current_user.getUserEmail());
+        pntxt.setText(Student_Hostel_System.current_user.getContact());
     }
 
     /**
@@ -41,10 +57,8 @@ public class UI_Booking extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        rmlbl = new javax.swing.JLabel();
-        plbl = new javax.swing.JLabel();
+        TypeLbl = new javax.swing.JLabel();
+        PriceLbl = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -57,25 +71,21 @@ public class UI_Booking extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         bbut = new javax.swing.JButton();
         sbut = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        nolbl = new javax.swing.JLabel();
+        RoomLbl = new javax.swing.JLabel();
+        FurnishLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(217, 225, 230));
 
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
-        jLabel5.setText("Hostel Booking");
+        jLabel5.setText("Hostel Booking Application");
 
-        jLabel4.setFont(new java.awt.Font("URWEgyptienneT", 0, 18)); // NOI18N
-        jLabel4.setText("Room Type :");
+        TypeLbl.setFont(new java.awt.Font("URWEgyptienneT", 0, 18)); // NOI18N
+        TypeLbl.setText("Room Type :");
 
-        jLabel9.setFont(new java.awt.Font("URWEgyptienneT", 0, 18)); // NOI18N
-        jLabel9.setText("Price :");
-
-        rmlbl.setFont(new java.awt.Font("URWEgyptienneT", 0, 18)); // NOI18N
-
-        plbl.setFont(new java.awt.Font("URWEgyptienneT", 0, 18)); // NOI18N
+        PriceLbl.setFont(new java.awt.Font("URWEgyptienneT", 0, 18)); // NOI18N
+        PriceLbl.setText("Price/M :");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel2.setOpaque(false);
@@ -104,7 +114,7 @@ public class UI_Booking extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jLabel6.setText("Length of Stay *");
 
-        lstxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "3 months", "6 months", "1 year" }));
+        lstxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "3 months", "6 months", "12 months" }));
         lstxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lstxtActionPerformed(evt);
@@ -118,7 +128,7 @@ public class UI_Booking extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jLabel3.setText("Check in Date *");
+        jLabel3.setText("Check in Date (dd-mm-yyyy) *");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -141,10 +151,10 @@ public class UI_Booking extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(pntxt, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(ctxt, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,17 +187,18 @@ public class UI_Booking extends javax.swing.JFrame {
             }
         });
 
-        sbut.setText("SUBMIT");
+        sbut.setText("Apply for Room");
         sbut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sbutActionPerformed(evt);
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("URWEgyptienneT", 0, 18)); // NOI18N
-        jLabel7.setText("Room No :");
+        RoomLbl.setFont(new java.awt.Font("URWEgyptienneT", 0, 18)); // NOI18N
+        RoomLbl.setText("Room No :");
 
-        nolbl.setFont(new java.awt.Font("URWEgyptienneT", 0, 18)); // NOI18N
+        FurnishLbl.setFont(new java.awt.Font("URWEgyptienneT", 0, 18)); // NOI18N
+        FurnishLbl.setText("Furnishing : ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -196,9 +207,9 @@ public class UI_Booking extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bbut, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(116, 116, 116)
-                .addComponent(sbut, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(183, 183, 183))
+                .addGap(85, 85, 85)
+                .addComponent(sbut)
+                .addGap(153, 153, 153))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -208,22 +219,15 @@ public class UI_Booking extends javax.swing.JFrame {
                         .addGap(73, 73, 73)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addGap(55, 55, 55)
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(RoomLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(FurnishLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(rmlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(nolbl, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(plbl, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(TypeLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(PriceLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,17 +235,13 @@ public class UI_Booking extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7)
-                        .addComponent(nolbl))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
-                        .addComponent(rmlbl)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RoomLbl)
+                    .addComponent(TypeLbl))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(plbl))
+                    .addComponent(FurnishLbl)
+                    .addComponent(PriceLbl))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -255,7 +255,7 @@ public class UI_Booking extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,51 +264,97 @@ public class UI_Booking extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-  
-    private void ctxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ctxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ctxtActionPerformed
+
+    private void sbutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sbutActionPerformed
+        
+        FileHandler fHandler = new FileHandler(FileName.APPLICATIONS);
+        // Validation
+        
+        if( etxt.getText().isEmpty() || pntxt.getText().isEmpty() || ctxt.getText().isEmpty() || lstxt.getSelectedItem()==null){
+            JOptionPane.showMessageDialog(null,"Text Field Cannot Be Empty!" , "TextField Empty",JOptionPane.ERROR_MESSAGE,null);
+        }else{
+            int result = JOptionPane.showConfirmDialog(this, "Confirm Room?", "Confirmation",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,null);
+        if (result==JOptionPane.YES_OPTION){
+            int StudentId = Student_Hostel_System.current_user.getUserId();
+            String StudentName = Student_Hostel_System.current_user.getUsername();
+            String RoomNumber = no;
+            String cdate = ctxt.getText();
+            String email = etxt.getText();
+            String phone = pntxt.getText();
+            String los = lstxt.getSelectedItem().toString();
+            String status = "Pending";
+            if(bookingvalidation (email,phone,cdate)){
+                // Extract the numeric part from the string
+                String numericPart = los.split(" ")[0];
+
+                // Parse the numeric part into an integer
+                int intlos = Integer.parseInt(numericPart);
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+            try {
+                Date startDate = dateFormat.parse(cdate);
+
+                // Check if the check-in date is after the current date
+                    Date currentDate = new Date();
+                    if (startDate.before(currentDate)) {
+                        JOptionPane.showMessageDialog(null, "Check-in date cannot be in the past!", "Invalid Date",
+                                JOptionPane.ERROR_MESSAGE, null);
+                        return; // Stop further processing
+                    }
+                // Create a Calendar instance and set the start date
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(startDate);
+                // Add the length of stay (in months) to the start date
+                calendar.add(Calendar.MONTH, intlos);
+                // Get the check-out date
+                Date checkOutDate = calendar.getTime();
+                // Format the check-out date as a string
+                String formattedCheckOutDate = dateFormat.format(checkOutDate);
+
+
+                    // Create application object
+                    Application application = new Application(fHandler.GenerateID(), StudentName, StudentId, RoomNumber, cdate, formattedCheckOutDate, status);
+
+                    // Send application
+                    ApplicationService applicationService = new ApplicationService();
+                    applicationService.sendApplication(application);
+
+
+
+                    if (!applicationService.checkExistingApplication(Student_Hostel_System.current_user.getUsername())) {
+                    JOptionPane.showMessageDialog(null,"No existing booking. Make a booking first!" , "Error",JOptionPane.ERROR_MESSAGE,null);
+                    return; // Stop further processing
+                    }
+                    JOptionPane.showMessageDialog(null, "Application Successfully sent! Await for approval from Admin.");
+                    this.setVisible(false);
+                        UI_Applications UIA = new UI_Applications();
+                        UIA.setVisible(true);
+                                }
+
+                             catch (java.text.ParseException e) {
+                                e.printStackTrace();
+                            }
+                        }}
+        else{
+        UI_Student_Main us = new UI_Student_Main();
+        us.setVisible(true);
+        this.dispose();
+        }
+        }
+    }//GEN-LAST:event_sbutActionPerformed
 
     private void bbutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bbutActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bbutActionPerformed
-    private boolean bookingvalidation(String email, String phone, String cdate){
-        if(!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")){
-            JOptionPane.showMessageDialog(this,"Invalid email!","Wrong Format",JOptionPane.ERROR_MESSAGE,null);
-            return false;
-        }
-        if(!cdate.matches("\\d{2}-\\d{2}-\\d{4}")){
-            JOptionPane.showMessageDialog(this,"Invalid check in date!","Wrong Format",JOptionPane.ERROR_MESSAGE,null);
-            return false;
-        }
-        if(!phone.matches("\\d{3}-\\d{7}")){
-            JOptionPane.showMessageDialog(this,"Invalid phone number!","Wrong Format",JOptionPane.ERROR_MESSAGE,null);
-            return false;
-        }
-        return true;
-    }
-    private void sbutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sbutActionPerformed
-  
-            // Validation  
-    if( etxt.getText().isEmpty() || pntxt.getText().isEmpty() || ctxt.getText().isEmpty() || lstxt.getSelectedItem()==null){
-                JOptionPane.showMessageDialog(null,"Text Field Cannot Be Empty!" , "TextField Empty",JOptionPane.ERROR_MESSAGE,null);
-    }else{
-        String email = etxt.getText();
-        String cdate = ctxt.getText();
-        String phone = pntxt.getText();
-        String los = lstxt.getSelectedItem().toString();
-        
-        String roomID = nolbl.getText();
-        if(bookingvalidation (email,phone,cdate)){
-            UI_Payment up = new UI_Payment(roomID,type,price,email,phone,los,cdate);
-            up.setVisible(true);
-        }
-    }
-    
-    
-    
-    
-    }//GEN-LAST:event_sbutActionPerformed
+
+    private void ctxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ctxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ctxtActionPerformed
+
+    private void lstxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lstxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lstxtActionPerformed
 
     private void pntxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pntxtActionPerformed
         // TODO add your handling code here:
@@ -317,11 +363,17 @@ public class UI_Booking extends javax.swing.JFrame {
     private void etxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_etxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_etxtActionPerformed
-
-    private void lstxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lstxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lstxtActionPerformed
-
+      private boolean bookingvalidation(String email, String phone, String cdate){
+        if(!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")){
+            JOptionPane.showMessageDialog(this,"Invalid email!","Wrong Format",JOptionPane.ERROR_MESSAGE,null);
+            return false;
+        }
+        if(!cdate.matches("\\d{2}-\\d{2}-\\d{4}")){
+            JOptionPane.showMessageDialog(this,"Invalid check in date!","Wrong Format",JOptionPane.ERROR_MESSAGE,null);
+            return false;
+        }
+        return true;
+    }
     /**
      * @param args the command line arguments
      */
@@ -352,31 +404,29 @@ public class UI_Booking extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UI_Booking(type,price,no).setVisible(true);
+                new UI_Booking(no,type,furnish,price).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel FurnishLbl;
+    private javax.swing.JLabel PriceLbl;
+    private javax.swing.JLabel RoomLbl;
+    private javax.swing.JLabel TypeLbl;
     private javax.swing.JButton bbut;
     private javax.swing.JTextField ctxt;
     private javax.swing.JTextField etxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JComboBox<String> lstxt;
-    private javax.swing.JLabel nolbl;
-    private javax.swing.JLabel plbl;
     private javax.swing.JTextField pntxt;
-    private javax.swing.JLabel rmlbl;
     private javax.swing.JButton sbut;
     // End of variables declaration//GEN-END:variables
 }

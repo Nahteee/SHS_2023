@@ -10,78 +10,85 @@ import java.util.Date;
  * @author User
  */
 public class Application {
+    private int applicationID;
     private String studentName;
-    private String studentId;
-    private String preferredRoomType;
-    private int numberOfOccupants;
-    private Date startDate;
-    private Date endDate;
-    private boolean approved;
+    private int studentId;
+    private String RoomId;
+    private String startDate;
+    private String endDate;
+    private String status;
 
-    public Application(String studentName, String studentId, String preferredRoomType, int numberOfOccupants, Date startDate, Date endDate) {
+    public Application(int applicationID, String studentName, int studentId, String RoomId, String startDate, String endDate, String status) {
+        this.applicationID = applicationID;
         this.studentName = studentName;
         this.studentId = studentId;
-        this.preferredRoomType = preferredRoomType;
-        this.numberOfOccupants = numberOfOccupants;
+        this.RoomId = RoomId;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.approved = false;
+        this.status = status;
+    }
+
+    public int getApplicationID() {
+        return applicationID;
     }
 
     public String getStudentName() {
         return studentName;
     }
 
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public String getRoomId() {
+        return RoomId;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setApplicationID(int applicationID) {
+        this.applicationID = applicationID;
+    }
+
     public void setStudentName(String studentName) {
         this.studentName = studentName;
     }
 
-    public String getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(String studentId) {
+    public void setStudentId(int studentId) {
         this.studentId = studentId;
     }
 
-    public String getPreferredRoomType() {
-        return preferredRoomType;
+    public void setRoomId(String RoomId) {
+        this.RoomId = RoomId;
     }
 
-    public void setPreferredRoomType(String preferredRoomType) {
-        this.preferredRoomType = preferredRoomType;
-    }
-
-    public int getNumberOfOccupants() {
-        return numberOfOccupants;
-    }
-
-    public void setNumberOfOccupants(int numberOfOccupants) {
-        this.numberOfOccupants = numberOfOccupants;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
-    public boolean isApproved() {
-        return approved;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public void setApproved(boolean approved) {
-        this.approved = approved;
+    @Override
+    public String toString() {
+        return "Application{" + "applicationID=" + applicationID + ", studentName=" + studentName + ", studentId=" + studentId + ", RoomId=" + RoomId + ", startDate=" + startDate + ", endDate=" + endDate + ", status=" + status + '}';
     }
+
+
 }
 
