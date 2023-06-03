@@ -11,48 +11,65 @@ package main.java.SHS;
 import java.util.Date;
 
 public class Payment {
-    private String paymentID;
-    private double paymentAmount;
-    private Date paymentDate;
-    private String customerID;
+    private int paymentID;
+    private int customerID;
+    private int applicationID;
+    private int paymentAmount;
+    private String paymentDate;
 
-    public Payment(String paymentID, double paymentAmount, Date paymentDate, String customerID) {
+    public Payment(int paymentID, int customerID, int applicationID, int paymentAmount, String paymentDate) {
         this.paymentID = paymentID;
+        this.customerID = customerID;
+        this.applicationID = applicationID;
         this.paymentAmount = paymentAmount;
         this.paymentDate = paymentDate;
-        this.customerID = customerID;
     }
 
-    public String getPaymentID() {
+    public int getPaymentID() {
         return paymentID;
     }
 
-    public void setPaymentID(String paymentID) {
-        this.paymentID = paymentID;
-    }
-
-    public double getPaymentAmount() {
-        return paymentAmount;
-    }
-
-    public void setPaymentAmount(double paymentAmount) {
-        this.paymentAmount = paymentAmount;
-    }
-
-    public Date getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(Date paymentDate) {
-        this.paymentDate = paymentDate;
-    }
-
-    public String getCustomerID() {
+    public int getCustomerID() {
         return customerID;
     }
 
-    public void setCustomerID(String customerID) {
+    public int getApplicationID() {
+        return applicationID;
+    }
+
+    public int getPaymentAmount() {
+        return paymentAmount;
+    }
+
+    public String getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentID(int paymentID) {
+        this.paymentID = paymentID;
+    }
+
+    public void setCustomerID(int customerID) {
         this.customerID = customerID;
     }
+
+    public void setApplicationID(int applicationID) {
+        this.applicationID = applicationID;
+    }
+
+    public void setPaymentAmount(int paymentAmount) {
+        this.paymentAmount = paymentAmount;
+    }
+
+    public void setPaymentDate(String paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Payment{" + "paymentID=" + paymentID + ", customerID=" + customerID + ", applicationID=" + applicationID + ", paymentAmount=" + paymentAmount + ", paymentDate=" + paymentDate + '}';
+    }
+   
+
 }
 

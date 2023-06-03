@@ -205,18 +205,22 @@ public class UI_Login extends javax.swing.JFrame {
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         String username = UNField.getText().trim();
-        String password = PWField.getText().trim();
-        
-        if("Admin".equals(username)){
-            fileName = FileName.ADMIN;
-            Admin.login(username, password, fileName);
-            this.setVisible(false);
-        }
-        else{
-            fileName = FileName.STUDENT;
-            Student.login(username, password, fileName);
-            this.setVisible(false);
-        }
+    String password = PWField.getText().trim();
+
+    boolean loginSuccessful = false;
+    String fileName = null;
+
+    if ("Admin".equals(username)) {
+        fileName = FileName.ADMIN;
+        loginSuccessful = Admin.login(username, password, fileName);
+    } else {
+        fileName = FileName.STUDENT;
+        loginSuccessful = Student.login(username, password, fileName);
+    }
+
+    if (loginSuccessful) {
+        this.setVisible(false); // Hide the login frame
+    }
     }//GEN-LAST:event_LoginActionPerformed
 
     private void RegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterActionPerformed

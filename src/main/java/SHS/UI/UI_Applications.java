@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import main.java.SHS.Application;
 import main.java.SHS.Room;
 import main.java.SHS.Services.ApplicationService;
+import main.java.SHS.Services.PaymentService;
 import main.java.SHS.Services.RoomService;
 import main.java.SHS.Student_Hostel_System;
 
@@ -23,11 +24,11 @@ public class UI_Applications extends javax.swing.JFrame {
         initComponents();
         
         ApplicationService applicationService = new ApplicationService();
-        Application application = applicationService.displayOwnApplication(Student_Hostel_System.current_user.getUsername());
+        Application application = applicationService.getApplication(Student_Hostel_System.current_user.getUsername());
 
         
         RoomService roomservice = new RoomService();
-        Room room = roomservice.getRoom(Integer.parseInt(application.getRoomId()));
+        Room room = roomservice.getRoom(application.getRoomId());
         
         RoomLbl.setText("Room No : " + room.getRoomNumber());
         TypeLbl.setText("Room Type : " + room.getRoomType());
@@ -35,7 +36,7 @@ public class UI_Applications extends javax.swing.JFrame {
         RentLbl.setText("Monthly Rent : " + room.getPrice());
         CDateLbl.setText("Check-in Date : " + application.getStartDate());
         CODateLbl.setText("Check-out Date : " + application.getEndDate());
-        StatusLbl.setText("Approved : " + application.getStatus());
+        StatusLbl.setText("Status : " + application.getStatus());
     }
 
     /**
@@ -258,34 +259,59 @@ public class UI_Applications extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackBtnMouseClicked
-                this.setVisible(false);
-                UI_Student_Main s = new UI_Student_Main();
-                s.setVisible(true);
+        // Hide the current window
+        this.setVisible(false);
+
+    // ...
+    UI_Student_Main s = new UI_Student_Main();
+    s.refreshTable(); // Refresh the table data
+    s.setVisible(true);
+    // ...
     }//GEN-LAST:event_BackBtnMouseClicked
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
-
-    int confirmDialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this application?", "Confirmation", JOptionPane.YES_NO_OPTION);
-
-    if (confirmDialogResult == JOptionPane.YES_OPTION) { // User confirmed
         ApplicationService applicationService = new ApplicationService();
-        Application application = applicationService.displayOwnApplication(Student_Hostel_System.current_user.getUsername());
+        Application application = applicationService.getApplication(Student_Hostel_System.current_user.getUsername());
         int applicationID = application.getApplicationID();
+        String applicationStatus = application.getStatus();
 
-        // Update the application status to "Rejected"
-        applicationService.updateApplication(applicationID, "Deleted");
+        if (applicationStatus.equals("Paid")) {
+            // Display a message informing the user that the application cannot be deleted
+            JOptionPane.showMessageDialog(null, "The application cannot be deleted because it is already paid.", "Deletion Not Allowed", JOptionPane.WARNING_MESSAGE);
+        } else {
+            int confirmDialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this application?", "Confirmation", JOptionPane.YES_NO_OPTION);
 
-        // Show a success message or perform any additional operations
-        JOptionPane.showMessageDialog(null, "Application deleted. Status changed to Deleted.");
-        this.setVisible(false);
-        UI_Student_Main s = new UI_Student_Main();
-        s.setVisible(true);
-    }
+            if (confirmDialogResult == JOptionPane.YES_OPTION) { // User confirmed
+                // Update the application status to "Deleted"
+                applicationService.updateApplication(applicationID, "Deleted");
 
+                // Show a success message or perform any additional operations
+                JOptionPane.showMessageDialog(null, "Application deleted. Status changed to Deleted.");
+                this.setVisible(false);
+                UI_Student_Main s = new UI_Student_Main();
+                s.setVisible(true);
+            }
+        }
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
     private void PaymentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentBtnActionPerformed
-        // TODO add your handling code here:
+        ApplicationService applicationService = new ApplicationService();
+        Application application = applicationService.getApplication(Student_Hostel_System.current_user.getUsername());
+
+        RoomService roomservice = new RoomService();
+        Room room = roomservice.getRoom(application.getRoomId());
+
+        ApplicationService appservice = new ApplicationService();
+        boolean hasPendingPayment = appservice.checkAwaitingPaymentApplication(application.getStudentId());
+
+        if (hasPendingPayment) {
+            this.setVisible(false);
+            UI_Payment UP = new UI_Payment();
+            UP.setVisible(true);
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "You have no pending payment.", "Pending Payment", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_PaymentBtnActionPerformed
 
     /**

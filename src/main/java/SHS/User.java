@@ -12,6 +12,7 @@ import main.java.SHS.FileHandlers.FileName;
 import main.java.SHS.FileHandlers.FileRecord;
 import main.java.SHS.UI.UI_Student_Main;
 import javax.swing.JOptionPane;
+import main.java.SHS.Services.ApplicationService;
 import main.java.SHS.UI.UI_Login;
 
 /**
@@ -145,34 +146,30 @@ public class User {
         this.role = role;
     }
     
-    public static void login(String username, String password, String fileName){
+    public static boolean login(String username, String password, String fileName) {
         FileHandler fHandler = new FileHandler(fileName);
         FileRecord user_record = fHandler.FetchRecord(username, 1);
-        if(user_record == null){
-            JOptionPane.showMessageDialog(null,"Login credential incorrect.","Oops",JOptionPane.INFORMATION_MESSAGE);
-            return;
+        if (user_record == null) {
+            JOptionPane.showMessageDialog(null, "Login credential incorrect.", "Oops", JOptionPane.INFORMATION_MESSAGE);
+            return false;
         }
         int user_id = user_record.getID();
         String[] splitted_user_record = user_record.getRecordList();
-//        System.out.println(Arrays.toString(splitted_user_record));
-//        System.out.println(splitted_user_record[7]);
-        
-        if(!(username == null ? splitted_user_record[1] == null : username.equals(splitted_user_record[1]) 
-                && password == null ? splitted_user_record[4] == null : password.equals(splitted_user_record[4])))
-        {
-            JOptionPane.showMessageDialog(null,"Login credential incorrect.","Oops",JOptionPane.INFORMATION_MESSAGE);
-            return;
+
+        if (!(username == null ? splitted_user_record[1] == null : username.equals(splitted_user_record[1]))
+                || !(password == null ? splitted_user_record[4] == null : password.equals(splitted_user_record[4]))) {
+            JOptionPane.showMessageDialog(null, "Login credential incorrect.", "Oops", JOptionPane.INFORMATION_MESSAGE);
+            return false;
         }
-        
-        if(fileName == null ? FileName.ADMIN == null : fileName.equals(FileName.ADMIN)){
+
+        if (fileName == null ? FileName.ADMIN == null : fileName.equals(FileName.ADMIN)) {
             Student_Hostel_System.current_user = new Admin(user_id);
         }
-        
-        
-        if(fileName == null ? FileName.STUDENT== null : fileName.equals(FileName.STUDENT)){
+
+        if (fileName == null ? FileName.STUDENT == null : fileName.equals(FileName.STUDENT)) {
             Student_Hostel_System.current_user = new Student(user_id);
         }
-        
+
         Student_Hostel_System.current_user.setUsername(splitted_user_record[1]);
         Student_Hostel_System.current_user.setAge(Integer.parseInt(splitted_user_record[5]));
         Student_Hostel_System.current_user.setUserEmail(splitted_user_record[3]);
@@ -180,29 +177,35 @@ public class User {
         Student_Hostel_System.current_user.setPassword(splitted_user_record[4]);
         Student_Hostel_System.current_user.setContact(splitted_user_record[7]);
         Student_Hostel_System.current_user.setCard(splitted_user_record[8]);
-//        System.out.println(Student_Hostel_System.current_user.getUserId());
-        
-        switch(fileName) {
+
+        switch (fileName) {
             case FileName.ADMIN -> {
                 Student_Hostel_System.current_user.setRole(UserRole.ADMIN);
+                ApplicationService applicationService = new ApplicationService();
+                applicationService.checkExpiredApplications();
                 UI_Admin_Main a = new UI_Admin_Main();
                 System.out.println("User login successfully");
-                JOptionPane.showMessageDialog(null,"Welcome to StudentBNB!","Successfully Login",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Welcome to StudentBNB!", "Successfully Login", JOptionPane.INFORMATION_MESSAGE);
                 if (Student_Hostel_System.current_user instanceof Admin) {
-                Admin admin = (Admin) Student_Hostel_System.current_user;
-                admin.logAdminLogin();
-            }
+                    Admin admin = (Admin) Student_Hostel_System.current_user;
+                    admin.logAdminLogin();
+                }
+                UI_Login l = new UI_Login();
+                l.setVisible(false);
                 a.setVisible(true);
             }
             case FileName.STUDENT -> {
                 Student_Hostel_System.current_user.setRole(UserRole.STUDENT);
                 System.out.println("User login successfully");
-                JOptionPane.showMessageDialog(null,"Welcome to StudentBNB!","Successfully Login",JOptionPane.INFORMATION_MESSAGE);
-                            // Call logStudentLogin for student user
+                JOptionPane.showMessageDialog(null, "Welcome to StudentBNB!", "Successfully Login", JOptionPane.INFORMATION_MESSAGE);
+                UI_Login l = new UI_Login();
+                l.setVisible(false);
                 if (Student_Hostel_System.current_user instanceof Student) {
-                Student student = (Student) Student_Hostel_System.current_user;
-                student.logStudentLogin();
-            }
+                    Student student = (Student) Student_Hostel_System.current_user;
+                    student.logStudentLogin();
+                }
+                ApplicationService applicationService = new ApplicationService();
+                applicationService.checkExpiredApplications();
                 UI_Student_Main s = new UI_Student_Main();
                 s.setVisible(true);
             }
@@ -210,8 +213,11 @@ public class User {
                 System.out.println("no file name specified.");
             }
         }
+    // Call the checkExpiredApplications method
         
+        return true;
     }
+
     
     public static void logout(){
         Student_Hostel_System.current_user = null;

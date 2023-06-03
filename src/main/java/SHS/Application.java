@@ -13,18 +13,20 @@ public class Application {
     private int applicationID;
     private String studentName;
     private int studentId;
-    private String RoomId;
+    private int RoomId;
     private String startDate;
     private String endDate;
+    private int los;
     private String status;
 
-    public Application(int applicationID, String studentName, int studentId, String RoomId, String startDate, String endDate, String status) {
+    public Application(int applicationID, String studentName, int studentId, int RoomId, String startDate, String endDate, int los, String status) {
         this.applicationID = applicationID;
         this.studentName = studentName;
         this.studentId = studentId;
         this.RoomId = RoomId;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.los = los;
         this.status = status;
     }
 
@@ -40,7 +42,7 @@ public class Application {
         return studentId;
     }
 
-    public String getRoomId() {
+    public int getRoomId() {
         return RoomId;
     }
 
@@ -50,6 +52,10 @@ public class Application {
 
     public String getEndDate() {
         return endDate;
+    }
+
+    public int getLos() {
+        return los;
     }
 
     public String getStatus() {
@@ -68,7 +74,7 @@ public class Application {
         this.studentId = studentId;
     }
 
-    public void setRoomId(String RoomId) {
+    public void setRoomId(int RoomId) {
         this.RoomId = RoomId;
     }
 
@@ -80,13 +86,17 @@ public class Application {
         this.endDate = endDate;
     }
 
+    public void setLos(int los) {
+        this.los = los;
+    }
+
     public void setStatus(String status) {
         this.status = status;
     }
 
     @Override
     public String toString() {
-        return "Application{" + "applicationID=" + applicationID + ", studentName=" + studentName + ", studentId=" + studentId + ", RoomId=" + RoomId + ", startDate=" + startDate + ", endDate=" + endDate + ", status=" + status + '}';
+        return "Application{" + "applicationID=" + applicationID + ", studentName=" + studentName + ", studentId=" + studentId + ", RoomId=" + RoomId + ", startDate=" + startDate + ", endDate=" + endDate + ", los=" + los + ", status=" + status + '}';
     }
 
 

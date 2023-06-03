@@ -121,6 +121,22 @@ public class RoomService {
             }
         }
     }
+        
+        
+        public void updateRoom(Room room, String availability) {
+        for (int i = 0; i < rooms.size(); i++) {
+            if (rooms.get(i).getRoomNumber() == room.getRoomNumber()) {
+                // Update the availability of the room
+                rooms.get(i).setAvailability(availability);
+
+                // Update the room record in the file
+                FileRecord roomRecord = convertToFileRecord(rooms.get(i));
+                room_file.UpdateRecord(roomRecord);
+                break;
+        }
+    }
+}
+
     
     public void deleteRoom(Room room) {
          for(int i=0; i < rooms.size(); i++){

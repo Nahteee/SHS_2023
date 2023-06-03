@@ -27,7 +27,7 @@ public class UI_Admin_ApplicationsHistory extends javax.swing.JFrame {
     model.setRowCount(0); // Clear existing table data
     
     ApplicationService applicationService = new ApplicationService();
-    ArrayList<Application> applications = applicationService.getAllApplications();
+    ArrayList<Application> applications = applicationService.getApplication();
     
     for (Application application : applications) {
         if ("Rejected".equals(application.getStatus()) || ("Approved".equals(application.getStatus())) || ("Deleted".equals(application.getStatus()))) { // Filter unapproved applications
@@ -60,11 +60,11 @@ public class UI_Admin_ApplicationsHistory extends javax.swing.JFrame {
         AppsTable = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        ManageBtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        RecordsBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        AppsBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -86,7 +86,7 @@ public class UI_Admin_ApplicationsHistory extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Username", "Student ID", "Room No", "Check-in Date", "Check-out Date", "Status"
+                "ApplicationID", "Username", "Student ID", "Room No", "Check-in Date", "Check-out Date", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -103,13 +103,13 @@ public class UI_Admin_ApplicationsHistory extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/SHS Logo Header.png"))); // NOI18N
 
-        jButton2.setBackground(new java.awt.Color(92, 128, 188));
-        jButton2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(217, 225, 228));
-        jButton2.setText("Management");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        ManageBtn.setBackground(new java.awt.Color(92, 128, 188));
+        ManageBtn.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        ManageBtn.setForeground(new java.awt.Color(217, 225, 228));
+        ManageBtn.setText("Management");
+        ManageBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ManageBtnActionPerformed(evt);
             }
         });
 
@@ -123,13 +123,13 @@ public class UI_Admin_ApplicationsHistory extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(92, 128, 188));
-        jButton3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(217, 225, 228));
-        jButton3.setText("Records");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        RecordsBtn.setBackground(new java.awt.Color(92, 128, 188));
+        RecordsBtn.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        RecordsBtn.setForeground(new java.awt.Color(217, 225, 228));
+        RecordsBtn.setText("Records");
+        RecordsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                RecordsBtnActionPerformed(evt);
             }
         });
 
@@ -141,13 +141,13 @@ public class UI_Admin_ApplicationsHistory extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(92, 128, 188));
-        jButton6.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(217, 225, 228));
-        jButton6.setText("Applications");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        AppsBtn.setBackground(new java.awt.Color(92, 128, 188));
+        AppsBtn.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        AppsBtn.setForeground(new java.awt.Color(217, 225, 228));
+        AppsBtn.setText("Applications");
+        AppsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                AppsBtnActionPerformed(evt);
             }
         });
 
@@ -159,11 +159,11 @@ public class UI_Admin_ApplicationsHistory extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ManageBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AppsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(RecordsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
@@ -183,9 +183,9 @@ public class UI_Admin_ApplicationsHistory extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ManageBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AppsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(RecordsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -289,25 +289,31 @@ public class UI_Admin_ApplicationsHistory extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void ManageBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageBtnActionPerformed
+        this.setVisible(false);
+        UI_Admin_Manage_User UIAMU = new UI_Admin_Manage_User();
+        UIAMU.setVisible(true);
+    }//GEN-LAST:event_ManageBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void RecordsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecordsBtnActionPerformed
+        this.setVisible(false);
+        UI_Admin_Records_UserLogins UIARUL = new UI_Admin_Records_UserLogins();
+        UIARUL.setVisible(true);
+    }//GEN-LAST:event_RecordsBtnActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         System.out.println("hi");
     }//GEN-LAST:event_jLabel1MouseClicked
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void AppsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AppsBtnActionPerformed
+        this.setVisible(false);
+        UI_Admin_Applications UIAA = new UI_Admin_Applications();
+        UIAA.setVisible(true);
+    }//GEN-LAST:event_AppsBtnActionPerformed
 
     private void SearchTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchTxtKeyReleased
         DefaultTableModel table  = (DefaultTableModel)AppsTable.getModel();
@@ -353,12 +359,12 @@ public class UI_Admin_ApplicationsHistory extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AppsBtn;
     private javax.swing.JTable AppsTable;
+    private javax.swing.JButton ManageBtn;
+    private javax.swing.JButton RecordsBtn;
     private javax.swing.JTextField SearchTxt;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

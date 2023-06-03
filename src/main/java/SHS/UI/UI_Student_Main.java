@@ -7,6 +7,7 @@ package main.java.SHS.UI;
 import java.awt.Cursor;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import main.java.SHS.FileHandlers.FileHandler;
@@ -16,10 +17,7 @@ import main.java.SHS.Room;
 import main.java.SHS.Services.ApplicationService;
 import main.java.SHS.Services.RoomService;
 import main.java.SHS.Student_Hostel_System;
-import static main.java.SHS.UI.UI_Payment.cid;
-import static main.java.SHS.UI.UI_Payment.email;
-import static main.java.SHS.UI.UI_Payment.los;
-import static main.java.SHS.UI.UI_Payment.phone;
+
 
 
 
@@ -28,20 +26,14 @@ import static main.java.SHS.UI.UI_Payment.phone;
  * @author User
  */
 public class UI_Student_Main extends javax.swing.JFrame {
-    public static String price;
-    public static String type;
-    public static String no;
+
     
     /**
      * Creates new form student
      */
     public UI_Student_Main() {
         initComponents();
-        UI_Booking.type = type;
-        UI_Booking.price = price;
-        UI_Payment.price = price;
-        UI_Payment.type = type;
-        UI_Booking.no = no;
+
         
         UsernameLbl.setText(Student_Hostel_System.current_user.getUsername());
         
@@ -60,6 +52,51 @@ public class UI_Student_Main extends javax.swing.JFrame {
         }
     }
     }
+    
+    
+        @Override
+    public void setVisible(boolean visible) {
+        super.setVisible(visible);
+
+        if (visible) {
+            refreshTable();
+        }
+    }
+
+    public void refreshTable() {
+        // Read the data from the text file
+        ArrayList<String> lines = new ArrayList<>();
+        try {
+            File file = new File("src\\main\\java\\SHS\\Txtfiles\\room.txt");
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                lines.add(scanner.nextLine());
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        // Update the table model with new data
+        DefaultTableModel model = (DefaultTableModel) roomtab.getModel();
+        model.setRowCount(0); // Clear the existing data
+
+        // Process each line and add rows to the table model
+        for (String line : lines) {
+            String[] values = line.split(";");
+            if (values.length >= 5 && values[3].equals("Available")) {
+                model.addRow(new Object[] {
+                    values[0],
+                    values[1],
+                    values[2],
+                    values[4]
+                });
+            }
+        }
+    }
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -228,11 +265,7 @@ public class UI_Student_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_ViewRecordsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    UI_Payment up = new UI_Payment(no,type,price, email, phone, los, cid);
-        up.setVisible(true);
-        up.pack();
-        up.setLocationRelativeTo(null);
-       this.dispose();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void ViewBookingBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewBookingBtnActionPerformed
@@ -243,7 +276,7 @@ public class UI_Student_Main extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null,"No existing booking. Make a booking first!" , "Error",JOptionPane.ERROR_MESSAGE,null);
         return; // Stop further processing
     }
-    this.setVisible(false);
+        this.dispose();
         UI_Applications UIA = new UI_Applications();
         UIA.setVisible(true);
      
@@ -254,7 +287,7 @@ public class UI_Student_Main extends javax.swing.JFrame {
         ApplicationService applicationService = new ApplicationService();
     
         if (applicationService.checkExistingApplication(Student_Hostel_System.current_user.getUsername())) {
-            JOptionPane.showMessageDialog(null, "Already have a booking. View current booking status first!", "Error", JOptionPane.ERROR_MESSAGE, null);
+            JOptionPane.showMessageDialog(null, "Already have a booking.", "Error", JOptionPane.ERROR_MESSAGE, null);
             return; // Stop further processing
         }
 
@@ -265,7 +298,7 @@ public class UI_Student_Main extends javax.swing.JFrame {
         }
 
         int row = roomtab.getSelectedRow();
-        String no = roomtab.getModel().getValueAt(row, 0).toString();
+        int no = Integer.parseInt(roomtab.getModel().getValueAt(row, 0).toString());
         String type = roomtab.getModel().getValueAt(row, 1).toString();
         String furnish = roomtab.getModel().getValueAt(row, 2).toString();
         String price = roomtab.getModel().getValueAt(row, 3).toString();
@@ -291,6 +324,9 @@ public class UI_Student_Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
+
+    
+    
     /**
      * @param args the command line arguments
      */

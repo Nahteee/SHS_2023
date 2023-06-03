@@ -56,7 +56,7 @@ public class UI_Admin_Records_UserLogins extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        RecordsBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         Label = new javax.swing.JLabel();
@@ -117,13 +117,13 @@ public class UI_Admin_Records_UserLogins extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(92, 128, 188));
-        jButton3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(217, 225, 228));
-        jButton3.setText("Records");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        RecordsBtn.setBackground(new java.awt.Color(92, 128, 188));
+        RecordsBtn.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        RecordsBtn.setForeground(new java.awt.Color(217, 225, 228));
+        RecordsBtn.setText("Records");
+        RecordsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                RecordsBtnActionPerformed(evt);
             }
         });
 
@@ -157,7 +157,7 @@ public class UI_Admin_Records_UserLogins extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(RecordsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
@@ -179,7 +179,7 @@ public class UI_Admin_Records_UserLogins extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(RecordsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -329,9 +329,11 @@ public class UI_Admin_Records_UserLogins extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void RecordsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecordsBtnActionPerformed
+        this.setVisible(false);
+        UI_Admin_Records_UserLogins UIARUL = new UI_Admin_Records_UserLogins();
+        UIARUL.setVisible(true);
+    }//GEN-LAST:event_RecordsBtnActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         System.out.println("hi");
@@ -437,13 +439,13 @@ public class UI_Admin_Records_UserLogins extends javax.swing.JFrame {
     private javax.swing.JButton AdminLogs;
     private javax.swing.JLabel Label;
     private javax.swing.JTable LogsTable;
+    private javax.swing.JButton RecordsBtn;
     private javax.swing.JLabel RoomsButton1;
     private javax.swing.JTextField SearchTxt;
     private javax.swing.JButton StudentLogs;
     private javax.swing.JLabel UserButton1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

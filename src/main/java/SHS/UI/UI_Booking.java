@@ -24,7 +24,7 @@ import java.util.Calendar;
  * @author User
  */
 public class UI_Booking extends javax.swing.JFrame {
-    public static String no;
+    public static int no;
     public static String type;
     public static String furnish;
     public static String price;
@@ -32,7 +32,7 @@ public class UI_Booking extends javax.swing.JFrame {
     /**
      * Creates new form UI_Booking
      */
-    public UI_Booking(String no,String type,String Furnish, String price) {
+    public UI_Booking(int no,String type,String Furnish, String price) {
         initComponents();
         UI_Booking.no = no;
         UI_Booking.type = type;
@@ -278,7 +278,7 @@ public class UI_Booking extends javax.swing.JFrame {
         if (result==JOptionPane.YES_OPTION){
             int StudentId = Student_Hostel_System.current_user.getUserId();
             String StudentName = Student_Hostel_System.current_user.getUsername();
-            String RoomNumber = no;
+            int RoomNumber = no;
             String cdate = ctxt.getText();
             String email = etxt.getText();
             String phone = pntxt.getText();
@@ -314,7 +314,7 @@ public class UI_Booking extends javax.swing.JFrame {
 
 
                     // Create application object
-                    Application application = new Application(fHandler.GenerateID(), StudentName, StudentId, RoomNumber, cdate, formattedCheckOutDate, status);
+                    Application application = new Application(fHandler.GenerateID(), StudentName, StudentId, RoomNumber, cdate, formattedCheckOutDate, intlos, status);
 
                     // Send application
                     ApplicationService applicationService = new ApplicationService();

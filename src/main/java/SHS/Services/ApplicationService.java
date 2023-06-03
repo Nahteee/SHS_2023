@@ -15,6 +15,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import main.java.SHS.Application;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Date;
+import main.java.SHS.Room;
 
 
 public class ApplicationService {
@@ -36,6 +40,7 @@ public class ApplicationService {
                 application.getRoomId() + ";" +
                 startDateString + ";" +
                 endDateString + ";" +
+                application.getLos() + ";" +
                 application.getStatus();
         FileRecord applicationRecord = new FileRecord(applicationId, applicationData);
         fileHandler.InsertRecord(applicationRecord);
@@ -49,7 +54,7 @@ public class ApplicationService {
     for (FileRecord record : records) {
         String[] data = record.getRecord().split(";");
 
-        if (data[1].equals(studentName) && (data[6].equals("Pending") || data[6].equals("Awaiting Payment") || data[6].equals("Rejected"))) {
+        if (data[1].equals(studentName) && (data[7].equals("Pending") || data[7].equals("Awaiting Payment") || data[7].equals("Rejected") || data[7].equals("Paid"))) {
             return true; // Existing application found with matching username and false approval status
         }
     }
@@ -58,21 +63,23 @@ public class ApplicationService {
 }
     
 
-public Application displayOwnApplication(String studentName) {
+public Application getApplication(String studentName) {
     List<FileRecord> records = fileHandler.FetchRecord();
 
-    for (FileRecord record : records) {
+    for (int i = records.size() - 1; i >= 0; i--) {
+        FileRecord record = records.get(i);
         String[] data = record.getRecord().split(";");
 
-        if (data[1].equals(studentName)) {
+        if (data[1].equals(studentName) && !data[7].equals("Deleted")) {
             int applicationID = Integer.parseInt(data[0]);
             int studentId = Integer.parseInt(data[2]);
-            String roomId = data[3];
+            int roomId = Integer.parseInt(data[3]);
             String startDate = data[4];
             String endDate = data[5];
-            String status = data[6];
+            int los = Integer.parseInt(data[6]);
+            String status = data[7];
 
-            Application application = new Application(applicationID, studentName, studentId, roomId, startDate, endDate, status);
+            Application application = new Application(applicationID, studentName, studentId, roomId, startDate, endDate, los, status);
             return application;
         }
     }
@@ -81,7 +88,8 @@ public Application displayOwnApplication(String studentName) {
 }
 
 
-public ArrayList<Application> getAllApplications() {
+
+public ArrayList<Application> getApplication() {
     ArrayList<Application> applications = new ArrayList<>();
     List<FileRecord> records = fileHandler.FetchRecord();
 
@@ -91,12 +99,13 @@ public ArrayList<Application> getAllApplications() {
         int applicationID = Integer.parseInt(data[0]);
         String studentName = data[1];
         int studentId = Integer.parseInt(data[2]);
-        String roomId = data[3];
+        int roomId = Integer.parseInt(data[3]);
         String startDate = data[4];
         String endDate = data[5];
-        String status = data[6];
+        int los = Integer.parseInt(data[6]);
+        String status = data[7];
 
-        Application application = new Application(applicationID, studentName, studentId, roomId, startDate, endDate, status);
+        Application application = new Application(applicationID, studentName, studentId, roomId, startDate, endDate, los, status);
         applications.add(application);
     }
 
@@ -129,6 +138,7 @@ private FileRecord convertToFileRecord(Application application) {
             application.getRoomId() + ";" +
             application.getStartDate() + ";" +
             application.getEndDate() + ";" +
+            application.getLos() + ";" +
             application.getStatus();
 
     return new FileRecord(application.getApplicationID(), applicationRecordString);
@@ -142,7 +152,7 @@ public void updateApplication(int applicationID, String newStatus) {
 
         if (Integer.parseInt(data[0]) == applicationID) {
             // Update the status of the matching application
-            data[6] = newStatus;
+            data[7] = newStatus;
 
             // Reconstruct the updated application record
             String updatedRecord = String.join(";", data);
@@ -160,5 +170,66 @@ public void updateApplication(int applicationID, String newStatus) {
 }
 
 
+    public boolean checkAwaitingPaymentApplication(int studentId) {
+    List<FileRecord> records = fileHandler.FetchRecord();
+
+    for (FileRecord record : records) {
+        String[] data = record.getRecord().split(";");
+
+        int applicationId = Integer.parseInt(data[0]);
+        int studentIdRecord = Integer.parseInt(data[2]);
+        String status = data[7];
+
+        if (studentIdRecord == studentId && status.equals("Awaiting Payment")) {
+            return true; // Found an application by the student that is Awaiting Payment
+        }
+    }
+
+    return false; // No Awaiting Payment application found for the student
+}
+
+
+    
+        public void checkExpiredApplications() {
+        List<FileRecord> records = fileHandler.FetchRecord();
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date currentDate = new Date();
+
+        for (FileRecord record : records) {
+            String[] data = record.getRecord().split(";");
+            String status = data[7];
+            String endDateString = data[5];
+
+            if (status.equals("Paid")) {
+                try {
+                    Date endDate = dateFormat.parse(endDateString);
+                    if (currentDate.after(endDate)) {
+                        // The current date is after the end date, update the status and availability
+                        int applicationID = Integer.parseInt(data[0]);
+
+                        // Update the application status to "Expired"
+                        updateApplication(applicationID, "Expired");
+
+                        // Get the room ID and update its availability to "Available"
+                        int roomId = Integer.parseInt(data[3]);
+
+                        // Update the room availability using the updateRoom method
+                        RoomService roomService = RoomService.getRoomService();
+                        List<Room> rooms = roomService.getRooms();
+
+                        for (Room room : rooms) {
+                            if (room.getRoomNumber() == roomId) {
+                                // Update the availability of the room
+                                roomService.updateRoom(room, "Available");
+                                break;
+                            }
+                        }
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }
 
