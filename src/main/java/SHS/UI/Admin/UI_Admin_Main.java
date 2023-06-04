@@ -5,6 +5,7 @@
 package main.java.SHS.UI.Admin;
 
 import java.awt.Cursor;
+import main.java.SHS.UI.UI_Login;
 
 /**
  *
@@ -19,6 +20,10 @@ public class UI_Admin_Main extends javax.swing.JFrame {
         initComponents();
         
         ManageIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        ApplicationsIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        RecordsIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        ReportIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        LogOut.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
     /**
@@ -34,11 +39,11 @@ public class UI_Admin_Main extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         ManageHeader = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        ReportsBtn = new javax.swing.JButton();
         RecordsBtn = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        LogOut = new javax.swing.JLabel();
         ApplicationsBtn = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        ReportIcon = new javax.swing.JLabel();
         ManageIcon = new javax.swing.JLabel();
         ApplicationsIcon = new javax.swing.JLabel();
         RecordsIcon = new javax.swing.JLabel();
@@ -71,13 +76,13 @@ public class UI_Admin_Main extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(92, 128, 188));
-        jButton1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(217, 225, 228));
-        jButton1.setText("Reports");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ReportsBtn.setBackground(new java.awt.Color(92, 128, 188));
+        ReportsBtn.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 14)); // NOI18N
+        ReportsBtn.setForeground(new java.awt.Color(217, 225, 228));
+        ReportsBtn.setText("Reports");
+        ReportsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ReportsBtnActionPerformed(evt);
             }
         });
 
@@ -91,11 +96,11 @@ public class UI_Admin_Main extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Logout button.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        LogOut.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Logout button.png"))); // NOI18N
+        LogOut.setText("jLabel1");
+        LogOut.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                LogOutMouseClicked(evt);
             }
         });
 
@@ -123,9 +128,9 @@ public class UI_Admin_Main extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(RecordsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ReportsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LogOut, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
         jPanel2Layout.setVerticalGroup(
@@ -137,18 +142,23 @@ public class UI_Admin_Main extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel1))
+                        .addComponent(LogOut))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ManageHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ApplicationsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(RecordsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(ReportsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Reports icon.png"))); // NOI18N
+        ReportIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Reports icon.png"))); // NOI18N
+        ReportIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ReportIconMouseClicked(evt);
+            }
+        });
 
         ManageIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Management icon.png"))); // NOI18N
         ManageIcon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -257,7 +267,7 @@ public class UI_Admin_Main extends javax.swing.JFrame {
                         .addComponent(RecordsIcon))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addComponent(jLabel3)
+                .addComponent(ReportIcon)
                 .addGap(57, 57, 57))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(377, 377, 377)
@@ -274,7 +284,7 @@ public class UI_Admin_Main extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
+                    .addComponent(ReportIcon)
                     .addComponent(ManageIcon)
                     .addComponent(ApplicationsIcon)
                     .addComponent(RecordsIcon))
@@ -313,9 +323,11 @@ public class UI_Admin_Main extends javax.swing.JFrame {
         UIARUL.setVisible(true);
     }//GEN-LAST:event_RecordsBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void ReportsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReportsBtnActionPerformed
+        this.setVisible(false);
+        UI_Admin_Reports UIAR = new UI_Admin_Reports();
+        UIAR.setVisible(true);
+    }//GEN-LAST:event_ReportsBtnActionPerformed
 
     private void ManageHeaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageHeaderActionPerformed
         this.setVisible(false);
@@ -323,9 +335,13 @@ public class UI_Admin_Main extends javax.swing.JFrame {
         UIAMU.setVisible(true);
     }//GEN-LAST:event_ManageHeaderActionPerformed
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        System.out.println("hi");
-    }//GEN-LAST:event_jLabel1MouseClicked
+    private void LogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogOutMouseClicked
+    UI_Login ul = new UI_Login();
+        ul.setVisible(true);
+        ul.pack();
+        ul.setLocationRelativeTo(null);
+       this.dispose();
+    }//GEN-LAST:event_LogOutMouseClicked
 
     private void ApplicationsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplicationsBtnActionPerformed
         this.setVisible(false);
@@ -350,6 +366,10 @@ public class UI_Admin_Main extends javax.swing.JFrame {
         UI_Admin_Records_UserLogins UIARUL = new UI_Admin_Records_UserLogins();
         UIARUL.setVisible(true);
     }//GEN-LAST:event_RecordsIconMouseClicked
+
+    private void ReportIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReportIconMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ReportIconMouseClicked
 
     /**
      * @param args the command line arguments
@@ -389,12 +409,13 @@ public class UI_Admin_Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ApplicationsBtn;
     private javax.swing.JLabel ApplicationsIcon;
+    private javax.swing.JLabel LogOut;
     private javax.swing.JButton ManageHeader;
     private javax.swing.JLabel ManageIcon;
     private javax.swing.JButton RecordsBtn;
     private javax.swing.JLabel RecordsIcon;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel ReportIcon;
+    private javax.swing.JButton ReportsBtn;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -402,7 +423,6 @@ public class UI_Admin_Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

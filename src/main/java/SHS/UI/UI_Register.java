@@ -59,22 +59,24 @@ public class UI_Register extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel2.setBackground(new java.awt.Color(175, 238, 238));
+        jPanel2.setBackground(new java.awt.Color(217, 225, 228));
 
         jLabel2.setFont(new java.awt.Font("URWEgyptienneTMed", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(100, 149, 137));
+        jLabel2.setForeground(new java.awt.Color(92, 128, 188));
         jLabel2.setText("APU HOSTEL SYSTEM ");
 
-        jButton2.setFont(new java.awt.Font("SimHei", 0, 18)); // NOI18N
-        jButton2.setText("BACK");
+        jButton2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(92, 128, 188));
+        jButton2.setText("Back");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("SimHei", 0, 18)); // NOI18N
-        jButton3.setText("REGISTER");
+        jButton3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(92, 128, 188));
+        jButton3.setText("Register");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -82,6 +84,7 @@ public class UI_Register extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(92, 128, 188));
         jLabel3.setText("Already Have Any Account? Click Here");
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -89,12 +92,15 @@ public class UI_Register extends javax.swing.JFrame {
             }
         });
 
+        jPanel3.setBackground(new java.awt.Color(92, 128, 188));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.setOpaque(false);
 
         nlbl.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
+        nlbl.setForeground(new java.awt.Color(92, 128, 188));
         nlbl.setText("NAME");
 
+        ntxt.setForeground(new java.awt.Color(92, 128, 188));
         ntxt.setBorder(null);
         ntxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,8 +109,10 @@ public class UI_Register extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(92, 128, 188));
         jLabel7.setText("USERNAME");
 
+        utxt.setForeground(new java.awt.Color(92, 128, 188));
         utxt.setBorder(null);
         utxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,8 +121,10 @@ public class UI_Register extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(92, 128, 188));
         jLabel4.setText("PASSWORD");
 
+        passtxt.setForeground(new java.awt.Color(92, 128, 188));
         passtxt.setBorder(null);
         passtxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,8 +133,10 @@ public class UI_Register extends javax.swing.JFrame {
         });
 
         cflbl.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
+        cflbl.setForeground(new java.awt.Color(92, 128, 188));
         cflbl.setText("CONFIRM PASSWORD");
 
+        cptxt.setForeground(new java.awt.Color(92, 128, 188));
         cptxt.setBorder(null);
         cptxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,8 +145,10 @@ public class UI_Register extends javax.swing.JFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(92, 128, 188));
         jLabel5.setText("Age");
 
+        atxt.setForeground(new java.awt.Color(92, 128, 188));
         atxt.setBorder(null);
         atxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,8 +157,10 @@ public class UI_Register extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(92, 128, 188));
         jLabel6.setText("GENDER");
 
+        gtxt.setForeground(new java.awt.Color(92, 128, 188));
         gtxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MALE", "FEMALE" }));
         gtxt.setBorder(null);
         gtxt.addActionListener(new java.awt.event.ActionListener() {
@@ -154,8 +170,10 @@ public class UI_Register extends javax.swing.JFrame {
         });
 
         jLabel9.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(92, 128, 188));
         jLabel9.setText("CONTACT NUMBER");
 
+        cntxt.setForeground(new java.awt.Color(92, 128, 188));
         cntxt.setBorder(null);
         cntxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,8 +182,10 @@ public class UI_Register extends javax.swing.JFrame {
         });
 
         jLabel8.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(92, 128, 188));
         jLabel8.setText("EMAIL");
 
+        etxt.setForeground(new java.awt.Color(92, 128, 188));
         etxt.setBorder(null);
         etxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,8 +204,7 @@ public class UI_Register extends javax.swing.JFrame {
                         .addComponent(utxt, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                             .addGap(9, 9, 9)
-                            .addComponent(nlbl)
-                            .addGap(30, 30, 30))
+                            .addComponent(nlbl))
                         .addComponent(ntxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                             .addGap(8, 8, 8)
@@ -253,49 +272,54 @@ public class UI_Register extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(139, 139, 139)
+                .addGap(167, 167, 167)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
-                .addGap(138, 138, 138))
+                .addGap(188, 188, 188))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabel2))
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(169, 169, 169)
+                                .addComponent(jLabel2))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(195, 195, 195)
+                        .addGap(227, 227, 227)
                         .addComponent(jLabel3)))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(14, 14, 14)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
-                .addGap(32, 32, 32))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -335,7 +359,7 @@ public class UI_Register extends javax.swing.JFrame {
         String gender = (String) gtxt.getSelectedItem();
         String phone = cntxt.getText().trim();
         String email = etxt.getText().trim();
-        String card = null;
+
 
         if(username.isBlank()
             || ntxt.getText().isBlank()
@@ -351,16 +375,22 @@ public class UI_Register extends javax.swing.JFrame {
             return;
         }
 
-        register(fullname,username,email,password,confirmpassword,age,gender,phone,card);
+        register(fullname,username,email,password,confirmpassword,age,gender,phone);
+        
+        UI_Login ul = new UI_Login();
+        ul.setVisible(true);
+        ul.pack();
+        ul.setLocationRelativeTo(null);
+        this.dispose();
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        //    Role r = new Role();
-        //        r.setVisible(true);
-        //        r.pack();
-        //        r.setLocationRelativeTo(null);
-        //       this.dispose();
+        UI_Login ul = new UI_Login();
+        ul.setVisible(true);
+        ul.pack();
+        ul.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void gtxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gtxtActionPerformed
@@ -390,7 +420,7 @@ public class UI_Register extends javax.swing.JFrame {
     private void atxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_atxtActionPerformed
-    public static void register(String fullname,String username, String email, String password, String confirmpassword, String age, String gender, String phone,String card){
+    public static void register(String fullname,String username, String email, String password, String confirmpassword, String age, String gender, String phone){
         
 
         
@@ -416,7 +446,7 @@ public class UI_Register extends javax.swing.JFrame {
         
         // write to text file
         int newStudentID = fHandler.GenerateID();
-        String newStudentString = newStudentID + ";" + username + ";" + fullname + ";" + email + ";" + password + ";" + age + ";" + gender + ";" + phone + ";" + card ;
+        String newStudentString = newStudentID + ";" + username + ";" + fullname + ";" + email + ";" + password + ";" + age + ";" + gender + ";" + phone ;
         FileRecord newStudentRecord = new FileRecord(newStudentID, newStudentString);
         fHandler.InsertRecord(newStudentRecord);
         

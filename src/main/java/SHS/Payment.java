@@ -12,14 +12,14 @@ import java.util.Date;
 
 public class Payment {
     private int paymentID;
-    private int customerID;
+    private int studentID;
     private int applicationID;
     private int paymentAmount;
     private String paymentDate;
 
     public Payment(int paymentID, int customerID, int applicationID, int paymentAmount, String paymentDate) {
         this.paymentID = paymentID;
-        this.customerID = customerID;
+        this.studentID = customerID;
         this.applicationID = applicationID;
         this.paymentAmount = paymentAmount;
         this.paymentDate = paymentDate;
@@ -29,8 +29,8 @@ public class Payment {
         return paymentID;
     }
 
-    public int getCustomerID() {
-        return customerID;
+    public int getStudentID() {
+        return studentID;
     }
 
     public int getApplicationID() {
@@ -49,8 +49,8 @@ public class Payment {
         this.paymentID = paymentID;
     }
 
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
+    public void setStudentID(int studentID) {
+        this.studentID = studentID;
     }
 
     public void setApplicationID(int applicationID) {
@@ -67,7 +67,7 @@ public class Payment {
 
     @Override
     public String toString() {
-        return "Payment{" + "paymentID=" + paymentID + ", customerID=" + customerID + ", applicationID=" + applicationID + ", paymentAmount=" + paymentAmount + ", paymentDate=" + paymentDate + '}';
+        return "Payment{" + "paymentID=" + paymentID + ", customerID=" + studentID + ", applicationID=" + applicationID + ", paymentAmount=" + paymentAmount + ", paymentDate=" + paymentDate + '}';
     }
    
 

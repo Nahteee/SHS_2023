@@ -114,6 +114,7 @@ public class UI_Login extends javax.swing.JFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 36)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(92, 128, 188));
         jLabel5.setText("WELCOME!");
 
         jPanel2.setBackground(new java.awt.Color(92, 128, 188));

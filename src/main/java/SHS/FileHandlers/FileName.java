@@ -15,4 +15,5 @@ public class FileName {
     public static final String LOGS = "logs";
     public static final String APPLICATIONS = "applications";
     public static final String PAYMENTS = "payments";
+    public static final String BOOKED_ROOM = "booking";
 }

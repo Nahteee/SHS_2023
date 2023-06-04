@@ -14,8 +14,8 @@ import main.java.SHS.User;
 public class Student extends User{
 
     
-    public Student(int userId, String username, String fullname, String userEmail, String password, int age, Gender gender, String contact, String card, UserRole role) {
-        super(userId, username, fullname, userEmail, password, age, gender, contact, card, role);
+    public Student(int userId, String username, String fullname, String userEmail, String password, int age, Gender gender, String contact, UserRole role) {
+        super(userId, username, fullname, userEmail, password, age, gender, contact, role);
     }
 
     public Student(int user_id) {

@@ -19,7 +19,7 @@ import main.java.SHS.UI.UI_Login;
  *
  * @author User
  */
-public class User {
+public abstract class User {
     protected int userId;
     protected String username;
     protected String fullname;
@@ -27,13 +27,10 @@ public class User {
     protected String password;
     protected int age;
     protected Gender gender;
-    protected String picturePath;
     protected String contact;
-    protected String card;
-    protected String address;
     protected UserRole role;
 
-    public User(int userId, String username, String fullname, String userEmail, String password, int age, Gender gender, String contact, String card, UserRole role) {
+    public User(int userId, String username, String fullname, String userEmail, String password, int age, Gender gender, String contact, UserRole role) {
         this.userId = userId;
         this.username = username;
         this.fullname = fullname;
@@ -42,7 +39,6 @@ public class User {
         this.age = age;
         this.gender = gender;
         this.contact = contact;
-        this.card = card;
         this.role = role;
     }
     
@@ -106,36 +102,12 @@ public class User {
         this.gender = gender;
     }
 
-    public String getPicturePath() {
-        return picturePath;
-    }
-
-    public void setPicturePath(String picturePath) {
-        this.picturePath = picturePath;
-    }
-
     public String getContact() {
         return contact;
     }
 
     public void setContact(String contact) {
         this.contact = contact;
-    }
-
-    public String getCard() {
-        return card;
-    }
-
-    public void setCard(String card) {
-        this.card = card;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public UserRole getRole() {
@@ -176,7 +148,6 @@ public class User {
         Student_Hostel_System.current_user.setGender(Gender.valueOf(splitted_user_record[6]));
         Student_Hostel_System.current_user.setPassword(splitted_user_record[4]);
         Student_Hostel_System.current_user.setContact(splitted_user_record[7]);
-        Student_Hostel_System.current_user.setCard(splitted_user_record[8]);
 
         switch (fileName) {
             case FileName.ADMIN -> {

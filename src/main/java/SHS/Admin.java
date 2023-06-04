@@ -15,8 +15,8 @@ import main.java.SHS.Services.LogService;
  */
 public class Admin extends User{
 
-    public Admin(int userId, String username, String fullname, String userEmail, String password, int age, Gender gender, String contact, String card, UserRole role) {
-        super(userId, username, fullname, userEmail, password, age, gender, contact, card, role);
+    public Admin(int userId, String username, String fullname, String userEmail, String password, int age, Gender gender, String contact, UserRole role) {
+        super(userId, username, fullname, userEmail, password, age, gender, contact, role);
     }
     
     public Admin(int userId){
@@ -85,14 +85,6 @@ public class Admin extends User{
 
     public void setContact(String contact) {
         this.contact = contact;
-    }
-
-    public String getCard() {
-        return card;
-    }
-
-    public void setCard(String card) {
-        this.card = card;
     }
 
     public UserRole getRole() {

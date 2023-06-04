@@ -3,3 +3,4 @@
 3;hanson123;Hanson Yip;hanson@gmail.com;12345;21;MALE;123456789;null
 4;john;johnFullName;john@gmail.com;john123;22;MALE;0122322222;null
 5;thum122;Thum;thum122@gmail.com;thum122;23;MALE;0128890009;null
+6;Ethan123;Eeeee;ethan@gmail.com;12345;12;MALE;0123790097

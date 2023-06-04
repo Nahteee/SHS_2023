@@ -61,15 +61,14 @@ public class StudentService {
         int student_age = Integer.parseInt(student_data[5]);
         Gender student_gender = Gender.valueOf(student_data[6]);
         String student_phone = student_data[7];
-        String student_card = student_data[8];
 
         // Still missing NULL Value for card 
-        return new Student(student_id, student_name, student_fullname, student_email, student_password, student_age, student_gender, student_phone, student_card, UserRole.STUDENT);
+        return new Student(student_id, student_name, student_fullname, student_email, student_password, student_age, student_gender, student_phone, UserRole.STUDENT);
 
     }
     
     private FileRecord convertToFileRecord(Student student){
-         String student_record_string = student.getUserId() + ";" + student.getUsername()+ ";" + student.getFullname()+ ";" + student.getUserEmail() + ";" + student.getPassword()+ ";" + student.getAge() + ";" +student.getGender() + ";" + student.getContact() + ";" + student.getCard();
+         String student_record_string = student.getUserId() + ";" + student.getUsername()+ ";" + student.getFullname()+ ";" + student.getUserEmail() + ";" + student.getPassword()+ ";" + student.getAge() + ";" +student.getGender() + ";" + student.getContact();
          return new FileRecord(student.getUserId(), student_record_string);
     }
     

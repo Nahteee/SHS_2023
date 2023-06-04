@@ -14,8 +14,10 @@ import main.java.SHS.Student_Hostel_System;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import main.java.SHS.BookedRoom;
 import main.java.SHS.FileHandlers.FileHandler;
 import main.java.SHS.FileHandlers.FileName;
+import main.java.SHS.Services.BookedRoomService;
 
 
 /**
@@ -165,13 +167,13 @@ public class UI_Payment extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DateLbl2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DateLbl3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(DateLbl2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DateLbl3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ExpDate, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CVV, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CVV, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ExpDate, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 42, Short.MAX_VALUE))
         );
 
@@ -288,42 +290,51 @@ public class UI_Payment extends javax.swing.JFrame {
     }//GEN-LAST:event_CancelBtnActionPerformed
 
     private void PayBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayBtnActionPerformed
-        FileHandler fHandler = new FileHandler(FileName.PAYMENTS);
-        String cardNumber = CardNumber.getText();
-        String expDate = ExpDate.getText();
-        String cvv = CVV.getText();
+    FileHandler paymentfile = new FileHandler(FileName.PAYMENTS);
+    FileHandler bookedroomfile = new FileHandler(FileName.BOOKED_ROOM);
+    String cardNumber = CardNumber.getText();
+    String expDate = ExpDate.getText();
+    String cvv = CVV.getText();
+    int paymentID;
 
-        if (cardvalidation(cardNumber, expDate, cvv)) {
-            // Confirm payment with the user
-            int confirmation = JOptionPane.showConfirmDialog(null, "Confirm payment?", "Payment Confirmation", JOptionPane.YES_NO_OPTION);
+    if (cardvalidation(cardNumber, expDate, cvv)) {
+        // Confirm payment with the user
+        int confirmation = JOptionPane.showConfirmDialog(null, "Confirm payment?", "Payment Confirmation", JOptionPane.YES_NO_OPTION);
 
-            if (confirmation == JOptionPane.YES_OPTION) {
-                // Create payment object
-                Payment payment = new Payment(fHandler.GenerateID(), StudentID, AppID, total, formattedDate);
+        if (confirmation == JOptionPane.YES_OPTION) {
+            // Create payment object
+            paymentID = paymentfile.GenerateID();
+            Payment payment = new Payment(paymentID, StudentID, AppID, total, formattedDate);
 
-                // Make payment
-                PaymentService paymentService = new PaymentService();
-                paymentService.makePayment(payment);
+            // Make payment
+            PaymentService paymentService = new PaymentService();
+            paymentService.makePayment(payment);
 
-                // Update application status
-                ApplicationService applicationService = new ApplicationService();
-                applicationService.updateApplication(AppID, "Paid");
+            // Update application status
+            ApplicationService applicationService = new ApplicationService();
+            Application application = applicationService.getApplication(Student_Hostel_System.current_user.getUsername());
+            applicationService.updateApplication(AppID, "Paid");
 
-                // Update room availability
-                RoomService roomService = new RoomService();
-                Room room = roomService.getRoom(RoomID);
-                roomService.updateRoom(room, "Booked");
+            // Update room availability
+            RoomService roomService = new RoomService();
+            Room room = roomService.getRoom(RoomID);
+            roomService.updateRoom(room, "Booked");
 
-                // Display payment success message
-                JOptionPane.showMessageDialog(null, "Payment successful!", "Payment Confirmation", JOptionPane.INFORMATION_MESSAGE);
-                this.setVisible(false);
-                UI_Applications UIA = new UI_Applications();
-                UIA.setVisible(true);
-            } else {
-                // Display payment cancellation message
-                JOptionPane.showMessageDialog(null, "Payment cancelled.", "Payment Confirmation", JOptionPane.INFORMATION_MESSAGE);
-            }
+            // Insert new booked room record
+            BookedRoomService bookedRoomService = new BookedRoomService();
+            BookedRoom bookedRoom = new BookedRoom(bookedroomfile.GenerateID(), StudentID, Student_Hostel_System.current_user.getUsername(), AppID, paymentID, application.getStartDate(), application.getEndDate(), application.getLos(), "Active", room.getRoomNumber(), room.getRoomType(), room.getFurnish(), "Booked", room.getPrice());
+            bookedRoomService.addBookedRoom(bookedRoom);
+
+            // Display payment success message
+            JOptionPane.showMessageDialog(null, "Payment successful!", "Payment Confirmation", JOptionPane.INFORMATION_MESSAGE);
+            this.setVisible(false);
+            UI_Receipt UIR = new UI_Receipt(paymentID);
+            UIR.setVisible(true);
+        } else {
+            // Display payment cancellation message
+            JOptionPane.showMessageDialog(null, "Payment cancelled.", "Payment Confirmation", JOptionPane.INFORMATION_MESSAGE);
         }
+    }
     }//GEN-LAST:event_PayBtnActionPerformed
 
     private void CardNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CardNumberActionPerformed

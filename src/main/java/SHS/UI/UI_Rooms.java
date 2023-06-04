@@ -9,7 +9,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import main.java.SHS.FileHandlers.FileHandler;
 import main.java.SHS.FileHandlers.FileName;
 import main.java.SHS.FileHandlers.FileRecord;
@@ -21,31 +23,75 @@ import main.java.SHS.Student_Hostel_System;
 import main.java.SHS.User;
 
 
-
-
-
 /**
  *
  * @author User
  */
-public class UI_Student_Main extends javax.swing.JFrame {
+public class UI_Rooms extends javax.swing.JFrame {
 
-    
     /**
-     * Creates new form student
+     * Creates new form UI_Rooms
      */
-    public UI_Student_Main() {
+    public UI_Rooms() {
         initComponents();
-
-        BookRoomBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        ApplicationsIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        RecordsIcon.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        YourRoomBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        LogOut.setCursor(new Cursor(Cursor.HAND_CURSOR));
         
-        UsernameLbl.setText("Welcome to StudentBnB, "+Student_Hostel_System.current_user.getUsername() + "!");
+        ArrayList<Room> rooms = RoomService.getRoomService().getRooms();
+
+        DefaultTableModel model = (DefaultTableModel) roomtab.getModel();
+        for (Room room : rooms) {
+            if (room.getAvailability().equals("Available")) { // Only add available rooms
+                model.addRow(new Object[] {
+                    room.getRoomNumber(),
+                    room.getRoomType(),
+                    room.getFurnish(),
+                    room.getPrice()
+                });
+            }
+        }
     }
     
+        @Override
+    public void setVisible(boolean visible) {
+        super.setVisible(visible);
+
+        if (visible) {
+            refreshTable();
+        }
+    }
+
+    public void refreshTable() {
+        // Read the data from the text file
+        ArrayList<String> lines = new ArrayList<>();
+        try {
+            File file = new File("src\\main\\java\\SHS\\Txtfiles\\room.txt");
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                lines.add(scanner.nextLine());
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        // Update the table model with new data
+        DefaultTableModel model = (DefaultTableModel) roomtab.getModel();
+        model.setRowCount(0); // Clear the existing data
+
+        // Process each line and add rows to the table model
+        for (String line : lines) {
+            String[] values = line.split(";");
+            if (values.length >= 5 && values[3].equals("Available")) {
+                model.addRow(new Object[] {
+                    values[0],
+                    values[1],
+                    values[2],
+                    values[4]
+                });
+            }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,6 +102,9 @@ public class UI_Student_Main extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        roomtab = new javax.swing.JTable();
+        BookRoom = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         RoomsBtn = new javax.swing.JButton();
@@ -63,24 +112,45 @@ public class UI_Student_Main extends javax.swing.JFrame {
         AppsBtn = new javax.swing.JButton();
         LogOut = new javax.swing.JLabel();
         BookedRoomsBtn = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        UsernameLbl = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        RecordsIcon = new javax.swing.JLabel();
-        ApplicationsIcon = new javax.swing.JLabel();
-        BookRoomBtn = new javax.swing.JLabel();
-        YourRoomBtn = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        SearchTxt = new javax.swing.JTextField();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(217, 225, 230));
+
+        roomtab.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Room No", "Room Type", "Furnishing", "Price"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        roomtab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                roomtabMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(roomtab);
+
+        BookRoom.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
+        BookRoom.setText("MAKE BOOKING");
+        BookRoom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BookRoomActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBackground(new java.awt.Color(92, 128, 188));
 
@@ -173,79 +243,34 @@ public class UI_Student_Main extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Search Icon.png"))); // NOI18N
+
+        SearchTxt.setText("Search...");
+        SearchTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SearchTxtKeyReleased(evt);
+            }
+        });
+
         jPanel4.setBackground(new java.awt.Color(92, 128, 188));
         jPanel4.setForeground(new java.awt.Color(92, 128, 188));
+        jPanel4.setPreferredSize(new java.awt.Dimension(403, 3));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 403, Short.MAX_VALUE)
+            .addGap(0, 424, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 3, Short.MAX_VALUE)
         );
 
-        UsernameLbl.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
-        UsernameLbl.setForeground(new java.awt.Color(92, 128, 188));
-        UsernameLbl.setText("Welcome to StudentBnB, Student!");
-
-        jLabel11.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(92, 128, 188));
-        jLabel11.setText("Your Room");
-
-        jLabel8.setForeground(new java.awt.Color(92, 128, 188));
-        jLabel8.setText("from List");
-
-        jLabel7.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(92, 128, 188));
-        jLabel7.setText("Book Rooms");
-
-        RecordsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Records icon.png"))); // NOI18N
-        RecordsIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                RecordsIconMouseClicked(evt);
-            }
-        });
-
-        ApplicationsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Application icon.png"))); // NOI18N
-        ApplicationsIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ApplicationsIconMouseClicked(evt);
-            }
-        });
-
-        BookRoomBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/BookingIcon.png"))); // NOI18N
-        BookRoomBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BookRoomBtnMouseClicked(evt);
-            }
-        });
-
-        YourRoomBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/RoomIcon.png"))); // NOI18N
-        YourRoomBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                YourRoomBtnMouseClicked(evt);
-            }
-        });
-
-        jLabel14.setForeground(new java.awt.Color(92, 128, 188));
-        jLabel14.setText("Details and Status");
-
-        jLabel13.setForeground(new java.awt.Color(92, 128, 188));
-        jLabel13.setText("App, Rooms, Payment, Login");
-
-        jLabel12.setForeground(new java.awt.Color(92, 128, 188));
-        jLabel12.setText("Status of Room");
-
-        jLabel10.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(92, 128, 188));
-        jLabel10.setText("Records");
-
-        jLabel9.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(92, 128, 188));
-        jLabel9.setText("Applications");
+        jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(92, 128, 188));
+        jLabel4.setText("Book Rooms");
+        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -253,104 +278,100 @@ public class UI_Student_Main extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addComponent(BookRoomBtn))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(89, 89, 89)
-                                .addComponent(jLabel7))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(112, 112, 112)
-                                .addComponent(jLabel8)))
-                        .addGap(54, 54, 54)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(YourRoomBtn)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel14)
-                                    .addComponent(jLabel11))))
-                        .addGap(49, 49, 49)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(38, 38, 38)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jLabel9))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(155, 155, 155)
-                                        .addComponent(jLabel10))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(115, 115, 115)
-                                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(ApplicationsIcon)
-                                .addGap(56, 56, 56)
-                                .addComponent(RecordsIcon))))
+                                .addGap(73, 73, 73)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(61, 61, 61))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel4)
+                                .addGap(219, 219, 219)))
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(SearchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(295, 295, 295)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(117, 117, 117)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 766, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(308, 308, 308)
-                        .addComponent(UsernameLbl))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(367, 367, 367)
+                        .addComponent(BookRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(UsernameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(BookRoomBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8))
+                        .addGap(17, 17, 17)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel7)
+                            .addComponent(SearchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ApplicationsIcon)
-                            .addComponent(RecordsIcon))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10))
+                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(YourRoomBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel14)))
-                .addContainerGap(117, Short.MAX_VALUE))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(BookRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1001, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void roomtabMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roomtabMouseClicked
+
+    }//GEN-LAST:event_roomtabMouseClicked
+
+    private void BookRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookRoomActionPerformed
+        ApplicationService applicationService = new ApplicationService();
+        BookedRoomService  bookedRoomService = new BookedRoomService();
+
+        if (applicationService.checkExistingApplication(Student_Hostel_System.current_user.getUsername())) {
+            JOptionPane.showMessageDialog(null, "Already have an application.", "Error", JOptionPane.ERROR_MESSAGE, null);
+            return; // Stop further processing
+        }
+
+        if (bookedRoomService.checkExistingBooking(Student_Hostel_System.current_user.getUsername())) {
+            JOptionPane.showMessageDialog(null, "Already have a booking.", "Error", JOptionPane.ERROR_MESSAGE, null);
+            return; // Stop further processing
+        }
+
+        int selectedRowCount = roomtab.getSelectedRowCount();
+        if (selectedRowCount != 1) {
+            JOptionPane.showMessageDialog(null, "Please select exactly one room.", "Error", JOptionPane.ERROR_MESSAGE, null);
+            return;
+        }
+
+        int row = roomtab.getSelectedRow();
+        int no = Integer.parseInt(roomtab.getModel().getValueAt(row, 0).toString());
+        String type = roomtab.getModel().getValueAt(row, 1).toString();
+        String furnish = roomtab.getModel().getValueAt(row, 2).toString();
+        String price = roomtab.getModel().getValueAt(row, 3).toString();
+
+        UI_Booking ub = new UI_Booking(no, type, furnish, price);
+        ub.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BookRoomActionPerformed
 
     private void RoomsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RoomsBtnActionPerformed
         UI_Rooms ur = new UI_Rooms();
@@ -359,19 +380,19 @@ public class UI_Student_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_RoomsBtnActionPerformed
 
     private void RecBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecBtnActionPerformed
-    UI_Record_Rooms ur = new UI_Record_Rooms();
+        UI_Record_Rooms ur = new UI_Record_Rooms();
         ur.setVisible(true);
         ur.pack();
         ur.setLocationRelativeTo(null);
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_RecBtnActionPerformed
 
     private void AppsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AppsBtnActionPerformed
         ApplicationService applicationService = new ApplicationService();
         if (!applicationService.checkExistingApplication(Student_Hostel_System.current_user.getUsername())) {
-        JOptionPane.showMessageDialog(null,"No existing booking. Make a booking first!" , "Error",JOptionPane.ERROR_MESSAGE,null);
-        return; // Stop further processing
-    }
+            JOptionPane.showMessageDialog(null,"No existing booking. Make a booking first!" , "Error",JOptionPane.ERROR_MESSAGE,null);
+            return; // Stop further processing
+        }
         this.dispose();
         UI_Applications UIA = new UI_Applications();
         UIA.setVisible(true);
@@ -387,58 +408,25 @@ public class UI_Student_Main extends javax.swing.JFrame {
 
     private void BookedRoomsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookedRoomsBtnActionPerformed
         BookedRoomService  bookedRoomService = new BookedRoomService();
-        
+
         if (!bookedRoomService.checkBookingExist(Student_Hostel_System.current_user.getUsername())) {
             JOptionPane.showMessageDialog(null, "No Existing booking.", "Error", JOptionPane.ERROR_MESSAGE, null);
             return; // Stop further processing
         }
-        
+
         UI_BookedRoom ubr = new UI_BookedRoom();
         ubr.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_BookedRoomsBtnActionPerformed
 
-    private void RecordsIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RecordsIconMouseClicked
-        UI_Record_Rooms ur = new UI_Record_Rooms();
-            ur.setVisible(true);
-            ur.pack();
-            ur.setLocationRelativeTo(null);
-           this.dispose();
-    }//GEN-LAST:event_RecordsIconMouseClicked
+    private void SearchTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchTxtKeyReleased
+        DefaultTableModel table  = (DefaultTableModel)roomtab.getModel();
+        String search = SearchTxt.getText();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(table);
+        roomtab.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(search));
+    }//GEN-LAST:event_SearchTxtKeyReleased
 
-    private void ApplicationsIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ApplicationsIconMouseClicked
-        ApplicationService applicationService = new ApplicationService();
-        if (!applicationService.checkExistingApplication(Student_Hostel_System.current_user.getUsername())) {
-        JOptionPane.showMessageDialog(null,"No existing booking. Make a booking first!" , "Error",JOptionPane.ERROR_MESSAGE,null);
-        return; // Stop further processing
-    }
-        this.dispose();
-        UI_Applications UIA = new UI_Applications();
-        UIA.setVisible(true);
-    }//GEN-LAST:event_ApplicationsIconMouseClicked
-
-    private void BookRoomBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookRoomBtnMouseClicked
-        UI_Rooms ur = new UI_Rooms();
-        ur.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_BookRoomBtnMouseClicked
-
-    private void YourRoomBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_YourRoomBtnMouseClicked
-        BookedRoomService  bookedRoomService = new BookedRoomService();
-        
-        if (!bookedRoomService.checkBookingExist(Student_Hostel_System.current_user.getUsername())) {
-            JOptionPane.showMessageDialog(null, "No Existing booking.", "Error", JOptionPane.ERROR_MESSAGE, null);
-            return; // Stop further processing
-        }
-        
-        UI_BookedRoom ubr = new UI_BookedRoom();
-        ubr.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_YourRoomBtnMouseClicked
-
-
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -456,56 +444,39 @@ public class UI_Student_Main extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UI_Student_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UI_Rooms.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UI_Student_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UI_Rooms.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UI_Student_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UI_Rooms.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UI_Student_Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UI_Rooms.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UI_Student_Main().setVisible(true);
+                new UI_Rooms().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Appbtn;
-    private javax.swing.JLabel ApplicationsIcon;
     private javax.swing.JButton AppsBtn;
-    private javax.swing.JLabel BookRoomBtn;
+    private javax.swing.JButton BookRoom;
     private javax.swing.JButton BookedRoomsBtn;
     private javax.swing.JLabel LogOut;
-    private javax.swing.JButton ManageBtn;
     private javax.swing.JButton RecBtn;
-    private javax.swing.JButton RecordsBtn;
-    private javax.swing.JLabel RecordsIcon;
     private javax.swing.JButton RoomsBtn;
-    private javax.swing.JLabel UsernameLbl;
-    private javax.swing.JLabel YourRoomBtn;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField SearchTxt;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JTable roomtab;
     // End of variables declaration//GEN-END:variables
 }

@@ -263,11 +263,31 @@ public class UI_Applications extends javax.swing.JFrame {
         this.setVisible(false);
 
     // ...
-    UI_Student_Main s = new UI_Student_Main();
+    UI_Rooms s = new UI_Rooms();
     s.refreshTable(); // Refresh the table data
     s.setVisible(true);
     // ...
     }//GEN-LAST:event_BackBtnMouseClicked
+
+    private void PaymentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentBtnActionPerformed
+        ApplicationService applicationService = new ApplicationService();
+        Application application = applicationService.getApplication(Student_Hostel_System.current_user.getUsername());
+
+        RoomService roomservice = new RoomService();
+        Room room = roomservice.getRoom(application.getRoomId());
+
+        ApplicationService appservice = new ApplicationService();
+        boolean hasPendingPayment = appservice.checkAwaitingPaymentApplication(application.getStudentId());
+
+        if (hasPendingPayment) {
+            this.setVisible(false);
+            UI_Payment UP = new UI_Payment();
+            UP.setVisible(true);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "You have no pending payment.", "Pending Payment", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_PaymentBtnActionPerformed
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
         ApplicationService applicationService = new ApplicationService();
@@ -293,26 +313,6 @@ public class UI_Applications extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_DeleteBtnActionPerformed
-
-    private void PaymentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentBtnActionPerformed
-        ApplicationService applicationService = new ApplicationService();
-        Application application = applicationService.getApplication(Student_Hostel_System.current_user.getUsername());
-
-        RoomService roomservice = new RoomService();
-        Room room = roomservice.getRoom(application.getRoomId());
-
-        ApplicationService appservice = new ApplicationService();
-        boolean hasPendingPayment = appservice.checkAwaitingPaymentApplication(application.getStudentId());
-
-        if (hasPendingPayment) {
-            this.setVisible(false);
-            UI_Payment UP = new UI_Payment();
-            UP.setVisible(true);
-            
-        } else {
-            JOptionPane.showMessageDialog(null, "You have no pending payment.", "Pending Payment", JOptionPane.WARNING_MESSAGE);
-        }
-    }//GEN-LAST:event_PaymentBtnActionPerformed
 
     /**
      * @param args the command line arguments
