@@ -109,6 +109,37 @@ public class BookedRoomService {
 
     return null;
 }
+    
+    public BookedRoom getLatestBookedRoom(int RoomID) {
+        List<FileRecord> records = bookedRoomFile.FetchRecord();
+
+        for (int i = records.size() - 1; i >= 0; i--) {
+            FileRecord record = records.get(i);
+            String[] data = record.getRecord().split(";");
+
+            if (RoomID==Integer.parseInt(data[9])) {
+                int bookedRoomID = Integer.parseInt(data[0]);
+                int studentID = Integer.parseInt(data[1]);
+                String studentName = data[2];
+                int applicationID = Integer.parseInt(data[3]);
+                int paymentID = Integer.parseInt(data[4]);
+                String startDate = data[5];
+                String endDate = data[6];
+                int los = Integer.parseInt(data[7]);
+                String status = data[8];
+                int roomNumber = Integer.parseInt(data[9]);
+                String roomType = data[10];
+                String furnish = data[11];
+                String availability = data[12];
+                int price = Integer.parseInt(data[13]);
+
+                BookedRoom bookedRoom = new BookedRoom(bookedRoomID, studentID, studentName, applicationID, paymentID, startDate, endDate, los, status, roomNumber, roomType, furnish, availability, price);
+                return bookedRoom;
+            }
+        }
+
+    return null;
+}
 
 
     public BookedRoom getBookedRoom(int id) {
@@ -183,6 +214,22 @@ public boolean checkBookingExist(String studentName) {
         String[] data = record.getRecord().split(";");
 
         if (data[2].equals(studentName)) {
+            return true; // First matching record found with "Active" status
+        }
+    }
+
+    return false; // No matching record found
+}
+
+
+public boolean checkBookingExist(int RoomID) {
+    List<FileRecord> records = bookedRoomFile.FetchRecord();
+
+    for (int i = records.size() - 1; i >= 0; i--) {
+        FileRecord record = records.get(i);
+        String[] data = record.getRecord().split(";");
+
+        if (RoomID==Integer.parseInt(data[9])) {
             return true; // First matching record found with "Active" status
         }
     }

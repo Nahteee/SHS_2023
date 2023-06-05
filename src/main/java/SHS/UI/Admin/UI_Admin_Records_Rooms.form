@@ -49,18 +49,20 @@
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jPanel3" alignment="0" min="-2" pref="424" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                                  <Component id="jPanel3" min="-2" pref="424" max="-2" attributes="0"/>
+                              </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
                                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jTextField1" max="32767" attributes="0"/>
+                          <Component id="SearchTxt" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
@@ -71,9 +73,7 @@
                                   <Component id="PaymentIcon" min="-2" pref="75" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                                   <Component id="RoomsButton1" min="-2" pref="75" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="223" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="384" max="-2" attributes="0"/>
                                   <Component id="jButton8" min="-2" pref="150" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jButton10" min="-2" pref="150" max="-2" attributes="0"/>
@@ -109,7 +109,7 @@
                                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTextField1" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="SearchTxt" alignment="1" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -121,7 +121,6 @@
                               <Component id="PaymentIcon" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jButton8" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                               <Component id="jButton10" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
-                              <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -138,7 +137,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTable2">
+            <Component class="javax.swing.JTable" name="roomtab">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f2" green="e4" red="d5" type="rgb"/>
@@ -147,16 +146,28 @@
                   <Color blue="bc" green="80" red="5c" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="5" rowCount="0">
+                  <Table columnCount="7" rowCount="0">
                     <Column editable="false" title="BookedID" type="java.lang.Object"/>
                     <Column editable="false" title="StudentID" type="java.lang.Object"/>
                     <Column editable="false" title="Username" type="java.lang.Object"/>
-                    <Column editable="false" title="App ID" type="java.lang.Object"/>
-                    <Column editable="false" title="Price" type="java.lang.Object"/>
+                    <Column editable="false" title="RoomID" type="java.lang.Object"/>
+                    <Column editable="false" title="AppID" type="java.lang.Object"/>
+                    <Column editable="false" title="Price/M" type="java.lang.Object"/>
+                    <Column editable="false" title="Status" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
@@ -199,7 +210,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="bc" green="80" red="5c" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Room Records"/>
+            <Property name="text" type="java.lang.String" value="Room Booking Records"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
         </Component>
@@ -239,10 +250,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton8ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="SearchTxt">
           <Properties>
             <Property name="text" type="java.lang.String" value="Search..."/>
           </Properties>
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="SearchTxtKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
@@ -424,11 +438,6 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="jButton1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Booking Records"/>
-          </Properties>
-        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

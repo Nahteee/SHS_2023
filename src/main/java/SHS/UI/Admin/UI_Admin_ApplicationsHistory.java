@@ -4,12 +4,15 @@
  */
 package main.java.SHS.UI.Admin;
 
+import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import main.java.SHS.Application;
 import main.java.SHS.Services.ApplicationService;
+import main.java.SHS.Services.BookedRoomService;
 import main.java.SHS.UI.UI_Login;
 
 /**
@@ -31,7 +34,7 @@ public class UI_Admin_ApplicationsHistory extends javax.swing.JFrame {
     ArrayList<Application> applications = applicationService.getApplication();
     
     for (Application application : applications) {
-        if ("Rejected".equals(application.getStatus()) || ("Approved".equals(application.getStatus())) || ("Deleted".equals(application.getStatus()))) { // Filter unapproved applications
+        if ("Rejected".equals(application.getStatus()) || ("Paid".equals(application.getStatus())) || ("Deleted".equals(application.getStatus())) || ("Evicted".equals(application.getStatus()))) { // Filter unapproved applications
             Object[] rowData = {
                 application.getApplicationID(),
                 application.getStudentName(),
@@ -118,6 +121,11 @@ public class UI_Admin_ApplicationsHistory extends javax.swing.JFrame {
         );
 
         jButton8.setText("View Student Details");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         SearchTxt.setText("Search...");
         SearchTxt.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -232,8 +240,8 @@ public class UI_Admin_ApplicationsHistory extends javax.swing.JFrame {
                         .addGap(70, 70, 70)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(211, 211, 211)
-                        .addComponent(jLabel3)))
+                        .addGap(198, 198, 198)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
@@ -323,6 +331,33 @@ public class UI_Admin_ApplicationsHistory extends javax.swing.JFrame {
         UI_Admin_Applications UIAA = new UI_Admin_Applications();
         UIAA.setVisible(true);
     }//GEN-LAST:event_ApplicationsBtnActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+       if(AppsTable.getSelectedRowCount()==1) {
+       
+       DefaultTableModel model = (DefaultTableModel) AppsTable.getModel();         
+       int userID = parseInt(model.getValueAt(AppsTable.getSelectedRow(), 0).toString());
+       String userName = model.getValueAt(AppsTable.getSelectedRow(), 1).toString();
+       
+        BookedRoomService  bookedRoomService = new BookedRoomService();
+        
+        if (!bookedRoomService.checkBookingExist(userName)) {
+            JOptionPane.showMessageDialog(null, "No Existing booking.", "Error", JOptionPane.ERROR_MESSAGE, null);
+            return; // Stop further processing
+        }
+        
+       UI_Admin_StudentBookingDetails UI = new UI_Admin_StudentBookingDetails(userName);
+       UI.setVisible(true);
+       }
+       else {
+            if(AppsTable.getRowCount()==0) {
+                JOptionPane.showMessageDialog(this, "Table is empty...");
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Please Select Single Row to view..");
+            }
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -35,7 +35,7 @@ public class UI_Admin_Records_UserLogins extends javax.swing.JFrame {
             
             // Filter records for userType "Student"
             if ("Student".equals(userType)) {
-                Object[] rowData = new Object[]{recordData[1], recordData[2], recordData[4], recordData[5]};
+                Object[] rowData = new Object[]{recordData[0], recordData[1], recordData[2], recordData[4], recordData[5]};
                 logsTable.addRow(rowData);
             }
         }
@@ -81,11 +81,11 @@ public class UI_Admin_Records_UserLogins extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Date", "Time", "Student ID", "Username"
+                "Log ID", "Date", "Time", "Student ID", "Username"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -342,7 +342,7 @@ public class UI_Admin_Records_UserLogins extends javax.swing.JFrame {
             
             // Filter records for userType "Student"
             if ("Student".equals(userType)) {
-                Object[] rowData = new Object[]{recordData[1], recordData[2], recordData[4], recordData[5]};
+                Object[] rowData = new Object[]{recordData[0], recordData[1], recordData[2], recordData[4], recordData[5]};
                 logsTable.addRow(rowData);
             }
         }
@@ -369,7 +369,7 @@ public class UI_Admin_Records_UserLogins extends javax.swing.JFrame {
             
             // Filter records for userType "Student"
             if ("Admin".equals(userType)) {
-                Object[] rowData = new Object[]{recordData[1], recordData[2], recordData[4], recordData[5]};
+                Object[] rowData = new Object[]{recordData[0], recordData[1], recordData[2], recordData[4], recordData[5]};
                 logsTable.addRow(rowData);
             }
         }

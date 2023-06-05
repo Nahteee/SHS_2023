@@ -410,7 +410,7 @@ public class UI_Record_Payments extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Table is empty...");
             }
             else {
-                JOptionPane.showMessageDialog(this, "Please Select Single Row for Delete...");
+                JOptionPane.showMessageDialog(this, "Please Select Single Row to view...");
             }
         }
     }//GEN-LAST:event_GetReceiptBtnActionPerformed

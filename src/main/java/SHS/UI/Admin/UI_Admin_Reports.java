@@ -6,6 +6,18 @@ package main.java.SHS.UI.Admin;
 
 import main.java.SHS.UI.UI_Login;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author User
@@ -17,7 +29,61 @@ public class UI_Admin_Reports extends javax.swing.JFrame {
      */
     public UI_Admin_Reports() {
         initComponents();
+        String filePath = "src\\main\\java\\SHS\\Txtfiles\\payments.txt";
+        Map<String, Double> monthlySales = readMonthlySales(filePath);
+        displayMonthlySales(monthlySales);
     }
+
+    
+    public Map<String, Double> readMonthlySales(String filePath) {
+        Map<String, Double> monthlySales = new HashMap<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(";");
+                if (parts.length >= 4) {
+                    String paymentDate = parts[4];
+                    double paidAmount = Double.parseDouble(parts[3]);
+
+                    // Extract the month and year from the payment date
+                    String[] dateParts = paymentDate.split("-");
+                    if (dateParts.length >= 3) {
+                        String monthYear = dateParts[1] + "-" + dateParts[2];
+
+                        // Update the monthly sales amount
+                        if (monthlySales.containsKey(monthYear)) {
+                            double currentSalesAmount = monthlySales.get(monthYear);
+                            monthlySales.put(monthYear, currentSalesAmount + paidAmount);
+                        } else {
+                            monthlySales.put(monthYear, paidAmount);
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return monthlySales;
+    }
+
+    public void displayMonthlySales(Map<String, Double> monthlySales) {
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+
+        DefaultTableModel model = (DefaultTableModel) SalesTbl.getModel();
+
+        for (Map.Entry<String, Double> entry : monthlySales.entrySet()) {
+            String monthYear = entry.getKey();
+            double salesAmount = entry.getValue();
+            String formattedSalesAmount = decimalFormat.format(salesAmount);
+
+            // Add a new row to the table
+            Object[] rowData = {monthYear, formattedSalesAmount};
+            model.addRow(rowData);
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,6 +101,9 @@ public class UI_Admin_Reports extends javax.swing.JFrame {
         RecordsBtn = new javax.swing.JButton();
         LogOut = new javax.swing.JLabel();
         ApplicationsBtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        SalesTbl = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,17 +198,45 @@ public class UI_Admin_Reports extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        SalesTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Month", "Sales Amount"
+            }
+        ));
+        jScrollPane1.setViewportView(SalesTbl);
+
+        jLabel1.setBackground(new java.awt.Color(92, 128, 188));
+        jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(92, 128, 188));
+        jLabel1.setText("Monthly Sales");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(402, 402, 402)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 593, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(jLabel1)
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         pack();
@@ -218,7 +315,10 @@ public class UI_Admin_Reports extends javax.swing.JFrame {
     private javax.swing.JButton ManageHeader2;
     private javax.swing.JButton RecordsBtn;
     private javax.swing.JButton ReportsBtn;
+    private javax.swing.JTable SalesTbl;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

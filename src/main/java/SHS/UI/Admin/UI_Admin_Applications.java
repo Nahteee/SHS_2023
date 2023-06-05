@@ -4,6 +4,7 @@
  */
 package main.java.SHS.UI.Admin;
 
+import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -11,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import main.java.SHS.Application;
 import main.java.SHS.Services.ApplicationService;
+import main.java.SHS.Services.BookedRoomService;
 import main.java.SHS.UI.UI_Login;
 
 /**
@@ -127,6 +129,11 @@ public class UI_Admin_Applications extends javax.swing.JFrame {
         );
 
         jButton8.setText("View Student Details");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         SearchTxt.setText("Search...");
         SearchTxt.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -265,8 +272,8 @@ public class UI_Admin_Applications extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
-                        .addComponent(jLabel3)))
+                        .addGap(172, 172, 172)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -307,9 +314,9 @@ public class UI_Admin_Applications extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(RejectBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -427,6 +434,28 @@ if (selectedRow != -1) { // Check if a row is selected
         UI_Admin_Applications UIAA = new UI_Admin_Applications();
         UIAA.setVisible(true);
     }//GEN-LAST:event_ApplicationsBtnActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+       if(AppsTable.getSelectedRowCount()==1) {
+       
+       DefaultTableModel model = (DefaultTableModel) AppsTable.getModel(); 
+
+        String Username = model.getValueAt(AppsTable.getSelectedRow(), 1).toString();
+
+       UI_Admin_StudentDetails UI = new UI_Admin_StudentDetails(Username);
+       UI.setVisible(true);
+       
+       
+       }
+       else {
+            if(AppsTable.getRowCount()==0) {
+                JOptionPane.showMessageDialog(this, "Table is empty...");
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Please Select Single Row to view..");
+            }
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments

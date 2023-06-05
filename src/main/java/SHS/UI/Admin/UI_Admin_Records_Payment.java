@@ -4,7 +4,19 @@
  */
 package main.java.SHS.UI.Admin;
 
+import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import main.java.SHS.Payment;
+import main.java.SHS.Services.PaymentService;
+import main.java.SHS.Services.StudentService;
+import main.java.SHS.Student;
+import main.java.SHS.Student_Hostel_System;
 import main.java.SHS.UI.UI_Login;
+import main.java.SHS.UI.UI_Receipt;
 
 /**
  *
@@ -17,6 +29,21 @@ public class UI_Admin_Records_Payment extends javax.swing.JFrame {
      */
     public UI_Admin_Records_Payment() {
         initComponents();
+        
+
+        
+        ArrayList<Payment> payments = PaymentService.getPaymentService().getPayments();
+
+        DefaultTableModel model = (DefaultTableModel) roomtab.getModel();
+        for (Payment payment : payments) {
+                model.addRow(new Object[] {
+                    payment.getPaymentID(),
+                    payment.getStudentID(),
+                    payment.getApplicationID(),
+                    payment.getPaymentAmount(),
+                    payment.getPaymentDate()
+                });
+        }
     }
 
     /**
@@ -32,12 +59,12 @@ public class UI_Admin_Records_Payment extends javax.swing.JFrame {
         RoomsButton = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        roomtab = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        SearchTxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         PaymentBtn = new javax.swing.JLabel();
         RoomsButton1 = new javax.swing.JLabel();
@@ -49,7 +76,7 @@ public class UI_Admin_Records_Payment extends javax.swing.JFrame {
         RecordsBtn = new javax.swing.JButton();
         LogOut = new javax.swing.JLabel();
         ApplicationsBtn = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        ReceiptBtn = new javax.swing.JButton();
 
         UserButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Users (Selected).png"))); // NOI18N
         UserButton.setText("jLabel4");
@@ -66,17 +93,25 @@ public class UI_Admin_Records_Payment extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(217, 225, 228));
 
-        jTable2.setBackground(new java.awt.Color(213, 228, 242));
-        jTable2.setForeground(new java.awt.Color(92, 128, 188));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        roomtab.setBackground(new java.awt.Color(213, 228, 242));
+        roomtab.setForeground(new java.awt.Color(92, 128, 188));
+        roomtab.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "RoomNo", "RoomType", "Availability", "Price"
+                "Payment ID", "Student ID", "Application ID", "Amount Paid (RM)", "Date Paid"
             }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(roomtab);
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(92, 128, 188));
@@ -105,7 +140,12 @@ public class UI_Admin_Records_Payment extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("Search...");
+        SearchTxt.setText("Search...");
+        SearchTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SearchTxtKeyReleased(evt);
+            }
+        });
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/SHS/UI/Imgs/Search Icon.png"))); // NOI18N
 
@@ -223,7 +263,12 @@ public class UI_Admin_Records_Payment extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Get Receipt");
+        ReceiptBtn.setText("Get Receipt");
+        ReceiptBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReceiptBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -241,15 +286,15 @@ public class UI_Admin_Records_Payment extends javax.swing.JFrame {
                         .addGap(60, 60, 60)
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(SearchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(82, 82, 82)
                         .addComponent(PaymentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
                         .addComponent(RoomsButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54)
-                        .addComponent(jButton1)
-                        .addGap(165, 165, 165)
+                        .addGap(39, 39, 39)
+                        .addComponent(ReceiptBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(137, 137, 137)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -280,7 +325,7 @@ public class UI_Admin_Records_Payment extends javax.swing.JFrame {
                                 .addGap(21, 21, 21)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel7)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(SearchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(28, 28, 28)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
@@ -289,7 +334,7 @@ public class UI_Admin_Records_Payment extends javax.swing.JFrame {
                             .addComponent(PaymentBtn)
                             .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))))
+                            .addComponent(ReceiptBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -369,6 +414,36 @@ public class UI_Admin_Records_Payment extends javax.swing.JFrame {
         UIARUL.setVisible(true);
     }//GEN-LAST:event_PaymentBtnMouseClicked
 
+    private void ReceiptBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReceiptBtnActionPerformed
+        if(roomtab.getSelectedRowCount()==1) {
+            
+            
+            DefaultTableModel model = (DefaultTableModel) roomtab.getModel();         
+            StudentService studentService = new StudentService();
+            Student student = studentService.getStudent(parseInt(model.getValueAt(roomtab.getSelectedRow(), 1).toString()));
+            int PaymentID = parseInt(model.getValueAt(roomtab.getSelectedRow(), 0).toString());
+            this.setVisible(false);
+            UI_Receipt UI = new UI_Receipt(PaymentID, student.getUsername());
+            UI.setVisible(true);
+        }
+        else {
+            if(roomtab.getRowCount()==0) {
+                JOptionPane.showMessageDialog(this, "Table is empty...");
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Please Select Single Row to view...");
+            }
+        }
+    }//GEN-LAST:event_ReceiptBtnActionPerformed
+
+    private void SearchTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchTxtKeyReleased
+        DefaultTableModel table  = (DefaultTableModel)roomtab.getModel();
+        String search = SearchTxt.getText();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<DefaultTableModel>(table);
+        roomtab.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(search));
+    }//GEN-LAST:event_SearchTxtKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -410,12 +485,13 @@ public class UI_Admin_Records_Payment extends javax.swing.JFrame {
     private javax.swing.JLabel LogOut;
     private javax.swing.JButton ManageHeader2;
     private javax.swing.JLabel PaymentBtn;
+    private javax.swing.JButton ReceiptBtn;
     private javax.swing.JButton RecordsBtn;
     private javax.swing.JButton ReportsBtn;
     private javax.swing.JLabel RoomsButton;
     private javax.swing.JLabel RoomsButton1;
+    private javax.swing.JTextField SearchTxt;
     private javax.swing.JLabel UserButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel3;
@@ -426,7 +502,6 @@ public class UI_Admin_Records_Payment extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable roomtab;
     // End of variables declaration//GEN-END:variables
 }

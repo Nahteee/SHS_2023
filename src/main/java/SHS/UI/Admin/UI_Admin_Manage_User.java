@@ -71,7 +71,7 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         UserButton = new javax.swing.JLabel();
         RoomsButton = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        ViewDetailsBtn = new javax.swing.JButton();
         DeleteUser = new javax.swing.JButton();
         EvictBtn = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -165,7 +165,12 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("View Student Details");
+        ViewDetailsBtn.setText("View Student Details");
+        ViewDetailsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewDetailsBtnActionPerformed(evt);
+            }
+        });
 
         DeleteUser.setText("Delete");
         DeleteUser.addActionListener(new java.awt.event.ActionListener() {
@@ -297,7 +302,7 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                            .addComponent(ViewDetailsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
                             .addComponent(EvictBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(DeleteUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
@@ -320,7 +325,7 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
                             .addComponent(SearchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
                         .addGap(73, 73, 73)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ViewDetailsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49)
                         .addComponent(EvictBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
@@ -403,7 +408,13 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();         
             String Username = model.getValueAt(UsersTable.getSelectedRow(), 1).toString();
             
-            BookedRoomService bookedRoomService = BookedRoomService.getBookedRoomService();
+            BookedRoomService  bookedRoomService = BookedRoomService.getBookedRoomService();
+        
+            if (!bookedRoomService.checkBookingExist(Username)) {
+                JOptionPane.showMessageDialog(null, "No Existing booking.", "Error", JOptionPane.ERROR_MESSAGE, null);
+                return; // Stop further processing
+            }
+            
             BookedRoom bookedRoom = bookedRoomService.getLatestBookedRoom(Username);
             
             if ("Evicted".equals(bookedRoom.getStatus())) {
@@ -482,6 +493,33 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
         UIAA.setVisible(true);
     }//GEN-LAST:event_ApplicationsBtnActionPerformed
 
+    private void ViewDetailsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewDetailsBtnActionPerformed
+       if(UsersTable.getSelectedRowCount()==1) {
+       
+       DefaultTableModel model = (DefaultTableModel) UsersTable.getModel();         
+       int userID = parseInt(model.getValueAt(UsersTable.getSelectedRow(), 0).toString());
+       String userName = model.getValueAt(UsersTable.getSelectedRow(), 1).toString();
+       
+        BookedRoomService  bookedRoomService = new BookedRoomService();
+        
+        if (!bookedRoomService.checkBookingExist(userName)) {
+            JOptionPane.showMessageDialog(null, "No Existing booking.", "Error", JOptionPane.ERROR_MESSAGE, null);
+            return; // Stop further processing
+        }
+        
+       UI_Admin_StudentBookingDetails UI = new UI_Admin_StudentBookingDetails(userName);
+       UI.setVisible(true);
+       }
+       else {
+            if(UsersTable.getRowCount()==0) {
+                JOptionPane.showMessageDialog(this, "Table is empty...");
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Please Select Single Row to view..");
+            }
+        }
+    }//GEN-LAST:event_ViewDetailsBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -530,7 +568,7 @@ public class UI_Admin_Manage_User extends javax.swing.JFrame {
     private javax.swing.JTextField SearchTxt;
     private javax.swing.JLabel UserButton;
     private javax.swing.JTable UsersTable;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton ViewDetailsBtn;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;

@@ -17,6 +17,7 @@ import javax.swing.table.TableRowSorter;
 import javax.swing.*;
 import main.java.SHS.Services.RoomService;
 import main.java.SHS.Room;
+import main.java.SHS.Services.BookedRoomService;
 
 /**
  *
@@ -68,7 +69,7 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         UpdateRoom = new javax.swing.JButton();
         DeleteRoom = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        PastBookings = new javax.swing.JButton();
         ViewTenant = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -171,7 +172,12 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
             }
         });
 
-        jButton8.setText("View Past Bookings");
+        PastBookings.setText("View Past Bookings");
+        PastBookings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PastBookingsActionPerformed(evt);
+            }
+        });
 
         ViewTenant.setText("View Current Tenant");
         ViewTenant.addActionListener(new java.awt.event.ActionListener() {
@@ -289,7 +295,7 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(DeleteRoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(PastBookings, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(ViewTenant, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
@@ -324,7 +330,7 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
                             .addComponent(SearchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
                         .addGap(37, 37, 37)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(PastBookings, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(ViewTenant, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(107, 107, 107)
@@ -435,19 +441,29 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
     }//GEN-LAST:event_UpdateRoomActionPerformed
 
     private void ViewTenantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewTenantActionPerformed
-        if(RoomsTable.getSelectedRowCount()==1) {
-            DefaultTableModel model = (DefaultTableModel) RoomsTable.getModel();         
-            int RoomNo = parseInt(model.getValueAt(RoomsTable.getSelectedRow(), 0).toString());
-            this.setVisible(false);
-            UI_Admin_Manage_RoomsEdit UI = new UI_Admin_Manage_RoomsEdit(RoomNo);
-            UI.setVisible(true);
-        }
-        else {
+       if(RoomsTable.getSelectedRowCount()==1) {
+       
+       DefaultTableModel model = (DefaultTableModel) RoomsTable.getModel(); 
+       String Availability = model.getValueAt(RoomsTable.getSelectedRow(), 3).toString();
+       
+       if ("Booked".equals(Availability)) {
+        int RoomID = parseInt(model.getValueAt(RoomsTable.getSelectedRow(), 0).toString());
+       
+        
+       UI_Admin_StudentDetails UI = new UI_Admin_StudentDetails(RoomID);
+       UI.setVisible(true);
+       }
+       else {
+           JOptionPane.showMessageDialog(this, "Room not currently Booked.");
+       }
+       
+       }
+       else {
             if(RoomsTable.getRowCount()==0) {
                 JOptionPane.showMessageDialog(this, "Table is empty...");
             }
             else {
-                JOptionPane.showMessageDialog(this, "Please Select Single Row for Delete...");
+                JOptionPane.showMessageDialog(this, "Please Select Single Row to view..");
             }
         }
     }//GEN-LAST:event_ViewTenantActionPerformed
@@ -483,6 +499,33 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
         UI_Admin_Applications UIAA = new UI_Admin_Applications();
         UIAA.setVisible(true);
     }//GEN-LAST:event_ApplicationsBtnActionPerformed
+
+    private void PastBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PastBookingsActionPerformed
+      if(RoomsTable.getSelectedRowCount()==1) {
+       
+       DefaultTableModel model = (DefaultTableModel) RoomsTable.getModel(); 
+       int RoomID = parseInt(model.getValueAt(RoomsTable.getSelectedRow(), 0).toString());
+       BookedRoomService  bookedRoomService = new BookedRoomService();
+       if (!bookedRoomService.checkBookingExist(RoomID)) {
+            JOptionPane.showMessageDialog(null, "No Existing booking.", "Error", JOptionPane.ERROR_MESSAGE, null);
+            return; // Stop further processing
+        }
+        
+       UI_Admin_ViewBookedRoomRecord UI = new UI_Admin_ViewBookedRoomRecord(RoomID);
+       UI.setVisible(true);
+       
+
+       
+       }
+       else {
+            if(RoomsTable.getRowCount()==0) {
+                JOptionPane.showMessageDialog(this, "Table is empty...");
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Please Select Single Row to view..");
+            }
+        }
+    }//GEN-LAST:event_PastBookingsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -523,9 +566,8 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
     private javax.swing.JButton ApplicationsBtn;
     private javax.swing.JButton DeleteRoom;
     private javax.swing.JLabel LogOut;
-    private javax.swing.JButton ManageHeader;
-    private javax.swing.JButton ManageHeader1;
     private javax.swing.JButton ManageHeader2;
+    private javax.swing.JButton PastBookings;
     private javax.swing.JButton RecordsBtn;
     private javax.swing.JButton ReportsBtn;
     private javax.swing.JLabel RoomsButton;
@@ -535,17 +577,12 @@ public class UI_Admin_Manage_Rooms extends javax.swing.JFrame {
     private javax.swing.JLabel UserButton;
     private javax.swing.JButton ViewTenant;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables

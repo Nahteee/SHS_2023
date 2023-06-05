@@ -13,6 +13,7 @@ import main.java.SHS.Services.PaymentService;
 import main.java.SHS.Services.RoomService;
 import main.java.SHS.Services.StudentService;
 import main.java.SHS.Student;
+import main.java.SHS.UI.Admin.UI_Admin_Records_Payment;
 
 /**
  *
@@ -30,6 +31,35 @@ public static int paymentID;
         
         ApplicationService applicationService = new ApplicationService();
         Application application = applicationService.getApplication(Student_Hostel_System.current_user.getUsername());
+
+        StudentService studentService = new StudentService();
+        Student student = studentService.getStudent(application.getStudentId());
+        
+        RoomService roomservice = new RoomService();
+        Room room = roomservice.getRoom(application.getRoomId());
+        
+        PaymentService paymentservice = new PaymentService();
+        Payment payment = paymentservice.getPayment(paymentID);
+        
+        elbl.setText(student.getUserEmail());
+        cnlbl.setText(student.getContact());
+        idlbl.setText("" + application.getRoomId());
+        rtlbl.setText(room.getRoomType());
+        cidate.setText(application.getStartDate());
+        doslbl.setText("" + application.getLos());
+        codate.setText(application.getEndDate());
+        plbl.setText("RM" + payment.getPaymentAmount());
+        dlbl.setText(payment.getPaymentDate());
+        
+    }
+    
+        public UI_Receipt(int paymentID, String Username) {
+        initComponents();
+        UI_Receipt.paymentID=paymentID;
+        
+        
+        ApplicationService applicationService = new ApplicationService();
+        Application application = applicationService.getApplication(Username);
 
         StudentService studentService = new StudentService();
         Student student = studentService.getStudent(application.getStudentId());
@@ -310,11 +340,19 @@ public static int paymentID;
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
-        UI_Record_Rooms ur = new UI_Record_Rooms();
-        ur.setVisible(true);
-        ur.pack();
-        ur.setLocationRelativeTo(null);
-        this.dispose();
+        try {
+            UI_Record_Rooms ur = new UI_Record_Rooms();
+            ur.setVisible(true);
+            ur.pack();
+            ur.setLocationRelativeTo(null);
+            this.dispose();
+        }
+        catch (Exception e){
+            this.setVisible(false);
+            UI_Admin_Records_Payment UIARUL = new UI_Admin_Records_Payment();
+            UIARUL.setVisible(true);
+        }
+        
     }//GEN-LAST:event_BackBtnActionPerformed
 
     /**
